@@ -110,7 +110,7 @@
             font-size: 0.9rem;
         }
     </style>
-</head>@include('layouts.header')
+</head>
 <body>
     <div class="policy-header">
         <h1>Chính Sách Bảo Hành</h1>

@@ -29,5 +29,6 @@ Route::get('/chitiet/{id}', [HomeController::class, 'detail'])->name('home.detai
 Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add');
 
 
+//route 
 
 

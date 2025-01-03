@@ -1,4 +1,5 @@
 @extends('layouts.home.app')
+
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +19,8 @@
         </li>
         @endforeach
     </ul>
+    
 </body>
+@include('layouts.home.policy')
 </html>
 @endsection
