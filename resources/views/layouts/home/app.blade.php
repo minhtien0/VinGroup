@@ -284,7 +284,7 @@
         <span> > </span>
         <a href="" style="text-decoration: none;"><span>Bao Cao Su</span></a>
     </div>
-    <div class="body">
+    <div class="body-chitiet">
         @yield('content')
     </div>
     @include('layouts.home.khampha')
