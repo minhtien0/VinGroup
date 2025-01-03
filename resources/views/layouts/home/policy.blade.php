@@ -114,6 +114,7 @@
 <body>
     <div class="policy-header">
         <h1>Chính Sách Bảo Hành</h1>
+        <h1>Test ne HuyDong OIIIIIIIII</h1>
         <p>Cam kết mang đến trải nghiệm mua sắm an toàn và tiện lợi nhất.</p>
     </div>
 
