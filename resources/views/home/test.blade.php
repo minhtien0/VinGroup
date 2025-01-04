@@ -19,8 +19,6 @@
         </li>
         @endforeach
     </ul>
-    
 </body>
-@include('layouts.home.policy')
 </html>
 @endsection

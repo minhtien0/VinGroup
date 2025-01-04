@@ -1,15 +1,15 @@
 <?php
-
+use App\Http\Controllers\DongController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-
+//tien
 Route::get('/account/voucher', [HomeController::class, 'showVoucher'])->name('account.voucher');
 Route::get('/account/thongtin', [HomeController::class, 'showThongTin'])->name('account.thongtin');
 Route::get('/account/donhang', [HomeController::class, 'showDonHang'])->name('account.donhang');
 Route::get('/account', [HomeController::class, 'showDonHang'])->name('account.donhang');
 
-Route::get('/', [HomeController::class, 'test'])->name('home.test');
+/* Route::get('/', [HomeController::class, 'test'])->name('home.test'); */
 
 
 Route::get('/login', function () {
@@ -17,7 +17,7 @@ Route::get('/login', function () {
 })->name('home.login.form');
 
 Route::post('/login', [HomeController::class, 'login'])->name('home.login');
-Route::get('/home/test', [HomeController::class, 'test'])->name('home.test');
+/* Route::get('/home/test', [HomeController::class, 'test'])->name('home.test'); */
 
 Route::get('/infouser/{id}', [HomeController::class, 'infouser'])->name('account.infouser');
 Route::post('/UpdateInfoUser/{id}', [HomeController::class, 'UpdateInfoUser'])->name('account.UpdateInfoUser');
@@ -29,6 +29,8 @@ Route::get('/chitiet/{id}', [HomeController::class, 'detail'])->name('home.detai
 Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add');
 
 
-//route 
+//dong
+Route::get('/', [DongController::class, 'index'])->name('home.index');
+
 
 

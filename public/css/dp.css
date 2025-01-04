@@ -195,7 +195,7 @@ body {
 .body-chitiet {
     padding: 5px 75px 5px 75px;
     background-color: #eff1f4;
-    
+    display: flex;
 }
 
 .body__left__top {
