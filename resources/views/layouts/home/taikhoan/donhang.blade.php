@@ -1,27 +1,31 @@
 <div class="body__account__right__task" style="display: flex; background-color: white;">
                     <div class="body__account__right__task__btn"
-                        style="width: 20%; height: 45px;text-align: center; padding: 10px;">
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
                         <a href="" style="text-decoration: none; " onclick="showContent('all', event)">Tất cả</a>
                     </div>
                     <div class="body__account__right__task__btn"
-                        style="width: 20%; height: 45px;text-align: center; padding: 10px;">
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
                         <a href="" style="text-decoration: none; " onclick="showContent('chothanhtoan', event)">Chờ
                             Thanh Toán</a>
                     </div>
                     <div class="body__account__right__task__btn"
-                        style="width: 20%; height: 45px;text-align: center; padding: 10px;">
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
                         <a href="" style="text-decoration: none; " onclick="showContent('shipping', event)">Đang
                             Vận Chuyển</a>
                     </div>
                     <div class="body__account__right__task__btn"
-                        style="width: 20%; height: 45px;text-align: center; padding: 10px;">
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
                         <a href="" style="text-decoration: none; " onclick="showContent('danggiaohang', event)">Đang
                             Giao Hàng</a>
                     </div>
                     <div class="body__account__right__task__btn"
-                        style="width: 20%; height: 45px;text-align: center; padding: 10px;">
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
                         <a href="" style="text-decoration: none; " onclick="showContent('hoanthanh', event)">Hoàn
                             Thành</a>
+                    </div>
+                    <div class="body__account__right__task__btn"
+                        style="width: 16.6%; height: 45px;text-align: center; padding: 10px;">
+                        <a href="" style="text-decoration: none; " onclick="showContent('dahuy', event)">Đã Hủy</a>
                     </div>
                 </div>
                 <div class="body__account__right__search"
@@ -302,6 +306,74 @@
                                     @endforeach
                                 `;
                                 break;
+                            case 'dahuy':
+                                contentHtml = `
+                                 @foreach($donhangcancel as $item)
+                                    <div class="body__account__right__product__top" style="display: flex;">
+
+                                        <!-- Hình ảnh sản phẩm -->
+                                        <div class="body__account__right__product__top__img">
+                                            <a href="#"><img src="{{ asset('img/' . $item->avt) }}" alt="{{ $item->name }}" width="80px" height="80px" style="border: solid 1px gray;"></a>
+                                        </div>
+                                        <!-- Thông tin chi tiết sản phẩm -->
+                                        <div class="body__account__right__product__detail" style="margin-left: 15px; width: 780px;">
+                                            <div>
+                                                <span style="color: gray;">Tên Thiết Bị: </span>
+                                                <span>{{ $item->name }}</span>
+                                            </div>
+                                            <div>
+                                                <span style="color: gray;">Màu Sắc: </span>
+                                                <span>{{ $item->color }}</span>
+                                            </div>
+                                             <div>
+                                                <span style="color: gray;">Dung Lượng: </span>
+                                                <span>{{ $item->gb }} GB</span>
+                                            </div>
+                                            <div>
+                                                <span style="color: gray;">Số Lượng: </span>
+                                                <span>{{ $item->soluong }}</span>
+                                            </div>
+                                            <div>
+                                                <span style="color: gray; font-size: 12px;">{{ \Carbon\Carbon::parse($item->time)->format('d-m-Y') }}</span>
+                                            </div>
+                                            <div style="color: rgb(99, 215, 81); border: solid 1px  rgb(99, 215, 81); width: 150px;">
+                                                <span style="font-size: 13px;">Trả hàng miễn phí 7 ngày</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Giá của sản phẩm -->
+                                        <div class="body__account__right__product__top__price" style="width: 280px; text-align: center; padding: 40px;">
+                                            <span style="color: gray; text-decoration: line-through;"><sup>đ</sup>{{ number_format($item->price * 1.2, 0, ',', '.') }}</span>
+                                            <span style="color: #372fc5; margin-left: 10px;"><sup>đ</sup>{{ number_format($item->price, 0, ',', '.') }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tổng tiền của đơn hàng -->
+                                    <hr>
+                                    <div class="body__account__right__product__bot">
+                                        <div class="body__account__right__product__bot__price" style="margin-left: 82%;">
+                                            <span>Thành Tiền: </span>
+                                            <span style="color: rgb(33, 9, 243); font-size: 25px;"><sup>đ</sup>{{ number_format($item->total_price, 0, ',', '.') }}</span>
+                                        </div>
+                                        <div class="body__account__right__product__bot__btn" style="display: flex; margin-top: 20px;">
+                                            <div>
+                                                <span>
+                                                    <a href="#" style="color: blue; text-decoration: none; margin-right: 635px; font-size: 13px;">Đánh giá ngay nhận 200xu</a>
+                                                </span>
+                                                <p>
+                                                    <a href="#" style="color: gray; text-decoration: none; margin-right: 635px; font-size: 13px;">Đánh giá ghi nhận ý kiến</a>
+                                                </p>
+                                            </div>
+                                            <div>
+                                         
+                                                <button >Liên Hệ Shop</button>
+                                                <button style="margin-left: 15px;">Mua lại</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                `;
+                                break;
                             case 'voucher':
                                 contentHtml = '<h3>Kho voucher</h3><p>Danh sách voucher đã hoàn thành.</p>';
                                 break;
@@ -479,7 +551,6 @@
             });
         });
     </script>
-
 
 
                 <div class="body__account__right__product" id="body__account__right__product"

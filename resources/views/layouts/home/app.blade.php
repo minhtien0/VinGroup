@@ -178,10 +178,31 @@
                             }
 
                             function logout() {
-                                // Xóa thông tin người dùng trong sessionStorage
-                                sessionStorage.removeItem('user');
-                                window.location.href = "{{ url('/') }}";
-                            }
+                            // Xóa thông tin người dùng trong sessionStorage
+                            sessionStorage.removeItem('user');
+
+                            // Gửi yêu cầu đến server để xóa session
+                            fetch("{{ route('logout') }}", {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                },
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        // Chuyển hướng về trang chủ sau khi đăng xuất thành công
+                                        window.location.href = "{{ url('/') }}";
+                                    } else {
+                                        alert(data.message || "Đăng xuất thất bại.");
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error("Lỗi khi đăng xuất:", error);
+                                    alert("Có lỗi xảy ra khi đăng xuất.");
+                                });
+                        }
+
                         </script>
 
                         <!-- Form đăng nhập -->
@@ -287,7 +308,6 @@
     <div class="body-chitiet">
         @yield('content')
     </div>
-    @include('layouts.home.khampha')
 </body>
 <script>
     document.getElementById('loginForm').addEventListener('submit', function(e) {

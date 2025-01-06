@@ -51,8 +51,28 @@ class HomeController extends Controller
         )
         ->get();
 
+        $donhangcancel = DB::table('donhang')
+        ->join('product', 'donhang.sanpham', '=', 'product.id')
+        ->where('donhang.khachhang', $user->id)
+        ->whereIn('donhang.trangthaidonhang', ['Đã Hủy'])
+        ->select(
+            'product.id', 
+            'product.name', 
+            'product.price', 
+            'product.color', 
+            'product.gb',
+            'product.avt',
+            'donhang.soluong', 
+            'donhang.time',
+            'donhang.trangthaidonhang',
+        DB::raw('product.price * donhang.soluong AS total_price')
+        )
+        ->get();
+
         // Trả về view với dữ liệu người dùng
-        return view('home.taikhoan.index', ['user' => $user,'donhang' => $donhang, 'donhangcomplete' => $donhangcomplete]);
+        return view('home.taikhoan.index', ['user' => $user,'donhang' => $donhang, 'donhangcomplete' => $donhangcomplete,
+            'donhangcancel' => $donhangcancel
+    ]);
        
     }
   
@@ -65,7 +85,14 @@ class HomeController extends Controller
     return view('home.taikhoan.index', ['user' => $user]);
 }
 
-    
+public function showVoucher(Request $request){
+    $user = $request->session()->get('user');
+    return view('home.taikhoan.index', ['user' => $user]);
+}
+public function showyeuThich(Request $request){
+    $user = $request->session()->get('user');
+    return view('home.taikhoan.index', ['user' => $user]);
+}
 
     public function login(Request $request)
     {
@@ -111,13 +138,21 @@ class HomeController extends Controller
         ]);
     }
     
+    public function logout(Request $request)
+{
+    // Xóa session của người dùng
+    $request->session()->forget('user');
+    $request->session()->flush();
 
+    // Trả về phản hồi JSON hoặc chuyển hướng
+    return response()->json(['success' => true, 'message' => 'Đăng xuất thành công']);
+}
 
     public function detail(Request $request, $id)
     {
         // Lấy thông tin sản phẩm theo ID
         $product = DB::table('product')->where('id', $id)->first();
-    
+        $user = $request->session()->get('user');
         // Lấy danh sách hình ảnh liên quan đến sản phẩm
         $img = DB::table('img_sp')
             ->join('product', 'img_sp.sanpham', '=', 'product.id') // Join bảng img_sp với product
@@ -173,10 +208,19 @@ class HomeController extends Controller
         ->avg('rate');
     
         $averageRate = $averageRate ? round($averageRate, 1) : 0;
+
+        //yeuthich
+        $isFavorite = false; // Mặc định không yêu thích
+        if ($user) {
+            $isFavorite = DB::table('yeuthich')
+                ->where('khachhang', $user->id)
+                ->where('sanpham', $id)
+                ->exists(); // Trả về true nếu sản phẩm đã được yêu thích
+        }
         // Trả về view với dữ liệu sản phẩm và hình ảnh
         return view('home.detail', ['product' => $product, 'img' => $img,'options'=>$options, 
         'gigabyte' => $gigabyte,'allcomment'=>$allcomment,'rates'=>$rates,'sumrate'=>$sumrate,
-        'allRatings'=>$allRatings,'averageRate'=>$averageRate
+        'allRatings'=>$allRatings,'averageRate'=>$averageRate,'isFavorite' => $isFavorite
         ]);
     }
     
@@ -281,4 +325,41 @@ public function AddRates(Request $request)
         return redirect()->back()->with('error', 'Không thể thêm bình luận.');
     }
 }
+
+public function AddFavorite(Request $request)
+{
+    $user = $request->session()->get('user');
+    if (!$user) {
+        return response()->json(['success' => false, 'message' => 'Bạn cần đăng nhập để sử dụng tính năng này.'], 401);
+    }
+
+    $sanpham = $request->input('sanpham');
+
+    // Kiểm tra nếu sản phẩm đã được yêu thích
+    $favorite = DB::table('yeuthich')
+        ->where('khachhang', $user->id)
+        ->where('sanpham', $sanpham)
+        ->first();
+
+    if ($favorite) {
+        // Nếu đã yêu thích, thì hủy yêu thích
+        DB::table('yeuthich')
+            ->where('khachhang', $user->id)
+            ->where('sanpham', $sanpham)
+            ->delete();
+
+        return response()->json(['success' => true, 'isFavorite' => false, 'message' => 'Đã hủy yêu thích.']);
+    } else {
+        // Nếu chưa yêu thích, thêm vào danh sách yêu thích
+        DB::table('yeuthich')->insert([
+            'khachhang' => $user->id,
+            'sanpham' => $sanpham,
+            'time' => now(),
+            'trangthai' => 1,
+        ]);
+
+        return response()->json(['success' => true, 'isFavorite' => true, 'message' => 'Đã thêm vào yêu thích.']);
+    }
+}
+
 }
