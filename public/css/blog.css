@@ -1,0 +1,439 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.blog-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.blog-navigation ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  margin: 0;
+  background: #f8f9fa;
+}
+
+.blog-navigation li {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logo h1 {
+  font-size: 24px;
+  color: #0056b3;
+}
+
+.search-bar input {
+  padding: 5px;
+  width: 300px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+}
+
+.blog-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.blog-main {
+  flex: 3;
+}
+
+.blogleft-column {
+  flex: 2;
+  padding: 20px;
+}
+
+.blogright-column {
+  flex: 1;
+  padding: 20px;
+}
+
+.blog-category-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blog-category-main {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #0073e6;
+}
+
+.blogspan-size {
+  display: flex;
+  border: 1px solid #0073e6;
+  color: white;
+  background-color: #0073e6;
+  padding: 10px;
+  border-radius: 5px 5px 0 0;
+}
+
+.category-tabs {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.category-tabs li {
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.review-content h3 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.review-content .badge {
+  background: #0056b3;
+  color: #fff;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.blog-sidebar {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: #f9f9f9;
+}
+
+.blog-sidebar h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.social-links {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-item i {
+  font-size: 20px;
+  color: #333;
+}
+
+.social-item button {
+  padding: 5px 10px;
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  background: #222;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+
+.blog-tech-section {
+  margin-top: 20px;
+}
+
+.blog-category-main h2,
+
+.blog-main .category-tabs,
+.blog-tech-section .tech-tabs {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-main .category-tabs li,
+.blog-tech-section .tech-tabs li {
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 2px solid transparent;
+}
+
+.blog-main .category-tabs li:hover,
+.blog-tech-section .tech-tabs li:hover {
+  border-bottom: 2px solid #0056b3;
+}
+
+.featured-review img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.featured-review {
+  display: flex;
+  /* Chia cột bằng Flexbox */
+  gap: 5px;
+  /* Khoảng cách giữa các cột */
+  align-items: stretch;
+  /* Đảm bảo các cột cùng chiều cao */
+  border-radius: 5px;
+  /* Bo góc container */
+  overflow: hidden;
+  /* Đảm bảo không tràn viền */
+}
+
+.blogleft-review {
+  flex: 1;
+  width: 100%;
+  /* Đảm bảo hình ảnh co giãn theo chiều rộng cột */
+  height: 100%;
+  /* Đảm bảo hình ảnh bao phủ chiều cao */
+  object-fit: cover;
+  /* Đặt hình ảnh phù hợp */
+}
+
+.blogright-review {
+  flex: 1;
+  padding: 20px;
+  /* Thêm khoảng cách bên trong cột phải */
+  box-sizing: border-box;
+  /* Bao gồm padding trong kích thước cột */
+}
+
+/* ///////////////////////////// */
+.blog-khung {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 20px;
+  /* Khoảng cách giữa các mục */
+}
+
+.blog-hinh {
+  flex: 0 0 80px;
+  /* Chiều rộng cột ảnh */
+  height: 80px;
+  /* Chiều cao cột ảnh */
+  overflow: hidden;
+  border-radius: 5px;
+  /* Bo góc ảnh */
+}
+
+.blog-hinh img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Đảm bảo hình ảnh bao phủ hết khung */
+}
+
+.blog-noidung {
+  flex: 1;
+  /* Nội dung chiếm phần còn lại */
+}
+
+.blog-tieude {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.blog-tieude a {
+  text-decoration: none;
+  color: #0073e6;
+  /* Màu xanh chữ tiêu đề */
+  transition: color 0.3s;
+}
+
+.blog-tieude a:hover {
+  color: #005bb5;
+  /* Màu khi rê chuột lên */
+}
+
+.blog-ngaythang {
+  font-size: 12px;
+  color: #666;
+  /* Màu chữ ngày tháng */
+  margin: 5px 0 0;
+}
+
+/* ///////////////////////////////// */
+.review-content {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.badge {
+  background: #0056b3;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.review-content h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.review-content p {
+  font-size: 14px;
+  color: #555;
+}
+
+.pagination {
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: none;
+  background: #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.pagination button:hover {
+  background: #bbb;
+}
+
+.tech-reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.tech-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-5px);
+}
+
+.tech-card img {
+  width: 100%;
+  height: 50%;
+  border-bottom: 1px solid #ddd;
+}
+
+.tech-content {
+  padding: 10px;
+}
+
+.tech-content .badge {
+  background: #0056b3;
+  color: #fff;
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.tech-content h3 {
+  font-size: 16px;
+  margin: 10px 0;
+}
+.cart-item-luot {
+  max-height: 2000px;
+  height: 1000px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.blog-three-column {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+}
+.cot {
+  flex: 1;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.sub-articles {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.sub-articles li {
+  margin-bottom: 10px;
+}
+
+.sub-articles a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #0056b3;
+  transition: color 0.3s;
+}
+
+.sub-articles a:hover {
+  color: #003f8a;
+}
+
+.sub-articles p {
+  font-size: 12px;
+  color: #777;
+  margin: 5px 0 0;
+}
+.main-article img {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  border-radius: 5px;
+}

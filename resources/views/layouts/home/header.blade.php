@@ -4,10 +4,13 @@
   <title>Tiki Clone Header</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+  <!-- ------------- -->
+    <link rel="stylesheet" href="{{asset('css/dangnhap.css')}}">
+    <link rel="stylesheet" href="{{asset('css/dangky.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('css/popup.css')}}"> -->
+    <link rel="stylesheet" href="{{asset('css/lienhe.css')}}">
+  
 </head>
-
-
   <!-- Header -->
   <header class="header">
     <div class="header-container">
@@ -15,16 +18,16 @@
        <a href="{{ route('home.index') }}"><div  class="logo">
       <img  style="padding: 5px 10px 0px 30px;height: 94px; width: 250px;" src="{{ asset('images/logo.png') }}" alt="Logo">
 </div></a>
-      
-
       <!-- Search bar -->
       <div class="search-bar">
         <input type="text" placeholder="Giá siêu rẻ">
         <button>Tìm kiếm</button>
         <div class="header-icons">
           <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
-          <a href="#"><i class="fas fa-user"></i> Tài khoản</a>
-          <a href="#"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>
+          <div class="button-lienhe" onclick="showPopuplogin('loginPopup')">
+          <a ><i class="fas fa-user"></i> Tài khoản</a>
+          </div>
+          <a href="{{route('giohang.giohang')}}"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>
         </div>
       </div>
     </div>
@@ -72,6 +75,10 @@
       </div>
     </div>
     </div>
+    @include('dangnhap.Login')
+    @include('lienhe.khlienhe')
+    @include('dangnhap.dangky', ['random' => $random??'...'])
+   @yield('content')
   </header>
   <script src="{{ asset('js/carousel.js') }}"></script>
-  
+ 
