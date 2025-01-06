@@ -13,7 +13,10 @@ class BlogSeeder extends Seeder
      */
     public function run(): void
     {
-        Blog::create(['loai' => 'iphone', 'name' => 'iphon14', 'trang_thai' => 1]);
-        Blog::create(['loai' => 'samsum', 'name' => 's22utral', 'trang_thai' => 1]);
+        Blog::create(['loai' => 'Xiaomi', 'name' => 'Xiaomi31', 'trang_thai' => 1]);
+        Blog::create(['loai' => 'Google', 'name' => 'Google', 'trang_thai' => 1]);
+        Blog::create(['loai' => 'Oppo', 'name' => 'oppo1212', 'trang_thai' => 1]);
+        Blog::create(['loai' => 'Nokia', 'name' => 'lummia', 'trang_thai' => 1]);
+        
     }
 }

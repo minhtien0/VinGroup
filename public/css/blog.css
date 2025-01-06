@@ -248,13 +248,14 @@ footer {
 }
 
 .blog-hinh {
-  flex: 0 0 80px;
+  flex: 0 0 110px;
   /* Chiều rộng cột ảnh */
-  height: 80px;
+  height: 120px;
   /* Chiều cao cột ảnh */
   overflow: hidden;
   border-radius: 5px;
   /* Bo góc ảnh */
+  width: 100%;
 }
 
 .blog-hinh img {
@@ -385,12 +386,7 @@ footer {
   font-size: 16px;
   margin: 10px 0;
 }
-.cart-item-luot {
-  max-height: 2000px;
-  height: 1000px;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
+
 .blog-three-column {
   display: flex;
   justify-content: space-between;
@@ -436,4 +432,11 @@ footer {
   height: auto;
   max-height: 280px;
   border-radius: 5px;
+}
+.cart-item-luot{
+  max-height: 500px;
+  height: auto;
+  overflow-y: auto;
+  /* Ẩn scrollbar trên Firefox */
+  scrollbar-width: none;
 }

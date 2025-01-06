@@ -52,6 +52,7 @@ Route::post('/giohang/update/{id}', [GioHangController::class, 'update'])->name(
 Route::post('/giohang/remove/{id}', [GioHangController::class, 'removeProduct'])->name('giohang.remove');
 Route::post('/giohang/clear', [GioHangController::class, 'clearCart'])->name('giohang.clear');
 
+Route::get('/featured-products/{categoryId}', [BlogController::class, 'getFeaturedProducts']);
 
 
 

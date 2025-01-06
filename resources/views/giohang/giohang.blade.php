@@ -27,28 +27,33 @@
                     </div>
                 </div>
                 <div class="cart-item-luot">
-                <!-- Sản Phẩm -->
-                @foreach($cartItems as $item)
-                    <div class="cart-item row">
-                        <div class="product-info wide-column">
-                            <input type="checkbox" class="product-checkbox" data-id="{{ $item->id }}">
-                            <img src="{{ asset('images/' . $item->product->image) }}" alt="{{ $item->product->name }}">
-                            <div class="name">{{ $item->product->name }}</div>
+                    <!-- Sản Phẩm -->
+                    @foreach($cartItems as $item)
+                        <div class="cart-item row">
+                            <div class="product-info wide-column">
+                                <input type="checkbox" class="product-checkbox" data-id="{{ $item->id }}">
+                                <!-- Hiển thị hình ảnh -->
+                                @if ($item->images->isNotEmpty())
+                                    <img src="{{ asset('img/' . $item->images->first()->img) }}" alt="Hình ảnh sản phẩm">
+                                @else
+                                    <img src="{{ asset('img/default.jpg') }}" alt="Hình ảnh mặc định">
+                                @endif
+                                <div class="name">{{ $item->product->name }}</div>
+                            </div>
+                            <div class="price column">{{ number_format($item->product->price) }}đ</div>
+                            <div class="quantity-control column">
+                                <button onclick="update({{ $item->id }}, 'decrease')" class="btn-quantity">-</button>
+                                <input type="number" value="{{ $item->soluong }}" min="1" readonly class="quantity-input">
+                                <button onclick="update({{ $item->id }}, 'increase')" class="btn-quantity">+</button>
+                            </div>
+                            <div class="price column">{{ number_format($item->product->price * $item->soluong) }}đ</div>
+                            <div class="column">
+                                <button onclick="removeProduct({{ $item->id }})" class="delete-btn">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="price column">{{ number_format($item->product->price) }}đ</div>
-                        <div class="quantity-control column">
-                            <button onclick="update({{ $item->id }}, 'decrease')" class="btn-quantity">-</button>
-                            <input type="number" value="{{ $item->soluong }}" min="1" readonly class="quantity-input">
-                            <button onclick="update({{ $item->id }}, 'increase')" class="btn-quantity">+</button>
-                        </div>
-                        <div class="price column">{{ number_format($item->product->price * $item->soluong) }}đ</div>
-                        <div class="column">
-                            <button onclick="removeProduct({{ $item->id }})" class="delete-btn">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
+                    @endforeach
                 </div>
                 <!-- Hiển thị phân trang -->
                 <div class="pagination">

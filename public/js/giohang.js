@@ -3,8 +3,6 @@ function selectAllProducts(checkbox) {
     const productCheckboxes = document.querySelectorAll('.product-checkbox');
     productCheckboxes.forEach(cb => cb.checked = checkbox.checked);
 }
-
-// Cập nhật số lượng sản phẩm
 // Hàm cập nhật số lượng sản phẩm
 function update(id, action) {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -28,10 +26,10 @@ function update(id, action) {
         .then((data) => {
             if (data.success) {
                 console.log('Số lượng cập nhật:', data.newQuantity);
-                alert(data.message);
+                /* alert(data.message); */
                 location.reload(); // Tải lại trang để hiển thị số lượng mới
             } else {
-                alert(data.message);
+                /* alert(data.message); */
             }
         })
         .catch((error) => {
@@ -55,7 +53,7 @@ function removeProduct(productId) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert(data.message);
+            /* alert(data.message); */
             location.reload(); // Tải lại trang để cập nhật
         }
     })
@@ -75,7 +73,7 @@ function clearCart() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert(data.message);
+            /* alert(data.message); */
             location.reload(); // Tải lại trang để cập nhật
         }
     })

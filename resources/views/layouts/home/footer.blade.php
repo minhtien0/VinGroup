@@ -23,7 +23,7 @@
         <h4>Về Tiki</h4>
         <ul>
           <li><a href="#">Giới thiệu Tiki</a></li>
-          <li><a href="#">Tiki Blog</a></li>
+          <li><a href="{{ route('lienhe.blog') }}">Tiki Blog</a></li>
           <li><a href="#">Tuyển dụng</a></li>
           <li><a href="#">Chính sách bảo mật thanh toán</a></li>
           <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>

@@ -9,7 +9,19 @@ class SanPham extends Model
 {
     use HasFactory;
 
-    // Liên kết với bảng `product`
-    protected $table = 'product'; 
-    protected $fillable = ['id', 'name', 'price', 'color','gb', 'soluong', 'categori', 'avt','slug', 'trangthai']; // Columns
+    protected $table = 'product';
+
+    protected $fillable = [
+        'id', 'name', 'price', 'color', 'gb', 'soluong', 'categori', 'avt', 'slug', 'trangthai'
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Categori::class, 'categori', 'id');
+    }
+    //////////////
+    public function blog()
+    {
+        return $this->hasOne(Blog::class, 'sanpham_id', 'id');
+    }
 }

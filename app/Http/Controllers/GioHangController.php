@@ -18,7 +18,7 @@ class GioHangController extends Controller
             return redirect()->route('dangnhap.Login')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
         }
         // Lấy danh sách sản phẩm trong giỏ hàng
-        $cartItems = GioHang::with('product')
+        $cartItems = GioHang::with(['product','images'])
             ->where('khachhang', $user->id)
             //->get();
             ->paginate(10);
@@ -40,13 +40,13 @@ class GioHangController extends Controller
     // Tìm sản phẩm trong giỏ hàng dựa trên id
     $cartItem = GioHang::find($id);
 
-    if (!$cartItem) {
+    /* if (!$cartItem) {
         \Log::error('Không tìm thấy sản phẩm trong giỏ hàng.', ['id' => $id]);
         return response()->json([
             'success' => false,
             'message' => 'Không tìm thấy sản phẩm trong giỏ hàng.',
         ], 404);
-    }
+    } */
 
     // Xử lý tăng hoặc giảm số lượng
     $newQuantity = $cartItem->soluong;
@@ -67,15 +67,15 @@ class GioHangController extends Controller
     $cartItem->soluong = $newQuantity;
     $cartItem->save();
 
-    \Log::info('Số lượng cập nhật thành công:', [
+    /* \Log::info('Số lượng cập nhật thành công:', [
         'id' => $id,
         'newQuantity' => $newQuantity,
-    ]);
+    ]); */
 
     return response()->json([
         'success' => true,
         'newQuantity' => $newQuantity,
-        'message' => 'Cập nhật số lượng thành công.',
+        'message' => 'Cập nhật số lượng thành công',
     ]);
 }
 
