@@ -16,8 +16,7 @@
                 <hr>
                 <div class="body__account__left__bot">
                     <div style="margin-bottom: 10px;">
-                        <a href="{{ route('account.donhang') }}" style="text-decoration: none ;color: aquamarine;"
-                            onclick="showContentUser('donhang', event)">
+                        <a href="{{ route('account.donhang') }}" style="text-decoration: none ;color: aquamarine;">
                             <span><i class="fa-regular fa-rectangle-list"></i></span>
                             <span style="color: black;">Đơn Hàng</span>
                         </a>
@@ -29,10 +28,15 @@
                         </a>
                     </div>
                     <div style="margin-bottom: 10px;">
-                        <a href="{{ route('account.voucher') }}" style="text-decoration: none ; color: orange;"
-                            onclick="showContentUser('voucher', event)">
+                        <a href="{{ route('account.voucher') }}" style="text-decoration: none ; color: orange;">
                             <span><i class="fa-solid fa-ticket"></i></span>
                             <span style="color: black;">Voucher</span>
+                        </a>
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <a href="{{ route('account.yeuthich') }}" style="text-decoration: none ; color: orange;">
+                            <span><i class="fa-solid fa-heart" style="color: #74C0FC;"></i></span>
+                            <span style="color: black;">DS Yêu Thích</span>
                         </a>
                     </div>
                 </div>
@@ -44,9 +48,10 @@
                      @include('layouts.home.taikhoan.voucher')
                     @elseif(Request::is('account/thongtin'))
                         @include('layouts.home.taikhoan.thongtin')
+                    @elseif(Request::is('account/yeuthich'))
+                        @include('layouts.home.taikhoan.yeuthich')
             @endif
             </div>
 
-           
 </div>
 @endsection
