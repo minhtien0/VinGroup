@@ -23,29 +23,15 @@
         <nav class="sidebar-nav">
             <h3>Danh mục</h3>
             <ul>
-                <div class="product-list">
-                    @foreach ($products as $product)
-                        <div class="product-item">
-                            <div class="product-label">Giảm {{ rand(5, 25) }}%</div>
-                            <img src="{{ asset('images/' . $product->avt) }}" alt="{{ $product->name }}">
-                            <h2>{{ $product->name }}</h2>
-                            <div class="product-specs">
-                                <span>{{ $product->gb }} GB</span>
-                                <span>{{ $product->color }}</span>
-                            </div>
-                            <div class="product-price">
-                                <p class="current-price">{{ number_format($product->price) }} VNĐ</p>
-                                <p class="original-price">{{ number_format($product->price + 5000000) }} VNĐ</p>
-                            </div>
-                            <div class="product-info">
-                                Không phí chuyển đổi khi trả góp 0% qua thẻ tín dụng kỳ hạn 3-6 tháng
-                            </div>
-                            <div class="product-actions">
-                                <button class="like-btn">Yêu thích</button>
-                                <button class="compare-btn">So sánh</button>
-                            </div>
-                        </div>
-                    @endforeach
+                <div class="main-categories">
+                    <ul>
+                        @foreach ($categori as $cate)
+                            <li class="category-item">
+                                
+                                <a href="{{ route('category.show', $cate->slug) }}">{{ $cate->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </div>
                 <li>
                     <div><a class="vivo" href="#"><img
