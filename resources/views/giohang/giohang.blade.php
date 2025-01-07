@@ -33,8 +33,8 @@
                             <div class="product-info wide-column">
                                 <input type="checkbox" class="product-checkbox" data-id="{{ $item->id }}">
                                 <!-- Hiển thị hình ảnh -->
-                                @if ($item->images->isNotEmpty())
-                                    <img src="{{ asset('img/' . $item->images->first()->img) }}" alt="Hình ảnh sản phẩm">
+                                @if (!empty($item->product->avt))
+                                    <img src="{{ asset('img/' . $item->product->avt) }}" alt="{{ $item->product->name }}">
                                 @else
                                     <img src="{{ asset('img/default.jpg') }}" alt="Hình ảnh mặc định">
                                 @endif
@@ -71,5 +71,6 @@
         </div>
     </div>
 </div>
+@include('Layouts.home.footer')
 @endsection
 <script src="{{ asset('js/giohang.js') }}"></script>

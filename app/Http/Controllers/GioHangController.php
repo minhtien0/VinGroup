@@ -18,9 +18,12 @@ class GioHangController extends Controller
             return redirect()->route('dangnhap.Login')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
         }
         // Lấy danh sách sản phẩm trong giỏ hàng
-        $cartItems = GioHang::with(['product','images'])
+       /*  $cartItems = GioHang::with(['product','images'])
             ->where('khachhang', $user->id)
             //->get();
+            ->paginate(10); */
+            $cartItems = GioHang::with('product')
+            ->where('khachhang', $user->id)
             ->paginate(10);
 
         // Tính tổng tiền

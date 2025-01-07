@@ -11,8 +11,8 @@ class ImgSp extends Model
     protected $fillable = ['img', 'sanpham'];
 
     // Quan hệ với bảng sản phẩm (nếu cần)
-    public function product()
+    /* public function product()
     {
         return $this->belongsTo(SanPham::class, 'sanpham', 'id');
-    }
+    } */
 }
