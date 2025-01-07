@@ -1,4 +1,4 @@
-@extends('layouts.home.app')
+<!-- @extends('layouts.home.app')
 
 @section('content')
 <!DOCTYPE html>
@@ -22,3 +22,4 @@
 </body>
 </html>
 @endsection
+ -->

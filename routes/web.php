@@ -32,5 +32,9 @@ Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add'
 //dong
 Route::get('/', [DongController::class, 'index'])->name('home.index');
 
+route::get('/policy', [DongController::class,'Policy'])->name('layouts.home.policy'); 
 
+route::get('/Iphone', [DongController::class,'Iphone'])->name('layouts.home.Iphone'); 
 
+Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
+Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show');

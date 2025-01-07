@@ -281,4 +281,21 @@ public function AddRates(Request $request)
         return redirect()->back()->with('error', 'Không thể thêm bình luận.');
     }
 }
+
+
+//// cai nay của huy dong 
+public function showRandomProducts()
+{
+    // Lấy 6 sản phẩm ngẫu nhiên
+    $products = DB::table('product')
+        ->inRandomOrder() // Lấy sản phẩm ngẫu nhiên
+        ->limit(6) // Giới hạn số lượng sản phẩm (ở đây là 5)
+        ->get();
+
+    // Trả về view với danh sách sản phẩm
+    return view('home.index', ['products' => $products]);
+}
+
+
+
 }
