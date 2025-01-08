@@ -12,6 +12,49 @@ body {
     font-family: Arial, sans-serif;
     justify-content: center;
 }
+/* CSS */
+.sticky-header {
+    position: sticky;
+    top: 0; /* Vị trí cách đầu trang */
+    z-index: 1000; /* Đảm bảo header luôn ở trên cùng */
+    background-color: #fff; /* Màu nền */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+    padding: 10px 20px;
+}
+
+.sticky-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sticky-header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.sticky-header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.sticky-header nav ul li a:hover {
+    color: #007bff; /* Màu khi hover */
+}
+
+/* Nội dung giả lập */
+.content {
+    padding: 50px;
+    line-height: 1.6;
+}
+
 .container {
     display: flex;
 }

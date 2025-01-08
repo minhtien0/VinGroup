@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class DongController extends Controller
 {
+    public function dashboard()
+    {
+        return view('home.admin.dashboard');
+    }
     public function index()
     {
         $categori = DB::table('categori')->get();

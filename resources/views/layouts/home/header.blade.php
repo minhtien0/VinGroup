@@ -8,7 +8,7 @@
 
 </head>
 
-
+<header class="sticky-header">
   <!-- Header -->
   <header class="header">
     <div class="header-container">
@@ -74,6 +74,7 @@
       </div>
     </div>
     </div>
+  </header>
   </header>
   <script src="{{ asset('js/carousel.js') }}"></script>
   <script src="{{ asset('js/search.js') }}"></script>

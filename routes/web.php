@@ -31,6 +31,7 @@ Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add'
 
 //dong
 Route::get('/', [DongController::class, 'index'])->name('home.index');
+Route::get('/admin/dashboard', [DongController::class, 'dashboard'])->name('home.admin.dashboard');
 
 route::get('/policy', [DongController::class,'Policy'])->name('layouts.home.policy'); 
 
