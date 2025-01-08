@@ -1239,8 +1239,54 @@
                         <button class="btn btn-danger" type="button" style="width: 320px;">Mua ngay</button>
                         <button class="btn btn-primary" type="button"
                             style="background-color: transparent; color: blue;">Thêm giỏ hàng</button>
-                        <button class="btn btn-primary" type="button"
-                            style="background-color: transparent; color: blue;">Thêm Vào Yêu Thích <i class="fa-regular fa-heart"></i></button>
+                            <form id="favoriteForm" data-favorite="{{ $isFavorite ? 'true' : 'false' }}" action="{{ route('favorite.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="sanpham" value="{{ $product->id }}">
+                                <button id="favoriteButton" class="btn btn-primary" type="button"
+                                    style="background-color: transparent; color: {{ $isFavorite ? 'red' : 'blue' }}; width: 320px;">
+                                    <span id="favoriteText">{{ $isFavorite ? 'Đã Yêu Thích' : 'Thêm Vào Yêu Thích' }}</span>
+                                    <i id="favoriteIcon" class="fa-regular fa-heart"></i>
+                                </button>
+                            </form>
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                const favoriteForm = document.getElementById("favoriteForm");
+                                const favoriteButton = document.getElementById("favoriteButton");
+                                const favoriteText = document.getElementById("favoriteText");
+                                const favoriteIcon = document.getElementById("favoriteIcon");
+
+                                favoriteButton.addEventListener("click", function () {
+                                    const formData = new FormData(favoriteForm);
+
+                                    fetch(favoriteForm.action, {
+                                        method: "POST",
+                                        body: formData,
+                                        headers: {
+                                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                                        },
+                                    })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            if (data.success) {
+                                                // Cập nhật giao diện dựa trên trạng thái yêu thích
+                                                if (data.isFavorite) {
+                                                    favoriteText.textContent = "Đã Yêu Thích";
+                                                    favoriteButton.style.color = "red";
+                                                } else {
+                                                    favoriteText.textContent = "Thêm Vào Yêu Thích";
+                                                    favoriteButton.style.color = "blue";
+                                                }
+                                            } else {
+                                                alert(data.message || "Có lỗi xảy ra.");
+                                            }
+                                        })
+                                        .catch((error) => {
+                                            console.error("Lỗi:", error);
+                                            alert("Không thể thực hiện yêu cầu.");
+                                        });
+                                });
+                            });
+                            </script>
                     </div>
                 </div>
 
