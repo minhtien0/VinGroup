@@ -79,7 +79,7 @@ input[type="password"] {
 .login-button {
     width: 100%;
     padding: 10px;
-    background-color: #ff5722;
+    background-color: #4a95c7;
     color: white;
     border: none;
     border-radius: 4px;
@@ -136,7 +136,7 @@ input[type="password"] {
 }
 
 .google-btn {
-    background-color: #DB4437;
+    background-color:#4267B2;
 }
 
 .new-user {
@@ -146,12 +146,12 @@ input[type="password"] {
 }
 
 .new-user a {
-    color: #ff5722;
+    color: #4267B2;
     text-decoration: none;
 }
 
 .error-message {
-    color: red;
+    color: #fbd472;
     font-size: 14px;
     margin-top: 10px;
 }

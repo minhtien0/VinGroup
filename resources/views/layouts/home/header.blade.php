@@ -28,9 +28,7 @@
       <button>Tìm kiếm</button>
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
-        <!-- <div class="button-lienhe" onclick="showPopuplogin('loginPopup')">
-          <a><i class="fas fa-user"></i> Tài khoản</a>
-        </div> -->
+        <a href="{{route('lienhe.admin')}}"><i class="fas fa-user-cog"></i> Admin</a>
         <div class="button-lienhe">
           @if (session()->has('user'))
         <div class="dropdown">
@@ -59,7 +57,6 @@
       </div>
     </div>
   </div>
-  <!-- Navigation icons -->
   <!-- Navigation links -->
   <div>
     <div class="nav-links">
@@ -121,10 +118,12 @@
       </div>
     </div>
   </div>
+  <!-- @include('lienhe.admin') -->
   @include('dangnhap.Login')
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
   @yield('content')
+  
 </header>
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/headerr.js') }}"></script>

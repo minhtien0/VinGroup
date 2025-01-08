@@ -32,7 +32,8 @@ class QuocController extends Controller
     $user = DB::table('user')
         ->where(function ($query) use ($request) {
             $query->where('gmail', $request->login)
-                  ->orWhere('sdt', $request->login);
+                  ->orWhere('sdt', $request->login)
+                  ->orWhere('name', $request->login);
         })
         ->first();
 

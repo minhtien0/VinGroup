@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\DongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -54,6 +55,8 @@ Route::post('/giohang/clear', [GioHangController::class, 'clearCart'])->name('gi
 
 Route::get('/featured-products/{categoryId}', [BlogController::class, 'getFeaturedProducts']);
 
+//admin
+Route::get('/lienhe/admin', [adminController::class, 'admin'])->name('lienhe.admin');
 
 
 

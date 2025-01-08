@@ -15,17 +15,9 @@ class GioHangController extends Controller
         // Kiểm tra nếu người dùng chưa đăng nhập
         $user = $request->session()->get('user');
         if (!$user) {
-            return redirect()->route('dangnhap.Login')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
+            return redirect()->route('home.index')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
         }
-        // Lấy danh sách sản phẩm trong giỏ hàng
-       /*  $cartItems = GioHang::with(['product','images'])
-            ->where('khachhang', $user->id)
-            //->get();
-            ->paginate(10); */
-            $cartItems = GioHang::with('product')
-            ->where('khachhang', $user->id)
-            ->paginate(10);
-
+        $cartItems = GioHang::with('product')->where('khachhang', $user->id)->paginate(10);
         // Tính tổng tiền
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->product->price * $item->soluong;
@@ -42,15 +34,6 @@ class GioHangController extends Controller
 
     // Tìm sản phẩm trong giỏ hàng dựa trên id
     $cartItem = GioHang::find($id);
-
-    /* if (!$cartItem) {
-        \Log::error('Không tìm thấy sản phẩm trong giỏ hàng.', ['id' => $id]);
-        return response()->json([
-            'success' => false,
-            'message' => 'Không tìm thấy sản phẩm trong giỏ hàng.',
-        ], 404);
-    } */
-
     // Xử lý tăng hoặc giảm số lượng
     $newQuantity = $cartItem->soluong;
     if ($request->action === 'increase') {
@@ -69,12 +52,6 @@ class GioHangController extends Controller
     // Cập nhật số lượng
     $cartItem->soluong = $newQuantity;
     $cartItem->save();
-
-    /* \Log::info('Số lượng cập nhật thành công:', [
-        'id' => $id,
-        'newQuantity' => $newQuantity,
-    ]); */
-
     return response()->json([
         'success' => true,
         'newQuantity' => $newQuantity,
@@ -93,7 +70,4 @@ class GioHangController extends Controller
         GioHang::where('khachhang', Auth::id())->delete();
         return response()->json(['success' => true, 'message' => 'Đã xóa tất cả sản phẩm trong giỏ hàng']);
     }
-
-
-
 }

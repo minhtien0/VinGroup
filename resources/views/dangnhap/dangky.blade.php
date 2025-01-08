@@ -5,7 +5,7 @@
         <h2>Đăng Ký Tài Khoản</h2>
         <form id="register-form" action="{{ route('dangnhap.dangky') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <label for="name">Tên đăng nhập:</label>
+    <label for="name">Tên:</label>
     <input type="text" id="name" name="name" placeholder="Tên đăng nhập" required><br>
     <label for="email">Email:</label>
     <input type="gmail" id="gmail" name="gmail" placeholder="Nhập email" required><br>
