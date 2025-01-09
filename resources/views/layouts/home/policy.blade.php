@@ -1,3 +1,4 @@
+@include('layouts.home.header')
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -110,11 +111,10 @@
             font-size: 0.9rem;
         }
     </style>
-</head>@include('layouts.header')
+</head>
 <body>
     <div class="policy-header">
         <h1>Chính Sách Bảo Hành</h1>
-        <h1>Test ne HuyDong OIIIIIIIII</h1>
         <p>Cam kết mang đến trải nghiệm mua sắm an toàn và tiện lợi nhất.</p>
     </div>
 
@@ -130,18 +130,18 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Điện thoại/ Máy tính bảng/ Macbook/ Apple Watch</td>
+                    <td>Máy Mới</td>
                     <td>30 ngày</td>
                     <td>
-                        Trong 30 ngày: Nhập lại 20% trên giá mua ban đầu<br>
+                        Trong 30 ngày: Nhập lại 90% trên giá mua ban đầu<br>
                         Sau 30 ngày: Thỏa thuận
                     </td>
                 </tr>
                 <tr>
-                    <td>Laptop</td>
+                    <td>Máy Cũ</td>
                     <td>30 ngày</td>
                     <td>
-                        Trong 30 ngày: Nhập lại 40% trên giá mua ban đầu<br>
+                        Trong 30 ngày: Nhập lại 50% trên giá mua ban đầu<br>
                         Sau 30 ngày: Thỏa thuận
                     </td>
                 </tr>
@@ -167,36 +167,74 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Điện thoại di động, máy tính bảng</td>
+                    <td>Điện thoại di động</td>
                     <td>12 - 24 tháng</td>
                     <td>Không bị rơi vỡ, không bị ngấm nước, còn tem bảo hành.</td>
                 </tr>
                 <tr>
-                    <td>Laptop, MacBook</td>
-                    <td>12 - 24 tháng</td>
+                    <td>Điện thoại di động</td>
+                    <td>6 - 12 tháng</td>
                     <td>Không bị hỏng hóc do ngoại lực, còn đầy đủ hóa đơn mua hàng.</td>
                 </tr>
                 <tr>
-                    <td>Phụ kiện (tai nghe, sạc, dây cáp)</td>
-                    <td>6 - 12 tháng</td>
+                    <td>Điện thoại di động</td>
+                    <td>3 - 6 tháng</td>
                     <td>Không có dấu hiệu sử dụng sai mục đích, còn trong thời gian bảo hành.</td>
-                </tr>
-                <tr>
-                    <td>Đồng hồ thông minh</td>
-                    <td>12 tháng</td>
-                    <td>Còn nguyên vẹn, không bị rơi vỡ, có giấy tờ mua hàng.</td>
                 </tr>
             </tbody>
         </table>
         <div class="policy-note">
             (*) Lỗi phần cứng từ nhà sản xuất sẽ được hỗ trợ bảo hành miễn phí tại trung tâm ủy quyền.
         </div>
-
-        <div class="content flex-1 text-sm xl:text-base xl:mt-5" data-v-06b1bc72=""><div data-v-06b1bc72="" data-v-1852dedf=""><p class="ql-align-justify">Vin Group có dịch vụ giao hàng tận nơi trên toàn quốc, áp dụng cho khách mua hàng trên Website, Fanpage và gọi điện thoại vào Hotline của Vin. Đơn hàng sẽ được chuyển phát đến địa chỉ khách hàng cung cấp thông qua đơn vị vận chuyển trung gian là GIAO HÀNG TIẾT KIỆM hoặc 247EXPRESS. Đặc biệt, thông tin hóa đơn dán bên ngoài kiện hàng luôn luôn có logo cô gái của thương hiệu để nhận biết các sản phẩm là chính hãng.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>1.&nbsp;Chính sách giá</strong></p><p class="ql-align-justify">a. Giá sản phẩm niêm yết tại Website là giá đã bao gồm thuế theo quy định pháp luật hiện hành, phí đóng gói và các chi phí khác liên quan đến việc mua hàng trừ các chi phí phát sinh khác được xác nhận qua Hotline hoặc Email của Vin và được sự chấp thuận của khách hàng trong quá trình xác nhận đơn đặt hàng, giao nhận hàng hoá.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>2.&nbsp;Phí vận chuyển:</strong></p><p class="ql-align-justify">a.&nbsp;Với hóa đơn từ 99.000 VNĐ: miễn phí vận chuyển toàn quốc.</p><p class="ql-align-justify">b.&nbsp;Với hóa đơn dưới 99.000 VNĐ: phí vận chuyển mặc định là 30.000 VNĐ áp dụng toàn quốc.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>3.&nbsp;Thời gian giao hàng:</strong></p><p class="ql-align-justify">a.&nbsp;Đơn hàng nội thành TP.HCM: Thời gian giao hàng là 2-3 ngày sau khi đặt hàng.</p><p class="ql-align-justify">b.&nbsp;Đơn hàng ở ngoại thành TP.HCM và các tỉnh thành khác: Thời gian là 2-5 ngày đối với khu vực trung tâm tỉnh thành phố và 5-6 ngày đối với khu vực huyện, xã, thị trấn…</p><p class="ql-align-justify">c.&nbsp;Tuy nhiên, vẫn có những giới hạn và sự chậm trễ do nguyên nhân khách quan như lễ, tết, địa chỉ nhận hàng khó tìm, sự chậm trễ từ dịch vụ chuyển phát,…Vin mong quý khách thông cảm vì những lý do ngoài sự chi phối của chúng tôi.</p><p class="ql-align-justify">d.&nbsp;Trường hợp có sự chậm trễ khi giao hàng xảy ra, Vin sẽ thông báo ngay đến bạn đồng thời sẽ tiếp tục giao hàng hoặc hỗ trợ huỷ đơn hàng nếu bạn muốn. Chúng tôi sẽ không chịu trách nhiệm do việc giao hàng chậm trễ trừ trách nhiệm hoàn trả tiền nếu bạn đã thanh toán mà chưa nhận được sản phẩm.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>4.&nbsp;Quy trình giao nhận, đổi trả, bảo hành sản phẩm:</strong></p><p class="ql-align-justify">a.&nbsp;Trong quá trình giao nhận hàng, nếu quý khách không có mặt trong đợt nhận hàng thì đơn vị vận chuyển sẽ liên lạc lại với quý khách để hẹn thời gian giao lại hàng (đối đa 2 lần hẹn). Sau 2 lần hẹn giao lại nhưng vẫn không giao thành công thì đơn vị vận chuyển sẽ hoàn hàng về cho Vin và chúng tôi sẽ hoàn trả các chi phí mà bạn đã thanh toán trong vòng 15 ngày làm việc.</p><p class="ql-align-justify">b.&nbsp;Trường hợp việc giao và nhận hàng không thành công do không thể liên lạc được với quý khách trong vòng 3 ngày, đơn vị vận chuyển sẽ hoàn hàng về lại cho Vin và chúng tôi sẽ thông báo đến bạn qua thông tin liên lạc mà bạn đã cung cấp về việc hủy đơn hàng đồng thời hoàn trả các chi phí mà bạn đã thanh toán trong vòng 15 ngày làm việc.</p><p class="ql-align-justify">c.&nbsp;Khi nhận sản phẩm, quý khách vui lòng kiểm tra kỹ tính nguyên vẹn, số lượng sản phẩm theo đơn đặt hàng trước khi nhận. Việc bạn ký xác nhận hoặc ảnh chụp nhận hàng của bạn do đơn vị vận chuyển thu thập trong quá trình giao nhận là chứng từ xác minh chúng tôi đã hoàn thành nghĩa vụ giao hàng đúng với đơn đặt hàng sau khi được bạn kiểm tra ngoại quan.</p><p class="ql-align-justify">d.&nbsp;Đơn vị vận chuyển có trách nhiệm giao hàng và thu thập các chứng từ trong quá trình giao nhận như chữ ký xác nhận hoặc ảnh chụp nhận hàng của khách hàng và lưu trữ theo quy định của pháp luật. Chúng tôi cam kết dùng mọi biện pháp nhằm bảo mật những chứng từ, hình ảnh chúng tôi thu thập của khách hàng và chỉ sử dụng cho mục đích lưu trữ, giải quyết khiếu nại, hỗ trợ khách hàng hoặc các mục đích được cho là đúng pháp luật và cần thiết mà không sử dụng cho mục đích thương mại hay vụ lợi khác.</p><p class="ql-align-justify">e.&nbsp;Quý khách cần quay lại video mở hàng và kiểm tra chất lượng sản phẩm để làm bằng chứng trong trường hợp muốn liên hệ lại với Vin nhằm đổi, trả, bảo hành sản phẩm hoặc khiếu nại các vấn đề liên quan đến sản phẩm mà bạn đã mua.</p><p class="ql-align-justify">f.&nbsp;Vin chỉ nhận đổi trả, bảo hành sản phẩm khi lỗi đến từ nhà sản xuất hoặc do quá trình vận chuyển. Chúng tôi sẽ liên lạc với bạn để hướng dẫn qui cách đóng gói hàng hoàn trả đồng thời thông báo đơn vị thu hồi và gửi sản phẩm tương đương để bổ sung, thay thế theo chính sách giao hàng quy định như trên tính từ ngày nhận được yêu cầu đổi trả, bảo hành sản phẩm, đồng thời chúng tôi sẽ chi trả chi phí vận chuyển cho việc đổi trả, bảo hành này. Lưu ý, chúng tôi chỉ hỗ trợ đổi trả hàng với điều kiện yêu cầu đổi trả không quá 03 ngày kể từ ngày bạn nhận được hàng. Thời gian xử lý hoàn trả, bảo hành được thực hiện tối đa trong vòng 14 ngày tính từ ngày nhận được yêu cầu của bạn.</p><p class="ql-align-justify">g.&nbsp;Đơn hàng của bạn sẽ được đóng gói theo tiêu chuẩn của Vin. Ngoài tiêu chuẩn gói hàng theo quy định, nếu bạn có nhu cầu đóng gói kiện hàng theo yêu cầu đặc biệt khác, vui lòng liên hệ với chúng tôi và chi trả thêm phí theo thoả thuận.</p><p class="ql-align-justify">h.&nbsp;Quý khách có thể thanh toán khi nhận hàng (COD) hoặc có thể chọn phương thức thanh toán trực tuyến qua cổng thanh toán Alepay hoặc Ví Momo theo hướng dẫn tại Mục “Hướng dẫn mua hàng” được công bố trên website.</p><p class="ql-align-justify">i.&nbsp;Mọi thông tin về việc thay đổi hay hủy bỏ đơn hàng, quý khách cần thông báo sớm để chúng tôi có thể hủy hoặc chỉnhh sửa đơn hàng cho bạn kịp thời.</p><p class="ql-align-justify">j.&nbsp;Để kiểm tra mọi thông tin liên quan đến đơn hàng hoặc tình trạng đơn hàng của quý khách, xin vui lòng nhắn tin vào Fanpage, gửi Email hoặc gọi số Hotline và cung cấp tên, số điện thoại hoặc mã đơn hàng để được chúng tôi kiểm tra và hỗ trợ sớm nhất.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>5.&nbsp;Thông tin liên lạc</strong></p><p class="ql-align-justify">Quý khách vui lòng liên hệ với chúng tôi trong trường hợp có thắc mắc, cần sự hỗ trợ và phản hồi qua các kênh sau:</p><p class="ql-align-justify">• Fanpage: https://www.facebook.com/VinVietnamOfficial</p><p class="ql-align-justify">• Hotline: 028 38328228 (9:00-18:00 từ thứ 2 đến thứ 6)</p><p class="ql-align-justify">• Email: cskh@Vinvietnam.com</p></div></div>
         
+
+        <div class="content flex-1 text-sm xl:text-base xl:mt-5" data-v-06b1bc72=""><div data-v-06b1bc72="" data-v-1852dedf=""><p class="ql-align-justify">Vin Group có dịch vụ giao hàng tận nơi trên toàn quốc, áp dụng cho khách mua hàng trên Website, Fanpage và gọi điện thoại vào Hotline của Vin. Đơn hàng sẽ được chuyển phát đến địa chỉ khách hàng cung cấp thông qua đơn vị vận chuyển trung gian là GIAO HÀNG TIẾT KIỆM hoặc 247EXPRESS. Đặc biệt, thông tin hóa đơn dán bên ngoài kiện hàng luôn luôn có logo cô gái của thương hiệu để nhận biết các sản phẩm là chính hãng.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>1.&nbsp;Chính sách giá</strong></p><p class="ql-align-justify">a. Giá sản phẩm niêm yết tại Website là giá đã bao gồm thuế theo quy định pháp luật hiện hành, phí đóng gói và các chi phí khác liên quan đến việc mua hàng trừ các chi phí phát sinh khác được xác nhận qua Hotline hoặc Email của Vin và được sự chấp thuận của khách hàng trong quá trình xác nhận đơn đặt hàng, giao nhận hàng hoá.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>2.&nbsp;Phí vận chuyển:</strong></p><p class="ql-align-justify">a.&nbsp;Với hóa đơn từ 99.000 VNĐ: miễn phí vận chuyển toàn quốc.</p><p class="ql-align-justify">b.&nbsp;Với hóa đơn dưới 99.000 VNĐ: phí vận chuyển mặc định là 30.000 VNĐ áp dụng toàn quốc.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>3.&nbsp;Thời gian giao hàng:</strong></p><p class="ql-align-justify">a.&nbsp;Đơn hàng nội thành TP.HCM: Thời gian giao hàng là 2-3 ngày sau khi đặt hàng.</p><p class="ql-align-justify">b.&nbsp;Đơn hàng ở ngoại thành TP.HCM và các tỉnh thành khác: Thời gian là 2-5 ngày đối với khu vực trung tâm tỉnh thành phố và 5-6 ngày đối với khu vực huyện, xã, thị trấn…</p><p class="ql-align-justify">c.&nbsp;Tuy nhiên, vẫn có những giới hạn và sự chậm trễ do nguyên nhân khách quan như lễ, tết, địa chỉ nhận hàng khó tìm, sự chậm trễ từ dịch vụ chuyển phát,…Vin mong quý khách thông cảm vì những lý do ngoài sự chi phối của chúng tôi.</p><p class="ql-align-justify">d.&nbsp;Trường hợp có sự chậm trễ khi giao hàng xảy ra, Vin sẽ thông báo ngay đến bạn đồng thời sẽ tiếp tục giao hàng hoặc hỗ trợ huỷ đơn hàng nếu bạn muốn. Chúng tôi sẽ không chịu trách nhiệm do việc giao hàng chậm trễ trừ trách nhiệm hoàn trả tiền nếu bạn đã thanh toán mà chưa nhận được sản phẩm.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>4.&nbsp;Quy trình giao nhận, đổi trả, bảo hành sản phẩm:</strong></p><p class="ql-align-justify">a.&nbsp;Trong quá trình giao nhận hàng, nếu quý khách không có mặt trong đợt nhận hàng thì đơn vị vận chuyển sẽ liên lạc lại với quý khách để hẹn thời gian giao lại hàng (đối đa 2 lần hẹn). Sau 2 lần hẹn giao lại nhưng vẫn không giao thành công thì đơn vị vận chuyển sẽ hoàn hàng về cho Vin và chúng tôi sẽ hoàn trả các chi phí mà bạn đã thanh toán trong vòng 15 ngày làm việc.</p><p class="ql-align-justify">b.&nbsp;Trường hợp việc giao và nhận hàng không thành công do không thể liên lạc được với quý khách trong vòng 3 ngày, đơn vị vận chuyển sẽ hoàn hàng về lại cho Vin và chúng tôi sẽ thông báo đến bạn qua thông tin liên lạc mà bạn đã cung cấp về việc hủy đơn hàng đồng thời hoàn trả các chi phí mà bạn đã thanh toán trong vòng 15 ngày làm việc.</p><p class="ql-align-justify">c.&nbsp;Khi nhận sản phẩm, quý khách vui lòng kiểm tra kỹ tính nguyên vẹn, số lượng sản phẩm theo đơn đặt hàng trước khi nhận. Việc bạn ký xác nhận hoặc ảnh chụp nhận hàng của bạn do đơn vị vận chuyển thu thập trong quá trình giao nhận là chứng từ xác minh chúng tôi đã hoàn thành nghĩa vụ giao hàng đúng với đơn đặt hàng sau khi được bạn kiểm tra ngoại quan.</p><p class="ql-align-justify">d.&nbsp;Đơn vị vận chuyển có trách nhiệm giao hàng và thu thập các chứng từ trong quá trình giao nhận như chữ ký xác nhận hoặc ảnh chụp nhận hàng của khách hàng và lưu trữ theo quy định của pháp luật. Chúng tôi cam kết dùng mọi biện pháp nhằm bảo mật những chứng từ, hình ảnh chúng tôi thu thập của khách hàng và chỉ sử dụng cho mục đích lưu trữ, giải quyết khiếu nại, hỗ trợ khách hàng hoặc các mục đích được cho là đúng pháp luật và cần thiết mà không sử dụng cho mục đích thương mại hay vụ lợi khác.</p><p class="ql-align-justify">e.&nbsp;Quý khách cần quay lại video mở hàng và kiểm tra chất lượng sản phẩm để làm bằng chứng trong trường hợp muốn liên hệ lại với Vin nhằm đổi, trả, bảo hành sản phẩm hoặc khiếu nại các vấn đề liên quan đến sản phẩm mà bạn đã mua.</p><p class="ql-align-justify">f.&nbsp;Vin chỉ nhận đổi trả, bảo hành sản phẩm khi lỗi đến từ nhà sản xuất hoặc do quá trình vận chuyển. Chúng tôi sẽ liên lạc với bạn để hướng dẫn qui cách đóng gói hàng hoàn trả đồng thời thông báo đơn vị thu hồi và gửi sản phẩm tương đương để bổ sung, thay thế theo chính sách giao hàng quy định như trên tính từ ngày nhận được yêu cầu đổi trả, bảo hành sản phẩm, đồng thời chúng tôi sẽ chi trả chi phí vận chuyển cho việc đổi trả, bảo hành này. Lưu ý, chúng tôi chỉ hỗ trợ đổi trả hàng với điều kiện yêu cầu đổi trả không quá 03 ngày kể từ ngày bạn nhận được hàng. Thời gian xử lý hoàn trả, bảo hành được thực hiện tối đa trong vòng 14 ngày tính từ ngày nhận được yêu cầu của bạn.</p><p class="ql-align-justify">g.&nbsp;Đơn hàng của bạn sẽ được đóng gói theo tiêu chuẩn của Vin. Ngoài tiêu chuẩn gói hàng theo quy định, nếu bạn có nhu cầu đóng gói kiện hàng theo yêu cầu đặc biệt khác, vui lòng liên hệ với chúng tôi và chi trả thêm phí theo thoả thuận.</p><p class="ql-align-justify">h.&nbsp;Quý khách có thể thanh toán khi nhận hàng (COD) hoặc có thể chọn phương thức thanh toán trực tuyến qua cổng thanh toán Alepay hoặc Ví Momo theo hướng dẫn tại Mục “Hướng dẫn mua hàng” được công bố trên website.</p><p class="ql-align-justify">i.&nbsp;Mọi thông tin về việc thay đổi hay hủy bỏ đơn hàng, quý khách cần thông báo sớm để chúng tôi có thể hủy hoặc chỉnhh sửa đơn hàng cho bạn kịp thời.</p><p class="ql-align-justify">j.&nbsp;Để kiểm tra mọi thông tin liên quan đến đơn hàng hoặc tình trạng đơn hàng của quý khách, xin vui lòng nhắn tin vào Fanpage, gửi Email hoặc gọi số Hotline và cung cấp tên, số điện thoại hoặc mã đơn hàng để được chúng tôi kiểm tra và hỗ trợ sớm nhất.</p><p class="ql-align-justify"><br></p><p class="ql-align-justify"><strong>5.&nbsp;Thông tin liên lạc</strong></p><p class="ql-align-justify">Quý khách vui lòng liên hệ với chúng tôi trong trường hợp có thắc mắc, cần sự hỗ trợ và phản hồi qua các kênh sau:</p><p class="ql-align-justify">• Fanpage: https://www.facebook.com/VinVietnamOfficial</p><p class="ql-align-justify">• Hotline: 0909056131 (9:00-18:00 từ thứ 2 đến thứ 6)</p><p class="ql-align-justify">• Email: cskh@Vigroup.com</p></div></div>
+        <br>
+            <h2>II. Quy chế hoạt động sàn giao dịch thương mại điện tử.</h2>
+            <br>
+            <div class="content flex-1 text-sm xl:text-base xl:mt-5">
+    <div>
+        <p class="ql-align-justify"><strong>1. Sàn giao dịch thương mại điện tử là gì?</strong></p>
+        <p class="ql-align-justify">Theo khoản 9 Điều 3 Nghị định 52/2013/NĐ-CP, sàn giao dịch thương mại điện tử là website thương mại điện tử cho phép các thương nhân, tổ chức, cá nhân không phải chủ sở hữu website có thể tiến hành một phần hoặc toàn bộ quy trình mua bán hàng hóa, dịch vụ trên đó.</p>
+        <p class="ql-align-justify">Sàn giao dịch thương mại điện tử trong Nghị định 52/2013/NĐ-CP không bao gồm các website giao dịch chứng khoán trực tuyến.</p>
+
+        <p class="ql-align-justify"><strong>2. Các hình thức hoạt động sàn giao dịch thương mại điện tử</strong></p>
+        <p class="ql-align-justify">Các hình thức hoạt động của sàn giao dịch thương mại điện tử bao gồm:</p>
+        <ul class="ql-align-justify">
+            <ul>(i) Website cho phép người tham gia được mở các gian hàng để trưng bày, giới thiệu hàng hóa hoặc dịch vụ;</ul>
+            <ul>(ii) Website cho phép người tham gia được mở tài khoản để thực hiện quá trình giao kết hợp đồng với khách hàng;</ul>
+            <ul>(iii) Website có chuyên mục mua bán, trên đó cho phép người tham gia đăng tin mua bán hàng hóa và dịch vụ;</ul>
+            <ul>(iv) Mạng xã hội có một trong các hình thức hoạt động quy định tại điểm (i), (ii), (iii) và người tham gia trực tiếp hoặc gián tiếp trả phí cho việc thực hiện các hoạt động đó.</ul>
+        </ul>
+
+        <p class="ql-align-justify">(Khoản 2 Điều 35 Nghị định 52/2013/NĐ-CP, được sửa đổi khoản 15 Điều 1 Nghị định 85/2021/NĐ-CP)</p>
+
+        <p class="ql-align-justify"><strong>3. Quy chế hoạt động sàn giao dịch thương mại điện tử</strong></p>
+        <p class="ql-align-justify">Quy chế hoạt động của sàn giao dịch thương mại điện tử phải được thể hiện trên trang chủ của website.</p>
+        <p class="ql-align-justify">
+            Cụ thể tại khoản 2 Điều 38 Nghị định 52/2013/NĐ-CP (được sửa đổi tại điểm a khoản 17 và bổ sung tại điểm b khoản 17 Điều 1 Nghị định 85/2021/NĐ-CP), quy chế hoạt động sàn giao dịch thương mại điện tử phải bao gồm các nội dung sau:
+        </p>
+        <ul class="ql-align-justify">
+            <ul>Quyền và nghĩa vụ của thương nhân, tổ chức cung cấp dịch vụ sàn giao dịch thương mại điện tử;</ul>
+            <ul>Quyền và nghĩa vụ của người sử dụng dịch vụ sàn giao dịch thương mại điện tử;</ul>
+            <ul>Mô tả quy trình giao dịch đối với từng hình thức tổ chức hoạt động, bao gồm quy trình giao nhận hàng hóa (nếu có);</ul>
+            <ul>Hoạt động rà soát và thẩm quyền xử lý của thương nhân, tổ chức cung cấp dịch vụ sàn giao dịch thương mại điện tử khi phát hiện các hành vi kinh doanh vi phạm pháp luật;</ul>
+            <ul>Giới hạn trách nhiệm của thương nhân, tổ chức cung cấp dịch vụ sàn giao dịch thương mại điện tử trong những giao dịch thực hiện trên sàn;</ul>
+            <ul>Các quy định về an toàn thông tin, cơ chế kiểm tra, giám sát để đảm bảo việc cung cấp thông tin và quản lý thông tin trên sàn;</ul>
+            <ul>Cơ chế giải quyết khiếu nại, tranh chấp giữa các bên liên quan đến giao dịch trên sàn;</ul>
+            <ul>Chính sách bảo vệ thông tin cá nhân của người sử dụng dịch vụ;</ul>
+            <ul>Biện pháp xử lý các hành vi xâm phạm quyền lợi người tiêu dùng;</ul>
+            <ul>Chính sách đổi trả, hoàn tiền và quy trình xử lý tương ứng.</ul>
+        </ul>
+        <p class="ql-align-justify">Trong trường hợp có thay đổi về một trong các nội dung nêu trên, thương nhân phải thông báo trước 5 ngày trước khi áp dụng.</p>
+    </div>
+</div>
+
     </div>
         </p>
+        
     </div>
+    
 
     <div class="brand-section">
         <h2>Chọn hãng cần tìm điểm bảo hành</h2>
@@ -226,7 +264,7 @@
 
     <div class="policy-footer">
         <p>Liên hệ: <a href="mailto:support@example.com">nguyenhuydong789@gmail.com</a> hoặc 0909056131</p>
-        <p>&copy; 2024 Tiki Clone. All rights reserved.</p>
+        <p>&copy; 2025 VinGroup . All rights reserved.</p>
     </div>
 </body>
 </html>
