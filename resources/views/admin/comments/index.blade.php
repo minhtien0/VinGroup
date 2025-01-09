@@ -5,7 +5,7 @@
 
     <style>
         .container {
-            background-color: #ffffff;
+            background-color: #b612b3;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -70,6 +70,11 @@
         }
         .alert {
             border-radius: 4px;
+        }
+        .mb-4{
+            display: block;
+            margin: 0 auto;
+            text-align: center;
         }
     </style>
 
@@ -150,7 +155,6 @@
         @endforelse
         </tbody>
     </table>
-
     {{-- Nếu có phân trang
     <div class="pagination">
         {{ $comments->links() }}
