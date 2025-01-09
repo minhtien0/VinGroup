@@ -56,6 +56,7 @@
         <a href="{{route('giohang.giohang')}}"><i class="fas fa-shopping-cart"></i> <span
             class="cart-count">0</span></a>
       </div>
+      <div id="search-results" class="search-results"></div>
 
     </div>
   </div>
