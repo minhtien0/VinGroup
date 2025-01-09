@@ -240,13 +240,13 @@
 
                                         <!-- Hình ảnh sản phẩm -->
                                         <div class="body__account__right__product__top__img">
-                                            <a href="#"><img src="{{ asset('img/' . $item->avt) }}" alt="{{ $item->name }}" width="80px" height="80px" style="border: solid 1px gray;"></a>
+                                            <a href="{{ route('account.trangthai', $item->madon) }}"><img src="{{ asset('img/' . $item->avt) }}" alt="{{ $item->name }}" width="80px" height="80px" style="border: solid 1px gray;"></a>
                                         </div>
                                         <!-- Thông tin chi tiết sản phẩm -->
                                         <div class="body__account__right__product__detail" style="margin-left: 15px; width: 780px;">
                                             <div>
                                                 <span style="color: gray;">Tên Thiết Bị: </span>
-                                                <span>{{ $item->name }}</span>
+                                                <span >{{ $item->name }}</span>
                                             </div>
                                             <div>
                                                 <span style="color: gray;">Màu Sắc: </span>
@@ -319,7 +319,7 @@
                                         <div class="body__account__right__product__detail" style="margin-left: 15px; width: 780px;">
                                             <div>
                                                 <span style="color: gray;">Tên Thiết Bị: </span>
-                                                <span>{{ $item->name }}</span>
+                                                <span >{{ $item->name }}</span>
                                             </div>
                                             <div>
                                                 <span style="color: gray;">Màu Sắc: </span>

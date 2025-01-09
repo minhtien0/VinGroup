@@ -8,6 +8,7 @@ Route::get('/account/voucher', [HomeController::class, 'showVoucher'])->name('ac
 Route::get('/account/thongtin', [HomeController::class, 'showThongTin'])->name('account.thongtin');
 Route::get('/account/donhang', [HomeController::class, 'showDonHang'])->name('account.donhang');
 Route::get('/account/yeuthich', [HomeController::class, 'showYeuThich'])->name('account.yeuthich');
+Route::get('/account/trangthai/{madon}', [HomeController::class, 'showTrangThai'])->name('account.trangthai');
 Route::get('/account', [HomeController::class, 'showDonHang'])->name('account.donhang');
 
 Route::get('/', [HomeController::class, 'test'])->name('home.test');

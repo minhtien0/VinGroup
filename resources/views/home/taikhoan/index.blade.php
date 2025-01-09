@@ -51,6 +51,7 @@
                     @elseif(Request::is('account/yeuthich'))
                         @include('layouts.home.taikhoan.yeuthich')
             @endif
+            @yield('trangthai')
             </div>
 
 </div>

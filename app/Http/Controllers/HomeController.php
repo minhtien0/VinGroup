@@ -47,6 +47,7 @@ class HomeController extends Controller
             'donhang.soluong', 
             'donhang.time',
             'donhang.trangthaidonhang',
+            'donhang.madon',
         DB::raw('product.price * donhang.soluong AS total_price')
         )
         ->get();
@@ -93,6 +94,35 @@ public function showyeuThich(Request $request){
     $user = $request->session()->get('user');
     return view('home.taikhoan.index', ['user' => $user]);
 }
+
+public function showTrangThai(Request $request, $madon)
+{
+    $user = $request->session()->get('user');
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem trạng thái đơn hàng.');
+    }
+
+    // Lấy thông tin đơn hàng
+    $donhang = DB::table('donhang')
+        ->where('madon', $madon)
+        ->where('khachhang', $user->id)
+        ->first(); // Lấy 1 đơn hàng
+
+    if (!$donhang) {
+        abort(404, 'Không tìm thấy đơn hàng');
+    }
+
+    // Lấy thông tin sản phẩm liên quan đến đơn hàng
+    $sanpham = DB::table('product')->where('id', $donhang->sanpham)->first();
+
+    return view('home.taikhoan.trangthai', [
+        'user' => $user,
+        'donhang' => $donhang,
+        'sanpham' => $sanpham,
+    ]);
+}
+
 
     public function login(Request $request)
     {
