@@ -1,0 +1,43 @@
+.main-categories {
+    background-color: #f9f9f9; /* Màu nền nhẹ */
+    border: 1px solid #ffffff; /* Đường viền nhạt */
+    border-radius: 8px; /* Góc bo tròn */
+    padding: 16px; /* Khoảng cách bên trong */
+    max-width: 400px; /* Độ rộng tối đa */
+    margin: 0 auto; /* Căn giữa trên màn hình */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+    text-transform: uppercase;
+}
+
+.main-categories ul {
+    list-style-type: none; /* Xóa gạch đầu dòng */
+    padding: 0;
+    margin: 0;
+}
+
+.category-item {
+    margin-bottom: 12px; /* Khoảng cách giữa các mục */
+}
+
+.category-item:last-child {
+    margin-bottom: 0; /* Xóa khoảng cách cho mục cuối */
+}
+
+.category-item a {
+    display: block; /* Biến liên kết thành khối */
+    padding: 10px 15px; /* Khoảng cách bên trong liên kết */
+    color: #333; /* Màu chữ */
+    text-decoration: none; /* Xóa gạch chân */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: 500; /* Độ đậm chữ */
+    border: 1px solid transparent; /* Khung mặc định */
+    border-radius: 5px; /* Bo góc */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+}
+
+.category-item a:hover {
+    background-color: #007bff; /* Màu nền khi hover */
+    color: #fff; /* Màu chữ khi hover */
+    border-color: #007bff; /* Đường viền khi hover */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Hiệu ứng chữ khi hover */
+}
