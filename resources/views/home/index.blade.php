@@ -1,4 +1,4 @@
-@include('layouts.home.components.product-popup')
+@include('layouts.home.components.product-popup')   
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +28,7 @@
                         @foreach ($categori as $cate)
                             <li class="category-item">
                                 
-                                <a href="{{ route('category.show', $cate->slug) }}">{{ $cate->name }}</a>
+                                <a href="{{ route('category.show', $cate->name) }}">{{ $cate->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -165,7 +165,7 @@
                     <div class="product-grid">
                         @foreach($products as $product)
                             <div class="product-card">
-                                <img src="{{ asset('images/' . $product->avt) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                 <div class="product-labels">
                                     <span class="label-auth">CHÍNH HÃNG</span>
                                 </div>

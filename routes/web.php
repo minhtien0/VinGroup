@@ -39,6 +39,10 @@ Route::get('/search-ajax', [DongController::class, 'searchAjax'])->name('product
 Route::get('/san-pham/{slug}', [DongController::class, 'detail'])->name('home.product.detail');
 
 
-Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
-Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show');
+Route::get('/categories/{name}', [DongController::class, 'getCategoryName'])->name('categories.name');
+Route::get('/category/{name}', [DongController::class, 'showCategory'])->name('category.show');
+Route::post('/get-child-categories', [DongController::class, 'getChildCategories'])->name('getChildCategories');
+
+Route::get('/categori', [DongController::class, 'showIphoneCategory'])->name('iphone');
+
 
