@@ -7,14 +7,17 @@
 <div class="gh-container">
     <h1 class="cart-title">GIỎ HÀNG</h1>
     <div class="cart-content-tong">
+    <form action="{{ route('giohang.thanhtoan') }}" method="POST">
+    @csrf
         <div class="cart-left">
             @if($cartItems->isEmpty())
                 <p>Giỏ hàng của bạn trống!</p>
             @else
                 <!-- Header -->
+                 
                 <div class="cart-item-header row">
                     <div class="product-info wide-column">
-                        <input type="checkbox" id="select-all" onclick="selectAllProducts(this)">
+                        <input type="checkbox"  id="select-all" onclick="selectAllProducts(this)">
                         <span>Tất cả ({{ $cartItems->count() }} sản phẩm)</span>
                     </div>
                     <div class="column"><span>Đơn giá</span></div>
@@ -31,7 +34,9 @@
                     @foreach($cartItems as $item)
                         <div class="cart-item row">
                             <div class="product-info wide-column">
-                                <input type="checkbox" class="product-checkbox" data-id="{{ $item->id }}">
+                                <input type="checkbox" name="selected_items[]" value="{{ $item->id }}"  class="product-checkbox" data-id="{{ $item->id }}"
+                                    data-price="{{ $item->product->price }}" data-quantity="{{ $item->soluong }}"
+                                    onchange="calculateTotal()">
                                 <!-- Hiển thị hình ảnh -->
                                 @if (!empty($item->product->avt))
                                     <img src="{{ asset('img/' . $item->product->avt) }}" alt="{{ $item->product->name }}">
@@ -65,11 +70,12 @@
         <!-- Sidebar -->
         <div class="cart-left">
             <div class="giohangsummary">
-                <p>Tổng tiền thanh toán: <strong id="total-price">{{ number_format($totalPrice) }}đ</strong></p>
-                <a href="#" class="summary-button">Mua Hàng</a>
+                <p>Tổng tiền thanh toán: <strong id="total-price">0đ</strong></p>
+                <button type="submit" class="summary-button">Thanh toán</button>
             </div>
         </div>
-    </div>
+        </form>
+    </div> 
 </div>
 @include('Layouts.home.footer')
 @endsection

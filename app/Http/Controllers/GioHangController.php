@@ -17,7 +17,7 @@ class GioHangController extends Controller
         if (!$user) {
             return redirect()->route('home.index')->with('error', 'Vui lòng đăng nhập để xem giỏ hàng.');
         }
-        $cartItems = GioHang::with('product')->where('khachhang', $user->id)->paginate(10);
+        $cartItems = GioHang::with('product')->where('khachhang', $user->id)->paginate(5);
         // Tính tổng tiền
         $totalPrice = $cartItems->sum(function ($item) {
             return $item->product->price * $item->soluong;
@@ -27,11 +27,6 @@ class GioHangController extends Controller
     }
     public function update(Request $request, $id)
 {
-    \Log::info('Request received:', [
-        'id' => $id,
-        'action' => $request->action,
-    ]);
-
     // Tìm sản phẩm trong giỏ hàng dựa trên id
     $cartItem = GioHang::find($id);
     // Xử lý tăng hoặc giảm số lượng
@@ -65,9 +60,11 @@ class GioHangController extends Controller
         return response()->json(['success' => true, 'message' => 'Xóa sản phẩm thành công']);
     }
 
-    public function clearCart()
+    public function clearCart(Request $request)
     {
-        GioHang::where('khachhang', Auth::id())->delete();
+        $userId = $request->session()->get('user')->id ?? null;
+        
+        GioHang::where('khachhang',$userId)->delete();
         return response()->json(['success' => true, 'message' => 'Đã xóa tất cả sản phẩm trong giỏ hàng']);
     }
 }

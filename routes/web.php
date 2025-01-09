@@ -9,6 +9,8 @@ use App\Http\Controllers\GioHangController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ThanhToanController;
+
 //tien
 Route::get('/account/voucher', [HomeController::class, 'showVoucher'])->name('account.voucher');
 Route::get('/account/thongtin', [HomeController::class, 'showThongTin'])->name('account.thongtin');
@@ -45,18 +47,10 @@ Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add'
 //yeuthich
 Route::post('/favorite/add', [HomeController::class, 'AddFavorite'])->name('favorite.add');
 
-//comment
-// Danh sách bình luận
-Route::get('admin/comments', [CommentController::class, 'index'])->name('comments.index');
-// Xoá bình luận
-Route::delete('admin/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
-
-
-
 //dong
 Route::get('/', [DongController::class, 'index'])->name('home.index');
 
-///Quoc
+///Quoc/////////////////////////////////////////////
 Route::get('/giohang/giohang', [GioHangController::class, 'giohang'])->name('giohang.giohang');
 Route::post('/dangnhap/Login', [QuocController::class, 'Login'])->name('dangnhap.Login.post');
 Route::get('/dangnhap/Login', [QuocController::class, 'Logingiohang'])->name('dangnhap.Login');
@@ -72,10 +66,13 @@ Route::post('/giohang/update/{id}', [GioHangController::class, 'update'])->name(
 
 Route::post('/giohang/remove/{id}', [GioHangController::class, 'removeProduct'])->name('giohang.remove');
 Route::post('/giohang/clear', [GioHangController::class, 'clearCart'])->name('giohang.clear');
-
 Route::get('/featured-products/{categoryId}', [BlogController::class, 'getFeaturedProducts']);
 
-//admin
+Route::post('/giohang/thanhtoan', [thanhtoanController::class, 'thanhToan'])->name('giohang.thanhtoan');
+Route::post('/xulythanhtoan', [thanhtoanController::class, 'xuLyThanhToan'])->name('xulythanhtoan');
+
+
+//admin thach////////////////////////////////////////////////////
 Route::get('/lienhe/admin', [adminController::class, 'admin'])->name('lienhe.admin');
 
 
@@ -87,19 +84,20 @@ Route::delete('admin/lienhe/{id}', [LienHeController::class, 'destroy'])->name('
 //product
 // Danh sách sản phẩm + tìm kiếm
 Route::get('admin/products', [ProductController::class, 'index'])->name('products.index');
-
 // Form thêm
 Route::get('admin/products/create', [ProductController::class, 'create'])->name('products.create');
 // Lưu
 Route::post('admin/products', [ProductController::class, 'store'])->name('products.store');
-
 // Form sửa
 Route::get('admin/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 // Cập nhật
 Route::put('admin/products/{id}', [ProductController::class, 'update'])->name('products.update');
-
 // Xóa
 Route::delete('admin/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-
-
+//comment
+// Danh sách bình luận
+Route::get('admin/comments', [CommentController::class, 'index'])->name('comments.index');
+// Xoá bình luận
+Route::delete('admin/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 

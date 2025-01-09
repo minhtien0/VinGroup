@@ -12,7 +12,7 @@
         </ul>
     </div>
 @endif
-
+<link rel="stylesheet" href="{{asset('css/create.css')}}">
 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 

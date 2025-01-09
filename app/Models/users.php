@@ -20,5 +20,17 @@ class Users extends Authenticatable
         'gioitinh',
         'avatar',
     ];
+
+    public function kh_vc()
+    {
+        return $this->hasMany(kh_vc::class, 'khachhang', 'id');
+    }
+
+    public function vouchers()
+    {
+        return $this->belongsToMany(Voucher::class, 'kh_vc', 'khachhang', 'voucher');
+    }
+
+
 }
 

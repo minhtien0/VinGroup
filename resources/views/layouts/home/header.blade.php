@@ -28,7 +28,7 @@
       <button>Tìm kiếm</button>
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
-        <a href="{{route('lienhe.admin')}}"><i class="fas fa-user-cog"></i> Admin</a>
+        <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-cog"></i> Admin</a>
         <div class="button-lienhe">
           @if (session()->has('user'))
         <div class="dropdown">
@@ -118,7 +118,6 @@
       </div>
     </div>
   </div>
-  <!-- @include('lienhe.admin') -->
   @include('dangnhap.Login')
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
