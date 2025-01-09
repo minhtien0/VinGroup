@@ -1,15 +1,16 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 
-class HomeController extends Controller 
-{ 
-    public function index(){
+class HomeController extends Controller
+{
+    public function index()
+    {
         return view('home.test');
     }
 
@@ -18,81 +19,86 @@ class HomeController extends Controller
         // Lấy thông tin người dùng từ session
         $user = $request->session()->get('user');
         $donhang = DB::table('donhang')
-        ->join('product', 'donhang.sanpham', '=', 'product.id')
-        ->where('donhang.khachhang', $user->id)
-        ->where('donhang.trangthaidonhang', 'Chờ Thanh Toán')
-        ->select(
-            'product.name', 
-            'product.price', 
-            'product.color', 
-            'product.gb',
-            'product.avt',
-            'donhang.soluong', 
-            'donhang.time', 
-        DB::raw('product.price * donhang.soluong AS total_price')
-        )
-        ->get();
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->where('donhang.trangthaidonhang', 'Chờ Thanh Toán')
+            ->select(
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
 
         $donhangcomplete = DB::table('donhang')
-        ->join('product', 'donhang.sanpham', '=', 'product.id')
-        ->where('donhang.khachhang', $user->id)
-        ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá'])
-        ->select(
-            'product.id', 
-            'product.name', 
-            'product.price', 
-            'product.color', 
-            'product.gb',
-            'product.avt',
-            'donhang.soluong', 
-            'donhang.time',
-            'donhang.trangthaidonhang',
-        DB::raw('product.price * donhang.soluong AS total_price')
-        )
-        ->get();
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá'])
+            ->select(
+                'product.id',
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
 
         $donhangcancel = DB::table('donhang')
-        ->join('product', 'donhang.sanpham', '=', 'product.id')
-        ->where('donhang.khachhang', $user->id)
-        ->whereIn('donhang.trangthaidonhang', ['Đã Hủy'])
-        ->select(
-            'product.id', 
-            'product.name', 
-            'product.price', 
-            'product.color', 
-            'product.gb',
-            'product.avt',
-            'donhang.soluong', 
-            'donhang.time',
-            'donhang.trangthaidonhang',
-        DB::raw('product.price * donhang.soluong AS total_price')
-        )
-        ->get();
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->whereIn('donhang.trangthaidonhang', ['Đã Hủy'])
+            ->select(
+                'product.id',
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
 
         // Trả về view với dữ liệu người dùng
-        return view('home.taikhoan.index', ['user' => $user,'donhang' => $donhang, 'donhangcomplete' => $donhangcomplete,
+        return view('home.taikhoan.index', [
+            'user' => $user,
+            'donhang' => $donhang,
+            'donhangcomplete' => $donhangcomplete,
             'donhangcancel' => $donhangcancel
-    ]);
-       
+        ]);
+
     }
-  
+
     public function showThongTin(Request $request)
-{
-    // Lấy thông tin người dùng từ session
-    $user = $request->session()->get('user');
+    {
+        // Lấy thông tin người dùng từ session
+        $user = $request->session()->get('user');
 
-    // Trả về view với dữ liệu người dùng
-    return view('home.taikhoan.index', ['user' => $user]);
-}
+        // Trả về view với dữ liệu người dùng
+        return view('home.taikhoan.index', ['user' => $user]);
+    }
 
-public function showVoucher(Request $request){
-    $user = $request->session()->get('user');
-    return view('home.taikhoan.index', ['user' => $user]);
-}
-public function showyeuThich(Request $request){
-    $user = $request->session()->get('user');
-    return view('home.taikhoan.index', ['user' => $user]);
-}
+    public function showVoucher(Request $request)
+    {
+        $user = $request->session()->get('user');
+        return view('home.taikhoan.index', ['user' => $user]);
+    }
+    public function showyeuThich(Request $request)
+    {
+        $user = $request->session()->get('user');
+        return view('home.taikhoan.index', ['user' => $user]);
+    }
 
     public function login(Request $request)
     {
@@ -104,15 +110,15 @@ public function showyeuThich(Request $request){
             'password.required' => 'Vui lòng nhập mật khẩu.',
             'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
         ]);
-    
+
         // Kiểm tra tên đăng nhập (email hoặc số điện thoại)
         $user = DB::table('user')
             ->where(function ($query) use ($request) {
                 $query->where('gmail', $request->login)
-                      ->orWhere('sdt', $request->login);
+                    ->orWhere('sdt', $request->login);
             })
             ->first();
-            
+
         // Nếu không tìm thấy người dùng
         if (!$user) {
             return response()->json([
@@ -120,7 +126,7 @@ public function showyeuThich(Request $request){
                 'message' => 'Tên đăng nhập không tồn tại.',
             ], 200);
         }
-    
+
         // Kiểm tra mật khẩu
         // Khuyến nghị sử dụng hàm hash để kiểm tra mật khẩu thay vì so sánh trực tiếp
         if ($user->password !== $request->password) {
@@ -129,7 +135,7 @@ public function showyeuThich(Request $request){
                 'message' => 'Mật khẩu không chính xác.',
             ], 200);
         }
-        
+
         $request->session()->put('user', $user);
         // Nếu cả tên đăng nhập và mật khẩu đều đúng
         return response()->json([
@@ -137,16 +143,16 @@ public function showyeuThich(Request $request){
             'user' => $user, // Trả về thông tin người dùng
         ]);
     }
-    
-    public function logout(Request $request)
-{
-    // Xóa session của người dùng
-    $request->session()->forget('user');
-    $request->session()->flush();
 
-    // Trả về phản hồi JSON hoặc chuyển hướng
-    return response()->json(['success' => true, 'message' => 'Đăng xuất thành công']);
-}
+    public function logout(Request $request)
+    {
+        // Xóa session của người dùng
+        $request->session()->forget('user');
+        $request->session()->flush();
+
+        // Trả về phản hồi JSON hoặc chuyển hướng
+        return response()->json(['success' => true, 'message' => 'Đăng xuất thành công']);
+    }
 
     public function detail(Request $request, $id)
     {
@@ -171,16 +177,16 @@ public function showyeuThich(Request $request){
             ->orderBy('gb', 'asc') // Sắp xếp theo gb (nếu cần)
             ->get();
         $allcomment = DB::table('comment')
-        ->where('sanpham', $id)
-        ->select(
-            'comment.avt', 
-            'comment.name', 
-            'comment.content', 
-            'comment.rate', 
-            'comment.khachhang',
-            'comment.time',
-        )
-        ->get();
+            ->where('sanpham', $id)
+            ->select(
+                'comment.avt',
+                'comment.name',
+                'comment.content',
+                'comment.rate',
+                'comment.khachhang',
+                'comment.time',
+            )
+            ->get();
         //lấy từng sao đánh giá
         $allRatings = [
             1 => 0,
@@ -189,24 +195,24 @@ public function showyeuThich(Request $request){
             4 => 0,
             5 => 0,
         ];
-        
+
         $rates = DB::table('comment')
             ->where('sanpham', $id)
             ->select('rate', DB::raw('COUNT(*) as total'))
             ->groupBy('rate')
             ->get();
-        
+
         // Gán số lượng đánh giá từ database vào mảng mặc định
         foreach ($rates as $rate) {
             $allRatings[$rate->rate] = $rate->total;
         }
         //tổng đánh giágiá
-        $sumrate=$rates->sum('total');
+        $sumrate = $rates->sum('total');
         //trung bình đánh giá
         $averageRate = DB::table('comment')
-        ->where('sanpham', $id)
-        ->avg('rate');
-    
+            ->where('sanpham', $id)
+            ->avg('rate');
+
         $averageRate = $averageRate ? round($averageRate, 1) : 0;
 
         //yeuthich
@@ -218,28 +224,36 @@ public function showyeuThich(Request $request){
                 ->exists(); // Trả về true nếu sản phẩm đã được yêu thích
         }
         // Trả về view với dữ liệu sản phẩm và hình ảnh
-        return view('home.detail', ['product' => $product, 'img' => $img,'options'=>$options, 
-        'gigabyte' => $gigabyte,'allcomment'=>$allcomment,'rates'=>$rates,'sumrate'=>$sumrate,
-        'allRatings'=>$allRatings,'averageRate'=>$averageRate,'isFavorite' => $isFavorite
+        return view('home.detail', [
+            'product' => $product,
+            'img' => $img,
+            'options' => $options,
+            'gigabyte' => $gigabyte,
+            'allcomment' => $allcomment,
+            'rates' => $rates,
+            'sumrate' => $sumrate,
+            'allRatings' => $allRatings,
+            'averageRate' => $averageRate,
+            'isFavorite' => $isFavorite
         ]);
     }
-    
+
 
     public function test()
     {
         $sp = DB::table('product')
-        ->join('categori', 'product.categori', '=', 'categori.id') // Join với bảng category
-        ->select('product.*', 'categori.name as category_name') // Lấy dữ liệu cần thiết
-        ->get();
+            ->join('categori', 'product.categori', '=', 'categori.id') // Join với bảng category
+            ->select('product.*', 'categori.name as category_name') // Lấy dữ liệu cần thiết
+            ->get();
 
 
         // Trả dữ liệu về view
         return view('home.test', compact('sp'));
     }
 
- 
-public function UpdateInfoUser(Request $request, $id)
-{
+
+    public function UpdateInfoUser(Request $request, $id)
+    {
         // Xác thực dữ liệu
         $request->validate([
             'name' => 'required|string|max:255',
@@ -250,25 +264,25 @@ public function UpdateInfoUser(Request $request, $id)
             'sdt' => 'required|integer|max:11',
             'avt' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
+
         // Lấy thông tin hiện tại từ cơ sở dữ liệu
         $user = DB::table('user')->where('id', $id)->first();
-    
+
         // Kiểm tra nếu có file ảnh mới được tải lên
         if ($request->hasFile('image')) {
             // Đặt tên tệp dựa trên thời gian hiện tại
             $imageName = time() . '.' . $request->image->extension();
-    
+
             // Di chuyển ảnh vào thư mục public/images
             $request->image->move(public_path('images'), $imageName);
-    
+
             // Đường dẫn ảnh mới
             $imagePath = '' . $imageName;
         } else {
             // Nếu không có ảnh mới, giữ lại đường dẫn ảnh cũ
             $imagePath = $user->avt;
         }
-    
+
         // Cập nhật dữ liệu vào bảng 'info'
         DB::table('user')->where('id', $id)->update([
             'name' => $request->input('name'),
@@ -280,86 +294,103 @@ public function UpdateInfoUser(Request $request, $id)
             'avt' => $imagePath, // Lưu lại đường dẫn ảnh mới hoặc cũ
 
         ]);
-    
+
         // Quay về trang dbcon với thông báo thành công
         return redirect()->route('account.thongtin')->with('success', 'Dữ liệu đã được cập nhật thành công!');
-}
-
-public function AddRates(Request $request)
-{
-    // Lấy thông tin user từ session
-    $user = $request->session()->get('user');
-
-    if (!$user) {
-        return redirect()->back()->with('error', 'Bạn cần đăng nhập để thực hiện đánh giá.');
     }
 
-    // Xác thực dữ liệu
-    $request->validate([
-        'content' => 'required|string',
-        'rate' => 'required|integer|min:1|max:5',
-        'sanpham' => 'required|integer', // ID sản phẩm
-    ]);
+    public function AddRates(Request $request)
+    {
+        // Lấy thông tin user từ session
+        $user = $request->session()->get('user');
 
-    // Thêm dữ liệu vào bảng 'comment'
-    $result = DB::table('comment')->insert([
-        'name' => $user->name, // Lấy name từ session
-        'avt' => $user->avt,
-        'time' => now(),
-        'content' => $request->input('content'),
-        'rate' => $request->input('rate'),
-        'khachhang' => $user->id, // Lấy id từ session
-        'sanpham' => $request->input('sanpham'), // ID sản phẩm
-        'trangthai' => 1, // Mặc định trạng thái là 1 (kích hoạt)
-    ]);
-    DB::table('donhang')
-    ->where('khachhang', $user->id)
-    ->where('sanpham', $request->input('sanpham')) // Không cần `andWhere`, chỉ cần thêm where
-    ->update([
-        'trangthaidonhang' => "Hoàn Thành"
-    ]);
+        if (!$user) {
+            return redirect()->back()->with('error', 'Bạn cần đăng nhập để thực hiện đánh giá.');
+        }
 
-    if ($result) {
-        return redirect()->route('home.test')->with('success', 'Bình luận đã được thêm thành công!');
-    } else {
-        return redirect()->back()->with('error', 'Không thể thêm bình luận.');
-    }
-}
-
-public function AddFavorite(Request $request)
-{
-    $user = $request->session()->get('user');
-    if (!$user) {
-        return response()->json(['success' => false, 'message' => 'Bạn cần đăng nhập để sử dụng tính năng này.'], 401);
-    }
-
-    $sanpham = $request->input('sanpham');
-
-    // Kiểm tra nếu sản phẩm đã được yêu thích
-    $favorite = DB::table('yeuthich')
-        ->where('khachhang', $user->id)
-        ->where('sanpham', $sanpham)
-        ->first();
-
-    if ($favorite) {
-        // Nếu đã yêu thích, thì hủy yêu thích
-        DB::table('yeuthich')
-            ->where('khachhang', $user->id)
-            ->where('sanpham', $sanpham)
-            ->delete();
-
-        return response()->json(['success' => true, 'isFavorite' => false, 'message' => 'Đã hủy yêu thích.']);
-    } else {
-        // Nếu chưa yêu thích, thêm vào danh sách yêu thích
-        DB::table('yeuthich')->insert([
-            'khachhang' => $user->id,
-            'sanpham' => $sanpham,
-            'time' => now(),
-            'trangthai' => 1,
+        // Xác thực dữ liệu
+        $request->validate([
+            'content' => 'required|string',
+            'rate' => 'required|integer|min:1|max:5',
+            'sanpham' => 'required|integer', // ID sản phẩm
         ]);
 
-        return response()->json(['success' => true, 'isFavorite' => true, 'message' => 'Đã thêm vào yêu thích.']);
+        // Thêm dữ liệu vào bảng 'comment'
+        $result = DB::table('comment')->insert([
+            'name' => $user->name, // Lấy name từ session
+            'avt' => $user->avt,
+            'time' => now(),
+            'content' => $request->input('content'),
+            'rate' => $request->input('rate'),
+            'khachhang' => $user->id, // Lấy id từ session
+            'sanpham' => $request->input('sanpham'), // ID sản phẩm
+            'trangthai' => 1, // Mặc định trạng thái là 1 (kích hoạt)
+        ]);
+        DB::table('donhang')
+            ->where('khachhang', $user->id)
+            ->where('sanpham', $request->input('sanpham')) // Không cần `andWhere`, chỉ cần thêm where
+            ->update([
+                'trangthaidonhang' => "Hoàn Thành"
+            ]);
+
+        if ($result) {
+            return redirect()->route('home.test')->with('success', 'Bình luận đã được thêm thành công!');
+        } else {
+            return redirect()->back()->with('error', 'Không thể thêm bình luận.');
+        }
     }
-}
+
+    public function AddFavorite(Request $request)
+    {
+        $user = $request->session()->get('user');
+        if (!$user) {
+            return response()->json(['success' => false, 'message' => 'Bạn cần đăng nhập để sử dụng tính năng này.'], 401);
+        }
+
+        $sanpham = $request->input('sanpham');
+
+        // Kiểm tra nếu sản phẩm đã được yêu thích
+        $favorite = DB::table('yeuthich')
+            ->where('khachhang', $user->id)
+            ->where('sanpham', $sanpham)
+            ->first();
+
+        if ($favorite) {
+            // Nếu đã yêu thích, thì hủy yêu thích
+            DB::table('yeuthich')
+                ->where('khachhang', $user->id)
+                ->where('sanpham', $sanpham)
+                ->delete();
+
+            return response()->json(['success' => true, 'isFavorite' => false, 'message' => 'Đã hủy yêu thích.']);
+        } else {
+            // Nếu chưa yêu thích, thêm vào danh sách yêu thích
+            DB::table('yeuthich')->insert([
+                'khachhang' => $user->id,
+                'sanpham' => $sanpham,
+                'time' => now(),
+                'trangthai' => 1,
+            ]);
+
+            return response()->json(['success' => true, 'isFavorite' => true, 'message' => 'Đã thêm vào yêu thích.']);
+        }
+    }
+
+
+
+    //// cai nay của huy dong 
+    public function showRandomProducts()
+    {
+        // Lấy 6 sản phẩm ngẫu nhiên
+        $products = DB::table('product')
+            ->inRandomOrder() // Lấy sản phẩm ngẫu nhiên
+            ->limit(6) // Giới hạn số lượng sản phẩm (ở đây là 5)
+            ->get();
+
+        // Trả về view với danh sách sản phẩm
+        return view('home.index', ['products' => $products]);
+    }
+
+
 
 }

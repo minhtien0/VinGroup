@@ -4,44 +4,37 @@
       <!-- Cột Hỗ trợ khách hàng -->
       <div class="footer-column">
         <h4>Hỗ trợ khách hàng</h4>
-        <p>Hotline: <strong>1900-6035</strong></p>
+        <p>Hotline: <strong>0909056131</strong></p>
         <ul>
-          <li><a href="#">Các câu hỏi thường gặp</a></li>
-          <li><a href="#">Gửi yêu cầu hỗ trợ</a></li>
-          <li><a href="#">Hướng dẫn đặt hàng</a></li>
-          <li><a href="#">Phương thức vận chuyển</a></li>
-          <li><a href="#">Chính sách kiểm hàng</a></li>
-          <li><a href="#">Chính sách đổi trả</a></li>
-          <li><a href="#">Hướng dẫn trả góp</a></li>
-          <li><a href="#">Chính sách hàng nhập khẩu</a></li>
-          <li><a href="#">Hỗ trợ khách hàng: hotro@tiki.vn</a></li>
-          <li><a href="#">Báo lỗi bảo mật: security@tiki.vn</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Các câu hỏi thường gặp</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Gửi yêu cầu hỗ trợ</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Hướng dẫn đặt hàng</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Phương thức vận chuyển</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Chính sách kiểm hàng</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Chính sách đổi trả</a></li>
         </ul>
       </div>
       <!-- Cột Về Tiki -->
       <div class="footer-column">
-        <h4>Về Tiki</h4>
+        <h4>Về Vin</h4>
         <ul>
-          <li><a href="#">Giới thiệu Tiki</a></li>
-          <li><a href="{{ route('lienhe.blog') }}">Tiki Blog</a></li>
-          <li><a href="#">Tuyển dụng</a></li>
-          <li><a href="#">Chính sách bảo mật thanh toán</a></li>
-          <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>
+          <li><a href="#">Giới thiệu VinGroup</a></li>
+          <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
-          <li><a href="#">Điều khoản sử dụng</a></li>
-          <li><a href="#">Chính sách Tiki Xu</a></li>
-          <li><a href="#">Tiếp thị liên kết cùng Tiki</a></li>
-          <li><a href="#">Bán hàng doanh nghiệp</a></li>
-          <li><a href="#">Điều kiện vận chuyển</a></li>
         </ul>
+        <a href="{{ route('home.index') }}">
+          <div class="logo">
+            <img style="padding: 5px 30px 0px 30px;height: 94px; width: 250px; margin-left:-30"
+              src="{{ asset('images/logo.png') }}" alt="Logo">
+          </div>
+        </a>
       </div>
 
       <!-- Cột Hợp tác và liên kết -->
       <div class="footer-column">
         <h4>Hợp tác và liên kết</h4>
         <ul>
-          <li><a href="#">Quy chế hoạt động Sàn GDTMĐT</a></li>
-          <li><a href="#">Bán hàng cùng Tiki</a></li>
+          <li><a href="{{ route('layouts.home.policy') }}">Quy chế hoạt động Sàn GDTMĐT</a></li>
         </ul>
         <h4>Chứng nhận bởi</h4>
         <div class="certifications">
@@ -210,26 +203,26 @@
       </div>
     </div>
   </footer>
-  
-  <div class="floating-buttons">
-  <div class="button" onclick="showPopup('floating-popup')">
-    <i class="icon">🌟</i>
-    <span>Trợ lý</span>
-  </div>
-  <div class="button" onclick="showPopup('floating-popup')">
-    <i class="icon">💬</i>
-    <span>Tin mới</span>
-  </div>
-</div>
 
-<!-- Popup floating -->
-<div id="floating-popup" class="popup-overlay hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePopup('floating-popup')">&times;</span>
-    <h2>Thông báo</h2>
-    <p>Nội dung trợ lý hoặc tin mới ở đây.</p>
+  <div class="floating-buttons">
+    <div class="button" onclick="showPopup('floating-popup')">
+      <i class="icon">🌟</i>
+      <span>Trợ lý</span>
+    </div>
+    <div class="button" onclick="showPopup('floating-popup')">
+      <i class="icon">💬</i>
+      <span>Tin mới</span>
+    </div>
   </div>
-</div>
+
+  <!-- Popup floating -->
+  <div id="floating-popup" class="popup-overlay hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup('floating-popup')">&times;</span>
+      <h2>Thông báo</h2>
+      <p>Nội dung trợ lý hoặc tin mới ở đây.</p>
+    </div>
+  </div>
 
   <!-- Popup cho Tin mới -->
   <div class="popup" id="popup2">

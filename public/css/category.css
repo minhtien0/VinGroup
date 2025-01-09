@@ -218,4 +218,93 @@ body {
   .compare-btn:hover {
     background-color: #218838;
   }
-  
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 70px;
+    margin-top: 20px;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    height: 300px;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product-item h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    height: 40px; /* Giới hạn chiều cao cho tiêu đề */
+    overflow: hidden; /* Ẩn phần thừa nếu quá dài */
+}
+
+.product-item p {
+    font-size: 14px;
+    color: #d9534f;
+    margin: -25px 0;
+    font-weight: bold;
+}
+
+.product-item .price-old {
+    text-decoration: line-through;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.product-item .size-options {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.size-options button {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease-in-out;
+}
+
+.size-options button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.product-item .btn-compare {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    font-size: 14px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.product-item .btn-compare:hover {
+    background-color: #218838;
+} 

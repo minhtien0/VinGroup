@@ -3,6 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tiki Clone Header</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <!-- ------------- -->
   <link rel="stylesheet" href="{{asset('css/dangnhap.css')}}">
@@ -24,8 +25,8 @@
     </a>
     <!-- Search bar -->
     <div class="search-bar">
-      <input type="text" placeholder="Giá siêu rẻ">
-      <button>Tìm kiếm</button>
+      <input type="text" id="search-input" placeholder="Giá siêu rẻ">
+      <button id="search-btn">Tìm kiếm</button>
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
         <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-cog"></i> Admin</a>
@@ -55,6 +56,7 @@
         <a href="{{route('giohang.giohang')}}"><i class="fas fa-shopping-cart"></i> <span
             class="cart-count">0</span></a>
       </div>
+
     </div>
   </div>
   <!-- Navigation links -->
@@ -122,7 +124,8 @@
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
   @yield('content')
-  
+</header>
 </header>
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/headerr.js') }}"></script>
+<script src="{{ asset('js/search.js') }}"></script>
