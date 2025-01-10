@@ -73,10 +73,27 @@ Route::post('/giohang/update/{id}', [GioHangController::class, 'update'])->name(
 Route::post('/giohang/remove/{id}', [GioHangController::class, 'removeProduct'])->name('giohang.remove');
 Route::post('/giohang/clear', [GioHangController::class, 'clearCart'])->name('giohang.clear');
 Route::get('/featured-products/{categoryId}', [BlogController::class, 'getFeaturedProducts']);
+/////////////////////////////////////////
 
-Route::post('/giohang/thanhtoan', [thanhtoanController::class, 'thanhToan'])->name('giohang.thanhtoan');
-Route::post('/xulythanhtoan', [thanhtoanController::class, 'xuLyThanhToan'])->name('xulythanhtoan');
+// Route để hiển thị trang thanh toán (GET)
+Route::get('/thanhtoan', [ThanhToanController::class, 'showThanhToan'])->name('showthanhtoan');
 
+// Route để xử lý dữ liệu từ giỏ hàng và chuyển hướng tới trang thanh toán (POST)
+Route::post('/thanhtoan', [ThanhToanController::class, 'thanhtoan'])->name('thanhtoan');
+
+// Route để hoàn tất xử lý thanh toán (POST)
+Route::post('/xulythanhtoan', [ThanhToanController::class, 'xuLyThanhToan'])->name('xulythanhtoan');
+
+// Route để xóa toàn bộ giỏ hàng (AJAX)
+Route::post('/clear-cart', [ThanhToanController::class, 'clearCart'])->name('clearCart');
+
+// Route để cập nhật số lượng sản phẩm trong giỏ hàng (AJAX)
+Route::post('/update-cart/{id}', [ThanhToanController::class, 'updateCart'])->name('updateCart');
+
+// Route để xóa một sản phẩm khỏi giỏ hàng (AJAX)
+Route::post('/remove-from-cart/{id}', [ThanhToanController::class, 'removeFromCart'])->name('removeFromCart');
+
+/////////////////////////////////////////////
 Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
 Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show');
 

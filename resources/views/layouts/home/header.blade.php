@@ -124,7 +124,8 @@
   @include('dangnhap.Login')
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
-  @yield('content')
+ 
+  <!-- @yield('content') -->
 </header>
 </header>
 <script src="{{ asset('js/carousel.js') }}"></script>
