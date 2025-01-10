@@ -11,6 +11,9 @@
   <!-- <link rel="stylesheet" href="{{asset('css/popup.css')}}"> -->
   <link rel="stylesheet" href="{{asset('css/lienhe.css')}}">
   <link rel="stylesheet" href="{{asset('css/headerr.css')}}">
+  <script src="{{ asset('js/carousel.js') }}"></script>
+  <script src="{{ asset('js/headerr.js') }}"></script>
+  <script src="{{ asset('js/search.js') }}"></script>
 
 </head>
 <!-- Header -->
@@ -29,7 +32,17 @@
       <button id="search-btn">Tìm kiếm</button>
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
-        <a href="{{ route('admin.dashboard') }}"><i class="fas fa-user-cog"></i> Admin</a>
+
+        @if (session()->has('user') && session('user')->name === 'Admin')
+      <a href="{{ route('admin.dashboard') }}">
+        <i class="fas fa-user-cog"></i> Admin
+      </a>
+    @else
+    <a href="{{ route('home.index') }}">
+      <i class="fas fa-user-cog"></i> Admin
+    </a>
+  @endif
+
         <div class="button-lienhe">
           @if (session()->has('user'))
         <div class="dropdown">
@@ -124,10 +137,7 @@
   @include('dangnhap.Login')
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
- 
+
   <!-- @yield('content') -->
 </header>
 </header>
-<script src="{{ asset('js/carousel.js') }}"></script>
-<script src="{{ asset('js/headerr.js') }}"></script>
-<script src="{{ asset('js/search.js') }}"></script>

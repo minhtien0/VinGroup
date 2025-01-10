@@ -86,7 +86,7 @@ Route::post('/thanhtoan', [ThanhToanController::class, 'thanhtoan'])->name('than
 Route::post('/xulythanhtoan', [ThanhToanController::class, 'xuLyThanhToan'])->name('xulythanhtoan');
 
 // Route để xóa toàn bộ giỏ hàng (AJAX)
-Route::post('/clear-cart', [ThanhToanController::class, 'clearCart'])->name('clearCart');
+Route::post('/adminDashboard', [ThanhToanController::class, 'adminDashboard'])->name('adminDashboard');
 
 // Route để cập nhật số lượng sản phẩm trong giỏ hàng (AJAX)
 Route::post('/update-cart/{id}', [ThanhToanController::class, 'updateCart'])->name('updateCart');
