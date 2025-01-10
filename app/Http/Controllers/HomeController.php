@@ -21,25 +21,8 @@ class HomeController extends Controller
         $donhang = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
             ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', 'Chờ Thanh Toán')
+            ->where('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán'])
             ->select(
-                'product.name',
-                'product.price',
-                'product.color',
-                'product.gb',
-                'product.avt',
-                'donhang.soluong',
-                'donhang.time',
-                DB::raw('product.price * donhang.soluong AS total_price')
-            )
-            ->get();
-
-        $donhangcomplete = DB::table('donhang')
-            ->join('product', 'donhang.sanpham', '=', 'product.id')
-            ->where('donhang.khachhang', $user->id)
-            ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá'])
-            ->select(
-                'product.id',
                 'product.name',
                 'product.price',
                 'product.color',
@@ -48,9 +31,65 @@ class HomeController extends Controller
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
+                'donhang.madon',
                 DB::raw('product.price * donhang.soluong AS total_price')
             )
             ->get();
+
+            $donggoi = DB::table('donhang')
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->where('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói'])
+            ->select(
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                'donhang.madon',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
+        
+        $danggiaohang = DB::table('donhang')
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->where('donhang.trangthaidonhang', 'Đang Giao Hàng')
+            ->select(
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                'donhang.madon',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
+
+        $donhangcomplete = DB::table('donhang')
+        ->join('product', 'donhang.sanpham', '=', 'product.id')
+        ->where('donhang.khachhang', $user->id)
+        ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá'])
+        ->select(
+            'product.id', 
+            'product.name', 
+            'product.price', 
+            'product.color', 
+            'product.gb',
+            'product.avt',
+            'donhang.soluong', 
+            'donhang.time',
+            'donhang.trangthaidonhang',
+            'donhang.madon',
+        DB::raw('product.price * donhang.soluong AS total_price')
+        )
+        ->get();
 
         $donhangcancel = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
@@ -66,6 +105,7 @@ class HomeController extends Controller
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
+                'donhang.madon',
                 DB::raw('product.price * donhang.soluong AS total_price')
             )
             ->get();
@@ -74,7 +114,9 @@ class HomeController extends Controller
         return view('home.taikhoan.index', [
             'user' => $user,
             'donhang' => $donhang,
+            'donggoi'=>$donggoi,
             'donhangcomplete' => $donhangcomplete,
+            'danggiaohang'=>$danggiaohang,
             'donhangcancel' => $donhangcancel
         ]);
 
@@ -89,18 +131,50 @@ class HomeController extends Controller
         return view('home.taikhoan.index', ['user' => $user]);
     }
 
-    public function showVoucher(Request $request)
-    {
-        $user = $request->session()->get('user');
-        return view('home.taikhoan.index', ['user' => $user]);
+public function showVoucher(Request $request){
+    $user = $request->session()->get('user');
+    return view('home.taikhoan.index', ['user' => $user]);
+}
+public function showyeuThich(Request $request){
+    $user = $request->session()->get('user');
+    $favorite=DB::table('yeuthich')->where('khachhang', $user->id)
+    ->join('product', 'yeuthich.sanpham', '=', 'product.id')
+    ->select('*')
+    ->get();
+    if (!$favorite) {
+        return redirect()->with('error', 'Chưa có đơn hàng yêu thích');
     }
-    public function showyeuThich(Request $request)
-    {
-        $user = $request->session()->get('user');
-        return view('home.taikhoan.index', ['user' => $user]);
+    return view('home.taikhoan.index', ['user' => $user,'favorite'=>$favorite]);
+}
+public function showTrangThai(Request $request, $madon)
+{
+    $user = $request->session()->get('user');
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem trạng thái đơn hàng.');
     }
 
-    public function login(Request $request)
+    // Lấy thông tin đơn hàng
+    $donhang = DB::table('donhang')
+        ->where('madon', $madon)
+        ->where('khachhang', $user->id)
+        ->first(); // Lấy 1 đơn hàng
+
+    if (!$donhang) {
+        abort(404, 'Không tìm thấy đơn hàng');
+    }
+
+    // Lấy thông tin sản phẩm liên quan đến đơn hàng
+    $sanpham = DB::table('product')->where('id', $donhang->sanpham)->first();
+
+    return view('home.taikhoan.trangthai', [
+        'user' => $user,
+        'donhang' => $donhang,
+        'sanpham' => $sanpham,
+    ]);
+}
+
+/*     public function login(Request $request)
     {
         $request->validate([
             'login' => 'required', // Email hoặc số điện thoại là bắt buộc
@@ -153,8 +227,8 @@ class HomeController extends Controller
         // Trả về phản hồi JSON hoặc chuyển hướng
         return response()->json(['success' => true, 'message' => 'Đăng xuất thành công']);
     }
-
-    public function detail(Request $request, $id)
+ */
+    public function detail(Request $request,$slug, $id)
     {
         // Lấy thông tin sản phẩm theo ID
         $product = DB::table('product')->where('id', $id)->first();
@@ -238,6 +312,26 @@ class HomeController extends Controller
         ]);
     }
 
+    public function AddGioHang(Request $request){
+        $user = $request->session()->get('user');
+
+        if (!$user) {
+            return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm vào giỏ hàng.');
+        }
+
+        $request->validate([
+            'sanpham' => 'required|integer', // ID sản phẩm
+            'soluong' => 'required|integer|min:1', // Số lượng sản phẩm
+        ]);
+
+        DB::table('giohang')->insert([
+            'khachhang' => $user->id,
+            'sanpham' => $request->input('sanpham'),
+            'soluong' => $request->input('soluong'), // Lưu số lượng vào giỏ hàng
+        ]);
+
+        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+    }
 
     public function test()
     {
@@ -376,8 +470,27 @@ class HomeController extends Controller
         }
     }
 
-
-
+    public function HuyDon(Request $request, $madon)
+    {
+        $user = $request->session()->get('user');
+    
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để hủy đơn hàng.');
+        }
+    
+        // Cập nhật trạng thái đơn hàng thành "Đã Hủy"
+        $result = DB::table('donhang')
+            ->where('khachhang', $user->id)
+            ->where('madon', '=', $madon)
+            ->update(['trangthaidonhang' => 'Đã Hủy']);
+    
+        if ($result) {
+            return redirect()->route('account.donhang')->with('success', 'Đơn hàng đã bị hủy!');
+        } else {
+            return redirect()->back()->with('error', 'Không thể hủy đơn hàng. Vui lòng thử lại.');
+        }
+    }
+    
     //// cai nay của huy dong 
     public function showRandomProducts()
     {

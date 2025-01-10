@@ -56,8 +56,11 @@
         <i class="fas fa-user"></i> {{ session('user')->name }}
         </a>
         <div id="dropdownMenu" class="dropdown-menu">
-        <a href="#">Thông tin tài khoản</a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+
+          <a href="{{route('account.thongtin')}}">Thông tin tài khoản</a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+
+      
           @csrf
           <button type="submit"
           style="background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;">
@@ -143,7 +146,6 @@
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
 
-  <!-- @yield('content') -->
 </header>
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/headerr.js') }}"></script>

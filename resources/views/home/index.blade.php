@@ -26,9 +26,10 @@
                     <ul>
                         @foreach ($categori as $cate)
                             <li class="category-item">
-                                
+
                                 <a href="{{ route('category.show', $cate->name) }}">{{ $cate->name }}</a>
                             </li>
+
                         @endforeach
                     </ul>
                 </div>
@@ -133,7 +134,8 @@
                     </div>
                     <div class="product-grid">
                         @foreach($products as $product)
-                            <div class="product-card">
+                        <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">   
+                        <div class="product-card">
                                 <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                 <div class="product-labels">
                                     <span class="label-auth">CHÍNH HÃNG</span>
@@ -143,6 +145,7 @@
                                     <span class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
                                 </div>
                             </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
