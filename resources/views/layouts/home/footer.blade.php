@@ -16,15 +16,18 @@
       </div>
       <!-- Cột Về Tiki -->
       <div class="footer-column">
-        <h4>Về Vin</h4>
+        <h4>Về Vin</h4> 
         <ul>
-          <li><a href="#">Giới thiệu VinGroup</a></li>
-          <li><a href="#">Vin Blog</a></li>
+          <li><a href="layouts.home.info">Giới thiệu VinGroup</a></li>
+          <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
         </ul>
-        <a href="{{ route('home.index') }}"><div  class="logo">
-      <img  style="padding: 5px 30px 0px 30px;height: 94px; width: 250px; margin-left:-30" src="{{ asset('images/logo.png') }}" alt="Logo">
-</div></a>
+        <a href="{{ route('home.index') }}">
+          <div class="logo">
+            <img style="padding: 5px 30px 0px 30px;height: 94px; width: 250px; margin-left:-30"
+              src="{{ asset('images/logo.png') }}" alt="Logo">
+          </div>
+        </a>
       </div>
 
       <!-- Cột Hợp tác và liên kết -->
@@ -149,14 +152,14 @@
           <!-- Thêm các icon phương thức thanh toán khác -->
         </div>
         <h4>Dịch vụ giao hàng</h4>
-        <div class="delivery-services">
+        <div class="delivery-services"><a href="https://tiki.vn/chuong-trinh/dich-vu-giao-nhanh">
           <img src="https://salt.tikicdn.com/ts/upload/74/56/ab/e71563afb23e3f34a148fe1b7d3413c5.png" width="109"
             height="33" style="margin-left:-9px;margin-top:-8px" alt="tikinow-icon">
-        </div>
+        </div></a>
       </div>
 
       <!-- Cột Kết nối với chúng tôi -->
-      <div class="footer-column">
+      <div class="footer-column">   
         <h4>Kết nối với chúng tôi</h4>
         <div class="social-icons">
           <a rel="nofollow noreferrer" href="https://www.facebook.com/tiki.vn/" class="icon" target="_blank"
@@ -200,26 +203,26 @@
       </div>
     </div>
   </footer>
-  
-  <div class="floating-buttons">
-  <div class="button" onclick="showPopup('floating-popup')">
-    <i class="icon">🌟</i>
-    <span>Trợ lý</span>
-  </div>
-  <div class="button" onclick="showPopup('floating-popup')">
-    <i class="icon">💬</i>
-    <span>Tin mới</span>
-  </div>
-</div>
 
-<!-- Popup floating -->
-<div id="floating-popup" class="popup-overlay hidden">
-  <div class="popup-content">
-    <span class="close-btn" onclick="closePopup('floating-popup')">&times;</span>
-    <h2>Thông báo</h2>
-    <p>Nội dung trợ lý hoặc tin mới ở đây.</p>
+  <div class="floating-buttons">
+    <div class="button" onclick="showPopup('floating-popup')">
+      <i class="icon">🌟</i>
+      <span>Trợ lý</span>
+    </div>
+    <div class="button" onclick="showPopup('floating-popup')">
+      <i class="icon">💬</i>
+      <span>Tin mới</span>
+    </div>
   </div>
-</div>
+
+  <!-- Popup floating -->
+  <div id="floating-popup" class="popup-overlay hidden">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup('floating-popup')">&times;</span>
+      <h2>Thông báo</h2>
+      <p>Nội dung trợ lý hoặc tin mới ở đây.</p>
+    </div>
+  </div>
 
   <!-- Popup cho Tin mới -->
   <div class="popup" id="popup2">

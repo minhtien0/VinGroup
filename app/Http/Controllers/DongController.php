@@ -26,6 +26,11 @@ class DongController extends Controller
     {
         return view('layouts.home.policy');
     }
+    public function Info()
+    {
+        return view('layouts.home.info');
+    }
+
 
     public function IPhone()
     {
@@ -71,7 +76,7 @@ public function detail($slug)
 
         return response()->json(['error' => 'Category not found'], 404);
     }
-    public function showCategory($name)
+    public function showCategory($name,Request $request)
     {
         // Lấy thông tin danh mục dựa trên slug
         
@@ -89,9 +94,16 @@ public function detail($slug)
         $products = DB::table('product')
             ->whereIn('categori_child', $childCategoryIds)
             ->get();
-            
+        //// Lấy tên từ yêu cầu từ thanh tìm kiếm
+        $name = $request->input('name');
+
+        // Tìm sản phẩm dựa trên tên
+        $productssearch = DB::table('product')
+            ->where('name', 'LIKE', "%{$name}%") // Tìm theo tên có chứa từ khóa
+            ->get();
+
         // Trả về view hiển thị danh mục và sản phẩm
-        return view('layouts.home.IPhone', compact('childCategories','products'));
+        return view('layouts.home.IPhone', compact('childCategories','products','productssearch'));
     }
 
     //đây là xuất ra danh mục child-categori

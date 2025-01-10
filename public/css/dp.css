@@ -638,6 +638,24 @@ body {
     color: white;
 }
 
+.body__account__right__favourite__top__price button {
+    color: black;
+    border: none;
+    /* Viền mảnh màu xám cho nút */
+    border: 1px solid rgb(121, 116, 116);
+    background-color: transparent;
+    /* Nền trong suốt */
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 150px;
+}
+
+.body__account__right__favourite__top__price button:hover {
+    background-color: darkblue;
+    /* Màu nền khi hover vào nút */
+    color: white;
+}
+
 .select-dropdown {
     border: 1px solid #ccc;
     border-radius: 5px;
