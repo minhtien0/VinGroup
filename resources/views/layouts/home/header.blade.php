@@ -28,18 +28,13 @@
     </a>
     <!-- Search bar -->
     <div class="search-bar">
-
       <input<div class="search-bar">
         <input type="text" id="search-input" placeholder="Nhập tên sản phẩm...">
         <button id="search-button">Tìm kiếm</button>
         <div class="search-results" id="search-results"></div>
     </div>
-   
+    <div class="header-icons">
 
-
-     
-
-      <input type="text" id="search-input" placeholder="Giá siêu rẻ">
 
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
@@ -57,7 +52,6 @@
         <div class="button-lienhe">
           @if (session()->has('user'))
         <div class="dropdown">
-
         <a class="dropdown-toggle" id="userDropdown" onclick="toggleDropdown()">
         <i class="fas fa-user"></i> {{ session('user')->name }}
         </a>
@@ -151,14 +145,7 @@
 
   <!-- @yield('content') -->
 </header>
-<<<<<<< HEAD
-</header>
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/headerr.js') }}"></script>
 <script src="{{ asset('js/search.js') }}"></script>
 
-
-  
-=======
-</header>
->>>>>>> f3463926b948bcfa5b5eef93f2cdccc43d974d05
