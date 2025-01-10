@@ -45,7 +45,6 @@ Route::get('/chitiet/{slug}/{id}', [HomeController::class, 'detail'])->name('hom
 //Hủy Đơn Hàng
 Route::post('/donhang/huydon/{madon}', [HomeController::class, 'HuyDon'])->name('donhang.huydon');
 
-
 //comment 
 Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add');
 //yeuthich
