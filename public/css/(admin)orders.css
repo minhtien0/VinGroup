@@ -1,0 +1,156 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #607d8b;
+}
+
+h1, h3 {
+    color: #607d8b;
+}
+
+/* Header Section */
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #607d8b;
+    padding-bottom: 10px;
+}
+
+.header-bottom h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.header-bottom .btn-primary {
+    background-color: #607d8b;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.header-bottom .btn-primary:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #607d8b;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table td a {
+    color: #607d8b;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+
+/* Buttons in Table */
+.table td .btn-link {
+    padding: 0;
+    font-size: 14px;
+    color: #607d8b;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.table td .btn-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Responsive Table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Tooltip or Confirmation Styling */
+button:focus {
+    outline: none;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #343a40;
+    color: white;
+    font-size: 14px;
+}
+
+/* Status Badge */
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+.header-bottom form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.header-bottom form .form-control {
+    min-width: 150px;
+}
+
+.header-bottom form button,
+.header-bottom form a {
+    white-space: nowrap;
+}
+

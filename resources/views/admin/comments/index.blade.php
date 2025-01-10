@@ -4,26 +4,77 @@
 <div class="container mt-4">
 
     <style>
-        /* Một ít CSS tùy chỉnh */
-        table thead {
-            background-color: #343a40; /* Màu nền head */
-            color: #ffffff;            /* Màu chữ head */
+        .container {
+            background-color: #b612b3;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        table tr td img {
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        table thead {
+            background-color: #343a40;
+            color:white; /* Đổi màu chữ thành xanh */
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+        table tbody td {
+            color: #618a0a; /* Đổi màu chữ nội dung thành xanh */
+        }
+        table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+        table tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+        table tbody tr:hover td {
+            background-color: #f1f1f1;
+        }
+        .avatar, .img-comment {
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 4px;
+            border: 1px solid #ddd;
         }
-        .avatar {
-            width: 50px;
-            height: 50px;
+        .btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-        .img-comment {
-            width: 50px;
-            height: 50px;
-            margin-right: 4px;
+        .btn-danger {
+            background-color: #e74c3c;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .badge {
+            font-size: 90%;
+            padding: 5px 8px;
         }
         .pagination {
-            justify-content: center; 
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .alert {
+            border-radius: 4px;
+        }
+        .mb-4{
+            display: block;
+            margin: 0 auto;
+            text-align: center;
         }
     </style>
 
@@ -35,7 +86,7 @@
         </div>
     @endif
 
-    <table class="table table-bordered align-middle">
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -104,5 +155,9 @@
         @endforelse
         </tbody>
     </table>
-</div>
+    {{-- Nếu có phân trang
+    <div class="pagination">
+        {{ $comments->links() }}
+    </div>
+</div> --}}
 @endsection
