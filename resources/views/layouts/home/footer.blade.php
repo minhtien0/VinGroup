@@ -18,7 +18,7 @@
       <div class="footer-column">
         <h4>Về Vin</h4> 
         <ul>
-          <li><a href="layouts.home.info">Giới thiệu VinGroup</a></li>
+          <li><a href="{{route('layouts.home.info')}}">Giới thiệu VinGroup</a></li>
           <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
         </ul>
