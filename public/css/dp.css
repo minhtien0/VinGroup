@@ -597,8 +597,6 @@ body {
     border: none;
     /* Bỏ viền đen của ô input */
     outline: none;
-    /* Bỏ viền khi nhấn vào ô input */
-    padding: 5px;
     flex: 1;
     /* Giúp input chiếm hết chiều ngang còn lại */
     font-size: 14px;

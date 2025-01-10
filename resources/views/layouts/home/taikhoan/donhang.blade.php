@@ -29,9 +29,9 @@
                     </div>
                 </div>
                 <div class="body__account__right__search"
-                    style="margin-top: 10px; background-color: rgb(207, 205, 205); width: 1160px; border-radius: 5px">
+                    style="width: 1160px; border-radius: 5px">
                     <div style="padding: 5px;">
-                        <i style="margin-left: 10px;" class="fa-solid fa-magnifying-glass"></i>
+                        
                         <input type="text" placeholder="Tìm kiếm theo ID, Tên sản phẩm...">
                     </div>
                 </div>

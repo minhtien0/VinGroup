@@ -16,20 +16,20 @@
                 <hr>
                 <div class="body__account__left__bot">
                     <div style="margin-bottom: 10px;">
-                        <a href="{{ route('account.donhang') }}" style="text-decoration: none ;color: aquamarine;">
-                            <span><i class="fa-regular fa-rectangle-list"></i></span>
+                        <a href="{{ route('account.donhang') }}" style="text-decoration: none ;">
+                            <span><i class="fa-regular fa-rectangle-list" style="color: aquamarine;"></i></span>
                             <span style="color: black;">Đơn Hàng</span>
                         </a>
                     </div>
                     <div style="margin-bottom: 10px;">
                     <a href="{{ route('account.thongtin')}}" style="text-decoration: none;">
-                            <span><i class="fa-solid fa-user-shield"></i></span>
+                            <span><i class="fa-solid fa-user-shield" style="color: ;"></i></span>
                             <span style="color: black;">Tài Khoản Của Tôi</span>
                         </a>
                     </div>
                     <div style="margin-bottom: 10px;">
-                        <a href="{{ route('account.voucher') }}" style="text-decoration: none ; color: orange;">
-                            <span><i class="fa-solid fa-ticket"></i></span>
+                        <a href="{{ route('account.voucher') }}" style="text-decoration: none ; ">
+                            <span><i class="fa-solid fa-ticket" style="color: orange;"></i></span>
                             <span style="color: black;">Voucher</span>
                         </a>
                     </div>

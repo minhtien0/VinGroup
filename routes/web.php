@@ -41,13 +41,14 @@ Route::get('/infouser/{id}', [HomeController::class, 'infouser'])->name('account
 Route::post('/UpdateInfoUser/{id}', [HomeController::class, 'UpdateInfoUser'])->name('account.UpdateInfoUser');
 
 //test chi tiết
-Route::get('/chitiet/{id}', [HomeController::class, 'detail'])->name('home.detail');
+Route::get('/chitiet/{slug}/{id}', [HomeController::class, 'detail'])->name('home.detail');
 
 //comment 
 Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add');
 //yeuthich
 Route::post('/favorite/add', [HomeController::class, 'AddFavorite'])->name('favorite.add');
-
+//giỏ hàng
+Route::post('/giohang/add', [HomeController::class, 'AddGioHang'])->name('giohang.add');
 //dong
 Route::get('/', [DongController::class, 'index'])->name('home.index');
 Route::get('/admin/dashboard', [DongController::class, 'dashboard'])->name('home.admin.dashboard');

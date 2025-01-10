@@ -30,6 +30,26 @@ class HomeController extends Controller
                 'product.avt',
                 'donhang.soluong',
                 'donhang.time',
+                'donhang.trangthaidonhang',
+                'donhang.madon',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
+
+        $danggiaohang = DB::table('donhang')
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->where('donhang.trangthaidonhang', 'Đang Giao Hàng')
+            ->select(
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                'donhang.madon',
                 DB::raw('product.price * donhang.soluong AS total_price')
             )
             ->get();
@@ -48,6 +68,7 @@ class HomeController extends Controller
             'donhang.soluong', 
             'donhang.time',
             'donhang.trangthaidonhang',
+            'donhang.madon',
         DB::raw('product.price * donhang.soluong AS total_price')
         )
         ->get();
@@ -66,6 +87,7 @@ class HomeController extends Controller
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
+                'donhang.madon',
                 DB::raw('product.price * donhang.soluong AS total_price')
             )
             ->get();
@@ -75,6 +97,7 @@ class HomeController extends Controller
             'user' => $user,
             'donhang' => $donhang,
             'donhangcomplete' => $donhangcomplete,
+            'danggiaohang'=>$danggiaohang,
             'donhangcancel' => $donhangcancel
         ]);
 
@@ -95,10 +118,44 @@ public function showVoucher(Request $request){
 }
 public function showyeuThich(Request $request){
     $user = $request->session()->get('user');
-    return view('home.taikhoan.index', ['user' => $user]);
+    $favorite=DB::table('yeuthich')->where('khachhang', $user->id)
+    ->join('product', 'yeuthich.sanpham', '=', 'product.id')
+    ->select('*')
+    ->get();
+    if (!$favorite) {
+        return redirect()->with('error', 'Chưa có đơn hàng yêu thích');
+    }
+    return view('home.taikhoan.index', ['user' => $user,'favorite'=>$favorite]);
+}
+public function showTrangThai(Request $request, $madon)
+{
+    $user = $request->session()->get('user');
+
+    if (!$user) {
+        return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để xem trạng thái đơn hàng.');
+    }
+
+    // Lấy thông tin đơn hàng
+    $donhang = DB::table('donhang')
+        ->where('madon', $madon)
+        ->where('khachhang', $user->id)
+        ->first(); // Lấy 1 đơn hàng
+
+    if (!$donhang) {
+        abort(404, 'Không tìm thấy đơn hàng');
+    }
+
+    // Lấy thông tin sản phẩm liên quan đến đơn hàng
+    $sanpham = DB::table('product')->where('id', $donhang->sanpham)->first();
+
+    return view('home.taikhoan.trangthai', [
+        'user' => $user,
+        'donhang' => $donhang,
+        'sanpham' => $sanpham,
+    ]);
 }
 
-    public function login(Request $request)
+/*     public function login(Request $request)
     {
         $request->validate([
             'login' => 'required', // Email hoặc số điện thoại là bắt buộc
@@ -151,8 +208,8 @@ public function showyeuThich(Request $request){
         // Trả về phản hồi JSON hoặc chuyển hướng
         return response()->json(['success' => true, 'message' => 'Đăng xuất thành công']);
     }
-
-    public function detail(Request $request, $id)
+ */
+    public function detail(Request $request,$slug, $id)
     {
         // Lấy thông tin sản phẩm theo ID
         $product = DB::table('product')->where('id', $id)->first();
@@ -236,6 +293,26 @@ public function showyeuThich(Request $request){
         ]);
     }
 
+    public function AddGioHang(Request $request){
+        $user = $request->session()->get('user');
+
+    if (!$user) {
+        return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm vào giỏ hàng.');
+    }
+
+    $request->validate([
+        'sanpham' => 'required|integer', // ID sản phẩm
+        'soluong' => 'required|integer|min:1', // Số lượng sản phẩm
+    ]);
+
+    DB::table('giohang')->insert([
+        'khachhang' => $user->id,
+        'sanpham' => $request->input('sanpham'),
+        'soluong' => $request->input('soluong'), // Lưu số lượng vào giỏ hàng
+    ]);
+
+    return redirect()->route('home.detail')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+    }
 
     public function test()
     {

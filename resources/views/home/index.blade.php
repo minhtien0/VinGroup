@@ -27,9 +27,6 @@
                     <ul>
                         @foreach ($categori as $cate)
                             <li class="category-item">
-                                
-                                <a href="{{ route('category.show', $cate->slug) }}">{{ $cate->name }}</a>
-                            </li>
                         @endforeach
                     </ul>
                 </div>

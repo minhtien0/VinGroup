@@ -37,7 +37,7 @@
           <i class="fas fa-user"></i> {{ session('user')->name }}
         </a>
         <div id="dropdownMenu" class="dropdown-menu">
-          <a href="#">Thông tin tài khoản</a>
+          <a href="{{route('account.thongtin')}}">Thông tin tài khoản</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
           @csrf
           <button type="submit"
@@ -124,7 +124,7 @@
   @include('dangnhap.Login')
   @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
-  @yield('content')
+
 </header>
 </header>
 <script src="{{ asset('js/carousel.js') }}"></script>
