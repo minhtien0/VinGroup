@@ -14,13 +14,15 @@
             <h1>Admin Dashboard</h1>
             <nav>
                 <ul>
-                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="{{ route('admin.dashboard')}}">Dashboard</a></li>
+                    <li><a href="{{ route('admin.danhmuc.category')}}">Category</a></li>
                     <li><a href="#">Users</a></li>
-                    <li><a href="#">Orders</a></li>
+                    <li><a href="{{ route('admin.donhang.orders')}}">Orders</a></li>
                     <li><a href="#">Directory</a></li>
                     <li><a href="{{ route('products.index') }}">Products</a></li>
                     <li><a href="{{ route('comments.index') }}">Comment</a></li>
-                    <li><a href="{{ route('lienhe.index') }}">Contact</a></li>    
+                    <li><a href="{{ route('lienhe.index') }}">Contact</a></li>
+
                     <li><a href="#">Settings</a></li>
                 </ul>
             </nav>
