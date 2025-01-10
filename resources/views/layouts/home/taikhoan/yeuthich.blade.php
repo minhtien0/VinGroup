@@ -21,11 +21,11 @@
                         <div style="margin-left: 10px;padding-top: 12px;"><input type="text" placeholder="Hãy nhập tên sản phẩm..." style="width: 400px;height: 40px;border: solid 1px rgb(231, 227, 227);border-radius: 5px;"></div>
                         <div style="padding-top:12px;"><button style="background-color: #372fc5; color: white; margin-left: 10px; border: none; border-radius: 5px; height: 40px; width: 60px;">Search</button></div>
                     </div>
+                    @foreach($favorite as $item)
                     <div class="body__account__right__favourite__top" style="display: flex;">
                     @if(empty($favorite))
                         <p style="margin-top: 5px; padding-top: 12px;">Bạn chưa yêu thích sản phẩm nào.</p>
                     @endif
-                    @foreach($favorite as $item)
                         <div class="body__account__right__favourite__top__img">
                             <a href=""><img src="{{ asset('img/' . $item->avt) }}" alt="" width="80px" height="80px"
                                     style="border: solid 1px gray;"></a>
@@ -47,7 +47,8 @@
                             style="width: 280px; text-align: center;padding: 40px; ">
                            <button style="color:black;"> <a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}" style="text-decoration: none;">Xem Chi Tiết</a></button>
                         </div>
-                        @endforeach
                     </div>
                     <hr>
+                    @endforeach
+                    
                 </div>

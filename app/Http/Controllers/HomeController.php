@@ -21,7 +21,7 @@ class HomeController extends Controller
         $donhang = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
             ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', 'Chờ Thanh Toán')
+            ->where('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán'])
             ->select(
                 'product.name',
                 'product.price',
@@ -36,6 +36,24 @@ class HomeController extends Controller
             )
             ->get();
 
+            $donggoi = DB::table('donhang')
+            ->join('product', 'donhang.sanpham', '=', 'product.id')
+            ->where('donhang.khachhang', $user->id)
+            ->where('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói'])
+            ->select(
+                'product.name',
+                'product.price',
+                'product.color',
+                'product.gb',
+                'product.avt',
+                'donhang.soluong',
+                'donhang.time',
+                'donhang.trangthaidonhang',
+                'donhang.madon',
+                DB::raw('product.price * donhang.soluong AS total_price')
+            )
+            ->get();
+        
         $danggiaohang = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
             ->where('donhang.khachhang', $user->id)
@@ -96,6 +114,7 @@ class HomeController extends Controller
         return view('home.taikhoan.index', [
             'user' => $user,
             'donhang' => $donhang,
+            'donggoi'=>$donggoi,
             'donhangcomplete' => $donhangcomplete,
             'danggiaohang'=>$danggiaohang,
             'donhangcancel' => $donhangcancel
@@ -296,22 +315,22 @@ public function showTrangThai(Request $request, $madon)
     public function AddGioHang(Request $request){
         $user = $request->session()->get('user');
 
-    if (!$user) {
-        return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm vào giỏ hàng.');
-    }
+        if (!$user) {
+            return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm vào giỏ hàng.');
+        }
 
-    $request->validate([
-        'sanpham' => 'required|integer', // ID sản phẩm
-        'soluong' => 'required|integer|min:1', // Số lượng sản phẩm
-    ]);
+        $request->validate([
+            'sanpham' => 'required|integer', // ID sản phẩm
+            'soluong' => 'required|integer|min:1', // Số lượng sản phẩm
+        ]);
 
-    DB::table('giohang')->insert([
-        'khachhang' => $user->id,
-        'sanpham' => $request->input('sanpham'),
-        'soluong' => $request->input('soluong'), // Lưu số lượng vào giỏ hàng
-    ]);
+        DB::table('giohang')->insert([
+            'khachhang' => $user->id,
+            'sanpham' => $request->input('sanpham'),
+            'soluong' => $request->input('soluong'), // Lưu số lượng vào giỏ hàng
+        ]);
 
-    return redirect()->route('home.detail')->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
+        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');
     }
 
     public function test()
@@ -451,8 +470,27 @@ public function showTrangThai(Request $request, $madon)
         }
     }
 
-
-
+    public function HuyDon(Request $request, $madon)
+    {
+        $user = $request->session()->get('user');
+    
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để hủy đơn hàng.');
+        }
+    
+        // Cập nhật trạng thái đơn hàng thành "Đã Hủy"
+        $result = DB::table('donhang')
+            ->where('khachhang', $user->id)
+            ->where('madon', '=', $madon)
+            ->update(['trangthaidonhang' => 'Đã Hủy']);
+    
+        if ($result) {
+            return redirect()->route('account.donhang')->with('success', 'Đơn hàng đã bị hủy!');
+        } else {
+            return redirect()->back()->with('error', 'Không thể hủy đơn hàng. Vui lòng thử lại.');
+        }
+    }
+    
     //// cai nay của huy dong 
     public function showRandomProducts()
     {
