@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     categoryItems.forEach((item) => {
         item.addEventListener("click", function () {
-            const slug = this.getAttribute("data-slug");
-            fetch(`/categories/${slug}`)
+            const name = this.getAttribute("data-id");
+            fetch(`/categories/${name}`)
                 .then((response) => response.json())
                 .catch((error) => {
                     console.error("bị lỗi nè", error);
@@ -12,3 +12,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+//lấy tên trong bảng danh mục con (child_categori)

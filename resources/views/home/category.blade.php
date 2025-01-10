@@ -1,6 +1,4 @@
 @include('layouts.home.header')
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

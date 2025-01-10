@@ -62,6 +62,7 @@ Route::post('/dangnhap/Login', [QuocController::class, 'Login'])->name('dangnhap
 Route::get('/dangnhap/Login', [QuocController::class, 'Logingiohang'])->name('dangnhap.Login');
 Route::post('/logout', [QuocController::class, 'logout'])->name('logout');
 
+
 Route::get('/Layouts/index', [QuocController::class, 'index'])->name('Layouts.index');
 Route::get('/lienhe/khlienhe', [LienHeController::class, 'khlienhe'])->name('lienhe.khlienhe');
 Route::get('/lienhe/blog', [BlogController::class, 'blog'])->name('lienhe.blog');
@@ -93,9 +94,16 @@ Route::post('/update-cart/{id}', [ThanhToanController::class, 'updateCart'])->na
 // Route để xóa một sản phẩm khỏi giỏ hàng (AJAX)
 Route::post('/remove-from-cart/{id}', [ThanhToanController::class, 'removeFromCart'])->name('removeFromCart');
 
-/////////////////////////////////////////////
-Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
-Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show');
+//////////
+/* Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
+Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show'); */
+
+Route::get('/categories/{name}', [DongController::class, 'getCategoryName'])->name('categories.name');
+Route::get('/category/{name}', [DongController::class, 'showCategory'])->name('category.show');
+Route::post('/get-child-categories', [DongController::class, 'getChildCategories'])->name('getChildCategories');
+
+Route::get('/categori', [DongController::class, 'showIphoneCategory'])->name('iphone');
+
 
 //admin thach////////////////////////////////////////////////////
 Route::get('/lienhe/admin', [adminController::class, 'admin'])->name('lienhe.admin');
