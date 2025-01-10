@@ -224,17 +224,18 @@ body {
     justify-content: space-between;
     gap: 70px;
     margin-top: 20px;
+    height: 200px;
 }
 
 .product-item {
     border: 1px solid #ddd;
-    border-radius: 5px;
     padding: 10px;
     background-color: #fff;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-    height: 300px;
+    border-radius: 50px;
+    max-height: 290px;
 }
 
 .product-item:hover {
@@ -243,10 +244,12 @@ body {
 }
 
 .product-item img {
-    width: 100%;
-    height: auto;
+    
+   
     border-radius: 5px;
     margin-bottom: 10px;
+    max-height: 84px;
+    max-width: 150px;
 }
 
 .product-item h2 {
@@ -308,3 +311,44 @@ body {
 .product-item .btn-compare:hover {
     background-color: #218838;
 } 
+
+.child-categories {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.child-category {
+  margin: 5px 0;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.child-category:hover {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+}
+
+.danhmuc-container {
+  display: flex; /* Kích hoạt flexbox */
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  flex-wrap: wrap; /* Đảm bảo các mục không bị tràn nếu có quá nhiều */
+  gap: 10px; /* Khoảng cách giữa các mục */
+}
+
+.danhmuc-seri {
+  padding: 10px 20px;
+  border: 1px solid #ccc; /* Viền xung quanh */
+  border-radius: 5px; /* Bo góc */
+  background-color: #f4f4f4; /* Màu nền */
+  text-align: center; /* Căn chữ ở giữa */
+  cursor: pointer; /* Con trỏ khi hover */
+}

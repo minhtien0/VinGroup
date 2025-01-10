@@ -32,18 +32,18 @@
     </div>
   </div>
 
-  <div class="category-nav">
-    <!-- Category Tabs -->
-    <div class="tabs">
-      <button class="tab active" data-category="iphone-16">IPHONE 16 SERIES</button>
-      <button class="tab" data-category="iphone-15">IPHONE 15 SERIES</button>
-      <button class="tab" data-category="iphone-14">IPHONE 14 SERIES</button>
-      <button class="tab" data-category="iphone-13">IPHONE 13 SERIES</button>
-      <button class="tab" data-category="iphone-12">IPHONE 12 SERIES</button>
-      <button class="tab" data-category="iphone-11">IPHONE 11 SERIES</button>
+
+  <div class="danhmuc-container">
+  @foreach ($childCategories as $child)
+    <div class="danhmuc-seri" style="text-transform: uppercase;" data-category="iphone-14">
+      {{$child->name}}
     </div>
-  </div>
-  
+  @endforeach
+</div>
+
+
+
+
 
 
   <div class="product-filter-page">
@@ -81,22 +81,20 @@
         </select>
       </div>
     </div>
-    <!-- Product Grid -->
+
     <div class="container">
       <div>
-      <h1>Danh mục {{ $category->name }}</h1>
-
-      <div class="product-list">
-        @foreach ($products as $product)
-      <div class="product-item">
-        <img src="{{ asset('images/' . $product->avt) }}" alt="{{ $product->name }}">
+        <div class="product-list">
+          @foreach ($products as $product)
+        <div class="product-item">
+        <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
         <h2>{{ $product->name }}</h2>
         <p>Giá: {{ number_format($product->price) }} VNĐ</p>
+        </div>
+      @endforeach
+        </div>
       </div>
-    @endforeach
-      </div>
-    </div>
-    </div>
+    </div> 
   </div>
 </body>
 

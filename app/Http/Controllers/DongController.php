@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class DongController extends Controller
 {
     public function dashboard()
@@ -59,10 +60,10 @@ public function detail($slug)
 
     return view('home.product.detail', compact('product'));
 }
-    public function getCategoryName($slug)
+    public function getCategoryName($name)
     {
         // Tìm danh mục dựa trên slug
-        $category = DB::table('categori')->where('slug', $slug)->first();
+        $category = DB::table('categori')->where('name', $name)->first();
 
         if ($category) {
             return response()->json(['name' => $category->name], 200);
@@ -70,25 +71,57 @@ public function detail($slug)
 
         return response()->json(['error' => 'Category not found'], 404);
     }
-    public function showCategory($slug)
+    public function showCategory($name)
     {
         // Lấy thông tin danh mục dựa trên slug
-        $category = DB::table('categori')->where('slug', $slug)->first();
-
-        if (!$category) {
-            abort(404, 'Danh mục không tồn tại.');
-        }
+        
+        $childCategories = DB::table('child_categori')
+        ->join('categori', 'child_categori.parent_id', '=', 'categori.id')
+        ->where('categori.name', '=', $name)
+        ->select('child_categori.name', 'child_categori.id')
+        ->get();
+       
 
         // Lấy sản phẩm liên quan đến danh mục
-        $products = DB::table('product')
-            ->where('categori', $category->id)
-            ->get();
+        $childCategoryIds = $childCategories->pluck('id')->toArray();
 
+        // Lấy sản phẩm liên quan đến các danh mục con
+        $products = DB::table('product')
+            ->whereIn('categori_child', $childCategoryIds)
+            ->get();
+            
         // Trả về view hiển thị danh mục và sản phẩm
-        return view('layouts.home.IPhone', compact('category', 'products'));
+        return view('layouts.home.IPhone', compact('childCategories','products'));
     }
 
     //đây là xuất ra danh mục child-categori
+    public function showIphoneCategory()
+    {
+        // Lấy thông tin danh mục cha là iPhone (id = 1)
+        $parentCategory = DB::table('categori')->where('id', 1)->first();
+    
+        // Nếu không tìm thấy danh mục cha, trả về lỗi 404
+        if (!$parentCategory) {
+            abort(404, 'Danh mục cha không tồn tại.');
+        }
+    
+        // Lấy danh sách danh mục con của iPhone (parent_id = 1)
+        $childCategories = DB::table('child_categori')
+            ->where('parent_id', 1)
+            ->get();
+    
+        // Lấy danh sách sản phẩm liên quan đến danh mục cha
+        $products = DB::table('product')
+            ->where('categori', 1) // Lọc sản phẩm thuộc danh mục cha (categori_id = 1)
+            ->get();
+    
+        // Trả dữ liệu về view IPhone.blade.php
+        return view('layouts.home.IPhone', [
+            'parentCategory' => $parentCategory,
+            'childCategories' => $childCategories,
+            'products' => $products,
+        ]);
+    }
 
     
 }
