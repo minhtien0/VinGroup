@@ -53,6 +53,7 @@ function closePopup(popupId) {
     if (overlay) {
         document.body.removeChild(overlay);
     }
+
 }
 function showPopup(popupId) {
     document.getElementById(popupId).style.display = 'block';
@@ -110,3 +111,6 @@ function showPopup(popupId) {
       popup.classList.add('hidden');
     }
   }
+
+
+

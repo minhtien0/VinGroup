@@ -497,7 +497,7 @@ public function showTrangThai(Request $request, $madon)
         // Lấy 6 sản phẩm ngẫu nhiên
         $products = DB::table('product')
             ->inRandomOrder() // Lấy sản phẩm ngẫu nhiên
-            ->limit(6) // Giới hạn số lượng sản phẩm (ở đây là 5)
+            ->limit(6) // Giới hạn số lượng sản phẩm (ở đây là 6)
             ->get();
 
         // Trả về view với danh sách sản phẩm

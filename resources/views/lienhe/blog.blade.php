@@ -91,7 +91,7 @@
                             <span class="blogspan-size ">{{ $categoryOppo->name}} </span>
                         </div>
                         <div id="featured-products">
-                            @foreach ($categoryIphone->products->take(5) as $product)
+                            @foreach ($categoryOppo->products->take(5) as $product)
                                 <div class="blog-khung" style="padding: 20px;">
                                     <div class="blog-hinh">
                                         <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
@@ -106,7 +106,7 @@
                         </div>
                         <div class="pagination">
                             <button id="prev-button">&laquo;</button>
-                            <button id="next-button" data-category-id="{{ $categoryIphone->id }}">&raquo;</button>
+                            <button id="next-button" data-category-id="{{ $categoryOppo->id }}">&raquo;</button>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
                     <span class="blogspan-size ">{{ $categoryGoogle->name}} </span>
                 </div>
                 <div class="featured-review" id="featured-products">
-                    @foreach ($categoryIphone->products->take(1) as $product)
+                    @foreach ($categoryGoogle->products->take(1) as $product)
                         <div class="blogleft-review main-article" >
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
@@ -133,7 +133,7 @@
                 </div>
                 <div class="pagination">
                     <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categoryNokia->id }}">&raquo;</button>
+                    <button id="next-button" data-category-id="{{ $categoryGoogle->id }}">&raquo;</button>
                 </div>
             </div>
 
@@ -143,7 +143,7 @@
                     <span class="blogspan-size ">{{ $categoryXiaomi->name}} </span>
                 </div>
                 <div class="featured-review" id="featured-products">
-                    @foreach ($categoryIphone->products->take(1) as $product)
+                    @foreach ($categoryXiaomi->products->take(1) as $product)
                         <div class="blogleft-review main-article" >
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
@@ -156,7 +156,7 @@
                 </div>
                 <div class="pagination">
                     <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categoryNokia->id }}">&raquo;</button>
+                    <button id="next-button" data-category-id="{{ $categoryXiaomi->id }}">&raquo;</button>
                 </div>
             </div>
 
@@ -166,7 +166,7 @@
                     <span class="blogspan-size ">{{ $categorySamsung->name}} </span>
                 </div>
                 <div class="featured-review" id="featured-products">
-                    @foreach ($categoryIphone->products->take(1) as $product)
+                    @foreach ($categorySamsung->products->take(1) as $product)
                         <div class="blogleft-review main-article" >
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
@@ -179,7 +179,7 @@
                 </div>
                 <div class="pagination">
                     <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categoryNokia->id }}">&raquo;</button>
+                    <button id="next-button" data-category-id="{{ $categorySamsung->id }}">&raquo;</button>
                 </div>
             </div>
         </section>

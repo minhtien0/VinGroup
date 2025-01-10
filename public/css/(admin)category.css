@@ -1,0 +1,135 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1, h3 {
+    color: #607d8b;
+}
+
+/* Header Section */
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #607d8b;
+    padding-bottom: 10px;
+}
+
+.header-bottom h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.header-bottom .btn-primary {
+    background-color: #607d8b;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.header-bottom .btn-primary:hover {
+    background-color: #607d8b;
+    color: #fff;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.search-box input {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-box button {
+    background-color: #607d8b;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.search-box button i {
+    font-size: 14px;
+}
+
+.search-box button:hover {
+    background-color: #607d8b;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; /* hoặc tuỳ ý */
+  }
+
+/* Table Styling */
+.table {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+}
+
+.table thead th {
+    background-color: #607d8b;
+    color: white;
+    font-size: 14px;
+}
+
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table td a {
+    color: #607d8b;
+    text-decoration: none;
+}
+
+.table td a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Table */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Buttons in Table */
+.table td .btn-link {
+    padding: 0;
+    font-size: 14px;
+    color: #607d8b;
+    border: none;
+    background: none;
+}
+
+.table td .btn-link:hover {
+    color: #607d8b;
+    text-decoration: underline;
+}

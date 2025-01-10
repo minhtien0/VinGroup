@@ -1,11 +1,10 @@
 @include('layouts.home.components.product-popup')   
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiki Clone Header</title>
+    <title>VinGroup Mobile</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/danhmuc.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -47,7 +46,6 @@
                         alt="Đóng tiền, nạp thẻ"> Đóng tiền, nạp thẻ</li>
                 <li><img src="https://salt.tikicdn.com/cache/100x100/ts/tmp/6f/4e/41/93f72f323d5b42207ab851dfa39d44fb.png"
                         alt="Mua trước trả sau"> Mua trước trả sau</li>
-
                 <li><img src="https://salt.tikicdn.com/cache/100x100/ts/upload/08/2f/14/fd9d34a8f9c4a76902649d04ccd9bbc5.png"
                         alt="Mua Bán Cùng Chúng TÔi"> Mua Bán Cùng Chúng Tôi</li>
             </ul>
@@ -449,5 +447,4 @@
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/danhmuc.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </html>

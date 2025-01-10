@@ -16,9 +16,10 @@
                     if (response.length > 0) {
                         response.forEach(product => {
                             results.append(`
-                                <div class="search-item">
-                                    <a href="/san-pham/${product.slug}">
-                                        <img src="/images/${product.avt}" alt="${product.name}">
+                                <div class="search-item " >
+                                    <a style="display:flex;" href="/chitiet/${product.slug}/${product.id}">
+                                        <img style="height:70px;width:70px;" src="/img/${product.avt}" alt="${product.name}">
+                                        <p style="margin-top:25px;text-transform: uppercase;">${product.name}</p>
                                     </a>
                                 </div>
                             `);
@@ -30,7 +31,7 @@
                     }
                 },
                 error: function () {
-                    results.html('<p>Có lỗi xảy ra, vui lòng thử lại.</p>');
+                    results.html('<p>Không Tìm Thấy Kết Quả.</p>');
                     results.show();
                 }
             });

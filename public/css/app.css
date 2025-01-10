@@ -6,6 +6,7 @@
     text-decoration: none;
     color: black;
     
+    
 }
 
 body {
@@ -136,13 +137,17 @@ body {
     font-weight: bold;
     color: #00aaff;
 }
-
-/* Header */
 .header {
+    position: sticky; /* Đặt header ở trạng thái sticky */
+    top: 0; /* Cố định header ở vị trí cách trên cùng 0px */
+    z-index: 10; /* Đảm bảo header nằm trên các phần tử khác */
     border-bottom: 1px solid #f0f0f0;
     padding: 0px 0px;
+    background-color: rgb(255, 255, 255); /* Đặt nền để header không bị trong suốt */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng nếu cần */
 }
 
+/* Header container */
 .header-container {
     display: flex;
     align-items: center;
@@ -155,7 +160,7 @@ body {
     flex: 1;
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 10px;
    
 }
 
@@ -531,6 +536,9 @@ body {
     font-weight: normal;
     height: 65px;
     overflow: hidden;
+    word-wrap: break-word; /* Tự động ngắt từ dài để xuống hàng */
+    word-break: break-word; /* Ngắt dòng khi từ quá dài (dành cho các trình duyệt cũ) */
+    white-space: normal; /* Cho phép ngắt dòng theo không gian */
 }
 
 /* Price */
@@ -1196,6 +1204,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Tự động điều chỉnh số cột */
     gap: 20px; /* Khoảng cách giữa các sản phẩm */
     margin-top: 20px;
+    text-transform: uppercase;
 }
 
 /* Kiểu cho từng sản phẩm */
@@ -1362,3 +1371,4 @@ body {
     font-weight: bold;
     margin-left: 10px;
 }
+
