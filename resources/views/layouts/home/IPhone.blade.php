@@ -86,11 +86,11 @@
       <div>
         <div class="product-list">
           @foreach ($products as $product)
-        <div class="product-item">
+        <a style="text-decoration:none;" href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}"><div class="product-item">
         <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
         <h2>{{ $product->name }}</h2>
         <p>Giá: {{ number_format($product->price) }} VNĐ</p>
-        </div>
+        </div></a>
       @endforeach
         </div>
       </div>

@@ -110,7 +110,7 @@
                                                     Đã Đánh Giá
                                                 </button>
                                             @endif
-                                                <button style="margin-left: 15px;">Mua lại</button>
+                                                <button style="margin-left: 15px;"><a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}" style="text-decoration: none;">Mua Lại</a></button>
                                             </div>
                                         </div>
                                     </div>
@@ -194,6 +194,7 @@
                                             </form>
                                         </div>
                                     </div>
+                                    <hr style="color:blue;">
                                     @endforeach
                                 `;
                                 break;
@@ -271,6 +272,7 @@
                                             </form>
                                         </div>
                                     </div>
+                                    <hr style="color:blue;">
                                     @endforeach
                                 `;
                                 break;
@@ -338,6 +340,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <hr style="color:blue;">
                                     @endforeach
                                 `;
                                 break;
@@ -407,10 +410,11 @@
                                                     Đã Đánh Giá
                                                 </button>
                                             @endif
-                                                <button style="margin-left: 15px;">Mua lại</button>
+                                                <button style="margin-left: 15px;"><a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}" style="text-decoration: none;">Mua Lại</a></button>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr style="color:blue;">
                                     @endforeach
                                 `;
                                 break;
@@ -474,10 +478,11 @@
                                             </div>
                                             <div>
                                                 <button >Liên Hệ Shop</button>
-                                                <button style="margin-left: 15px;">Mua lại</button>
+                                                <button style="margin-left: 15px;"><a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}" style="text-decoration: none;">Mua Lại</a></button>
                                             </div>
                                         </div>
                                     </div>
+                                    <hr style="color:blue;">
                                     @endforeach
                                 `;
                                 break;
@@ -495,7 +500,7 @@
                     <div class="popup-contentdanhgia" style="width: 440px;">
                         <div style="font-size: 20px; margin-bottom: 10px;"> Đánh Giá Sản Phẩm <i class="fa-regular fa-face-smile-wink" style="color:  rgb(17, 75, 200);"></i></div>
                         <div>
-                        @foreach($donhangcomplete as $item)
+                        @foreach($donhangrate as $item)
                             <div class="productrate" style="display: flex;">
                                 <!-- Hình ảnh sản phẩm -->
                                 <input type="hidden" name="sanpham" value="{{ $item->id }}" required> 
@@ -654,10 +659,6 @@
                 fileInput.value = ""; // Reset input để có thể chọn lại cùng file
             });
         });
-    </script>
-
-
-            <script>
                 // Hàm mở popup
                 function openPopupComfirm() {
                     document.getElementById('confirmPopup').style.display = 'flex';
@@ -667,7 +668,7 @@
                 function closePopupComfirm() {
                     document.getElementById('confirmPopup').style.display = 'none';
                 }
-            </script>
+</script>
 
 
                 <div class="body__account__right__product" id="body__account__right__product"
@@ -737,7 +738,7 @@
                                                     Đã Đánh Giá
                                                 </button>
                                             @endif
-                                                <button style="margin-left: 15px;">Mua lại</button>
+                                                <button style="margin-left: 15px;"><a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}" style="text-decoration: none;">Mua Lại</a></button>
                                             </div>
                                         </div>
                                     </div>

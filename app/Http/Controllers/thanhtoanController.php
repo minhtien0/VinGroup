@@ -122,7 +122,7 @@ class ThanhToanController extends Controller
             'sanpham' => $firstItem->product->id, // Lưu ID sản phẩm
             'soluong' => $firstItem->soluong,
             'trangthai' => '1', // Pending
-            'trangthaidonhang' => 'Đang chuẩn bị',
+            'trangthaidonhang' => 'Chờ Thanh Toán',
             'ghichu' => $request->input('ghichu', ''),
             'time' => now(),
         ]);

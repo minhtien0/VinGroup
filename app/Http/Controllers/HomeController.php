@@ -21,13 +21,14 @@ class HomeController extends Controller
         $donhang = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
             ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán'])
+            ->whereIn('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán'])
             ->select(
                 'product.name',
                 'product.price',
                 'product.color',
                 'product.gb',
                 'product.avt',
+                'product.slug',
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
@@ -39,13 +40,14 @@ class HomeController extends Controller
             $donggoi = DB::table('donhang')
             ->join('product', 'donhang.sanpham', '=', 'product.id')
             ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói'])
+            ->whereIn('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói'])
             ->select(
                 'product.name',
                 'product.price',
                 'product.color',
                 'product.gb',
                 'product.avt',
+                'product.slug',
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
@@ -64,6 +66,7 @@ class HomeController extends Controller
                 'product.color',
                 'product.gb',
                 'product.avt',
+                'product.slug',
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
@@ -83,6 +86,26 @@ class HomeController extends Controller
             'product.color', 
             'product.gb',
             'product.avt',
+            'product.slug',
+            'donhang.soluong', 
+            'donhang.time',
+            'donhang.trangthaidonhang',
+            'donhang.madon',
+        DB::raw('product.price * donhang.soluong AS total_price')
+        )
+        ->get();
+        $donhangrate = DB::table('donhang')
+        ->join('product', 'donhang.sanpham', '=', 'product.id')
+        ->where('donhang.khachhang', $user->id)
+        ->where('donhang.trangthaidonhang', ['Chờ Đánh Giá'])
+        ->select(
+            'product.id', 
+            'product.name', 
+            'product.price', 
+            'product.color', 
+            'product.gb',
+            'product.avt',
+            'product.slug',
             'donhang.soluong', 
             'donhang.time',
             'donhang.trangthaidonhang',
@@ -102,6 +125,7 @@ class HomeController extends Controller
                 'product.color',
                 'product.gb',
                 'product.avt',
+                'product.slug',
                 'donhang.soluong',
                 'donhang.time',
                 'donhang.trangthaidonhang',
@@ -117,7 +141,8 @@ class HomeController extends Controller
             'donggoi'=>$donggoi,
             'donhangcomplete' => $donhangcomplete,
             'danggiaohang'=>$danggiaohang,
-            'donhangcancel' => $donhangcancel
+            'donhangcancel' => $donhangcancel,
+            'donhangrate'=>$donhangrate
         ]);
 
     }

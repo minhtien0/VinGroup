@@ -69,7 +69,7 @@
             </div>
            
         @elseif($donhang->trangthaidonhang == 'Hoàn Thành')     
-        <button style="background-color: transparent; width: 220px; height: 40px; margin-bottom: 15px; border-radius: 5px;" onclick="openPopupComfirm()" >
+        <button style="background-color: transparent; width: 220px; height: 40px; margin-bottom: 15px; border-radius: 5px;" >
                     Mua Lại
         </button>
         @elseif($donhang->trangthaidonhang == 'Đang Giao Hàng')  
