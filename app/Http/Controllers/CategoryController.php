@@ -12,12 +12,12 @@ class CategoryController extends Controller
 
         // Lọc theo tên danh mục
         $categories = DB::table('categori')
-            ->where('name', 'like', '%' . $search . '%') // Tìm kiếm theo tên danh mục trong bảng categori
-            ->get();
+    ->whereRaw("name REGEXP ?", [implode('.*', str_split($search))])
+    ->get();
 
         $childCategories = DB::table('child_categori')
-            ->where('name', 'like', '%' . $search . '%') // Tìm kiếm theo tên danh mục trong bảng child_categori
-            ->get();
+    ->whereRaw("name REGEXP ?", [implode('.*', str_split($search))])
+    ->get();
 
         // Trả về dữ liệu HTML để hiển thị danh mục
         $html = '';
@@ -28,8 +28,8 @@ class CategoryController extends Controller
             $html .= '<td>' . $category->id . '</td>';
             $html .= '<td>' . $category->name . '</td>';
             $html .= '<td>' . ($category->trangthai == 1 ? 'Hiển thị' : 'Ẩn') . '</td>';
-            $html .= '<td>' . $category->time . '</td>';
             $html .= '<td>Không có</td>'; // Vì đây là danh mục cha, nên không có danh mục cha
+            $html .= '<td>' . $category->time . '</td>';
             $html .= '<td>';
             $html .= '<a href="' . route('admin.danhmuc.category.edit', $category->id) . '" class="btn btn-warning btn-sm">Sửa</a> ';
             $html .= '<form action="' . route('admin.danhmuc.category.destroy', $category->id) . '" method="POST" style="display:inline;">';
@@ -144,17 +144,28 @@ class CategoryController extends Controller
         ]);
     }
     public function destroy($id)
-    {
-        // Kiểm tra xem có là danh mục cha hay không
-        $category = DB::table('categori')->where('id', $id)->first();
-        if ($category) {
-            DB::table('categori')->where('id', $id)->delete();
-        } else {
-            DB::table('child_categori')->where('id', $id)->delete();
+{
+    // Kiểm tra xem có phải danh mục cha không
+    $category = DB::table('categori')->where('id', $id)->first();
+    if ($category) {
+        // Kiểm tra xem danh mục cha có chứa danh mục con không
+        $hasChildren = DB::table('child_categori')->where('parent_id', $id)->exists();
+        if ($hasChildren) {
+            return redirect()->route('admin.danhmuc.category')->with('error', 'Không thể xóa danh mục vì có danh mục con liên kết.');
         }
 
-        return redirect()->route('admin.danhmuc.category')->with('success', 'Danh mục đã được xóa thành công');
+        // Xóa danh mục cha
+        DB::table('categori')->where('id', $id)->delete();
+    } else {
+        // Nếu không phải danh mục cha, kiểm tra danh mục con
+        $childCategory = DB::table('child_categori')->where('id', $id)->first();
+        if ($childCategory) {
+            DB::table('child_categori')->where('id', $id)->delete();
+        }
     }
+
+    return redirect()->route('admin.danhmuc.category')->with('success', 'Danh mục đã được xóa thành công.');
+}
     public function update(Request $request, $id)
     {
         // Xác thực dữ liệu

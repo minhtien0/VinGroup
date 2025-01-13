@@ -14,9 +14,12 @@
         <div class="form-group mr-2">
             <select name="trangthaidonhang" id="filter-order-status" class="form-control">
                 <option value="">TT Đơn hàng</option>
-                <option value="Đang Vận Chuyển" {{ request('trangthaidonhang') == 'Đang Vận Chuyển' ? 'selected' : '' }}>Đang Vận Chuyển</option>
-                <option value="Đang Giao Hàng" {{ request('trangthaidonhang') == 'Đang Giao Hàng' ? 'selected' : '' }}>Đang Giao Hàng</option>
-                <option value="Hoàn thành" {{ request('trangthaidonhang') == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành</option>
+                <option value="Đang Vận Chuyển" {{ request('trangthaidonhang') == 'Đang Vận Chuyển' ? 'selected' : '' }}>
+                    Đang Vận Chuyển</option>
+                <option value="Đang Giao Hàng" {{ request('trangthaidonhang') == 'Đang Giao Hàng' ? 'selected' : '' }}>
+                    Đang Giao Hàng</option>
+                <option value="Hoàn thành" {{ request('trangthaidonhang') == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành
+                </option>
                 <option value="Đã hủy" {{ request('trangthaidonhang') == 'Đã hủy' ? 'selected' : '' }}>Đã hủy</option>
             </select>
         </div>
@@ -58,6 +61,7 @@
                         <td>{{$order->soluong}}</td>
                         <td>{{ $order->ghichu }}</td>
                         <td style="color: #007BFF">
+                            <a href="{{ route('admin.donhang.orders.edit', $order->id) }}" class="btn btn-warning btn-sm">Xác Nhận Đơn Hàng</a> |
                             <a href="{{ route('admin.donhang.orders.edit', $order->id) }}"
                                 class="btn btn-warning btn-sm">Sửa</a> |
                             <form action="{{ route('admin.donhang.orders.destroy', $order->id)}}" method="POST"
@@ -71,8 +75,8 @@
                     </tr>
                 @empty
                     <!-- <tr>
-                                                    <td colspan="8" class="text-center">Không có đơn hàng nào</td>
-                                                </tr> -->
+                                                        <td colspan="8" class="text-center">Không có đơn hàng nào</td>
+                                                    </tr> -->
                 @endforelse
             </tbody>
         </table>

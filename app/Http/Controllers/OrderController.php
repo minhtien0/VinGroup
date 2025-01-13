@@ -34,19 +34,11 @@ class OrderController extends Controller
         // Lấy thông tin đơn hàng theo id
         $order = DB::table('donhang')->where('id', $id)->first();
 
-        if (!$order) {
-            abort(404, 'Đơn hàng không tồn tại.');
-        }
-
         return view('admin.donhang.editorders', compact('order'));
     }
     public function destroy($id)
     {
         $order = DB::table('donhang')->where('id', $id)->first();
-
-        if (!$order) {
-            abort(404, 'Đơn hànghàng không tồn tại.');
-        }
 
         DB::table('donhang')->where('id', $id)->delete();
         return redirect()->route('admin.donhang.orders')->with('success', 'Đơn hàng đã được xóa thành công.');
