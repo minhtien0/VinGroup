@@ -22,6 +22,7 @@ Route::get('/account/voucher', [HomeController::class, 'showVoucher'])->name('ac
 Route::get('/account/thongtin', [HomeController::class, 'showThongTin'])->name('account.thongtin');
 Route::get('/account/donhang', [HomeController::class, 'showDonHang'])->name('account.donhang');
 Route::get('/account/yeuthich', [HomeController::class, 'showYeuThich'])->name('account.yeuthich');
+Route::get('/account/trangthai/{madon}', [HomeController::class, 'showTrangThai'])->name('account.trangthai');
 Route::get('/account', [HomeController::class, 'showDonHang'])->name('account.donhang');
 
 /* Route::get('/', [HomeController::class, 'test'])->name('home.test'); */
@@ -46,12 +47,17 @@ Route::get('/infouser/{id}', [HomeController::class, 'infouser'])->name('account
 Route::post('/UpdateInfoUser/{id}', [HomeController::class, 'UpdateInfoUser'])->name('account.UpdateInfoUser');
 
 //test chi tiết
-Route::get('/chitiet/{id}', [HomeController::class, 'detail'])->name('home.detail');
+Route::get('/chitiet/{slug}/{id}', [HomeController::class, 'detail'])->name('home.detail');
+//Hủy Đơn Hàng
+Route::post('/donhang/huydon/{madon}', [HomeController::class, 'HuyDon'])->name('donhang.huydon');
 
 //comment 
 Route::post('/rates/add', [HomeController::class, 'AddRates'])->name('rates.add');
 //yeuthich
 Route::post('/favorite/add', [HomeController::class, 'AddFavorite'])->name('favorite.add');
+
+//giỏ hàng
+Route::post('/giohang/add', [HomeController::class, 'AddGioHang'])->name('giohang.add');
 
 
 //dong
@@ -59,6 +65,7 @@ Route::get('/', [DongController::class, 'index'])->name('home.index');
 Route::get('/admin/dashboard', [DongController::class, 'dashboard'])->name('home.admin.dashboard');
 
 route::get('/policy', [DongController::class,'Policy'])->name('layouts.home.policy'); 
+route::get('/thongtin', [DongController::class,'Info'])->name('layouts.home.info'); 
 
 Route::get('/search-ajax', [DongController::class, 'searchAjax'])->name('product.searchAjax');
 Route::get('/san-pham/{slug}', [DongController::class, 'detail'])->name('home.product.detail');

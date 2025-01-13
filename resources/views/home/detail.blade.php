@@ -1237,8 +1237,12 @@
                     </div>
                     <div class="d-grid gap-2 col-6 mt-3">
                         <button class="btn btn-danger" type="button" style="width: 320px;">Mua ngay</button>
-                        <button class="btn btn-primary" type="button"
-                            style="background-color: transparent; color: blue;">Thêm giỏ hàng</button>
+                        <form action="{{ route('giohang.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="sanpham" value="{{ $product->id }}">
+                            <input type="hidden" name="soluong" id="soluong-input" value="1"> 
+                        <button class="btn btn-primary" type="submit" style="background-color: transparent; color: blue;width: 320px;">Thêm giỏ hàng</button>
+                        </form>
                             <form id="favoriteForm" data-favorite="{{ $isFavorite ? 'true' : 'false' }}" action="{{ route('favorite.add') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="sanpham" value="{{ $product->id }}">

@@ -16,9 +16,10 @@
       </div>
       <!-- Cột Về Tiki -->
       <div class="footer-column">
-        <h4>Về Vin</h4>
+        <h4>Về Vin</h4> 
         <ul>
           <li><a href="{{ route('lienhe.gioithieu') }}">Giới thiệu VinGroup</a></li>
+          <li><a href="layouts.home.info">Giới thiệu về chính sách</a></li>
           <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
         </ul>
@@ -152,14 +153,14 @@
           <!-- Thêm các icon phương thức thanh toán khác -->
         </div>
         <h4>Dịch vụ giao hàng</h4>
-        <div class="delivery-services">
+        <div class="delivery-services"><a href="https://tiki.vn/chuong-trinh/dich-vu-giao-nhanh">
           <img src="https://salt.tikicdn.com/ts/upload/74/56/ab/e71563afb23e3f34a148fe1b7d3413c5.png" width="109"
             height="33" style="margin-left:-9px;margin-top:-8px" alt="tikinow-icon">
-        </div>
+        </div></a>
       </div>
 
       <!-- Cột Kết nối với chúng tôi -->
-      <div class="footer-column">
+      <div class="footer-column">   
         <h4>Kết nối với chúng tôi</h4>
         <div class="social-icons">
           <a rel="nofollow noreferrer" href="https://www.facebook.com/tiki.vn/" class="icon" target="_blank"

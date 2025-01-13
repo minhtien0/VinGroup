@@ -48,7 +48,7 @@ class LienHeController extends Controller
 
         $lienHe->save();
 
-        return back()->with('success', 'Cảm ơn bạn đã liên hệ chúng tôi!');
+        return redirect()->route('home.index')->with('success', 'Cảm ơn bạn đã liên hệ chúng tôi!');
     }
 
     // Cập nhật liên hệ (không cần trang sửa riêng)

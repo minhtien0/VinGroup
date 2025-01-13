@@ -1,10 +1,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiki Clone Header</title>
+  <title>VinGroup Moblie</title>
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min">
   <!-- ------------- -->
   <link rel="stylesheet" href="{{asset('css/dangnhap.css')}}">
   <link rel="stylesheet" href="{{asset('css/dangky.css')}}">
@@ -28,8 +28,14 @@
     </a>
     <!-- Search bar -->
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Giá siêu rẻ">
-      <button id="search-btn">Tìm kiếm</button>
+      <input<div class="search-bar">
+        <input type="text" id="search-input" placeholder="Nhập tên sản phẩm...">
+        <button id="search-button">Tìm kiếm</button>
+        <div class="search-results" id="search-results"></div>
+    </div>
+    <div class="header-icons">
+
+
       <div class="header-icons">
         <a href="{{ route('home.index') }}"><i class="fas fa-home"></i> Trang chủ</a>
 
@@ -47,31 +53,33 @@
           @if (session()->has('user'))
         <div class="dropdown">
         <a class="dropdown-toggle" id="userDropdown" onclick="toggleDropdown()">
-          <i class="fas fa-user"></i> {{ session('user')->name }}
+        <i class="fas fa-user"></i> {{ session('user')->name }}
         </a>
         <div id="dropdownMenu" class="dropdown-menu">
-          <a href="#">Thông tin tài khoản</a>
+
+          <a href="{{route('account.thongtin')}}">Thông tin tài khoản</a>
           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+
+      
           @csrf
           <button type="submit"
-            style="background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;">
-            Đăng xuất
+          style="background: none; border: none; color: blue; cursor: pointer; text-decoration: underline;">
+          Đăng xuất
           </button>
-          </form>
+        </form>
         </div>
-        </div>
-      @else
-      <a onclick="showPopuplogin('loginPopup')">
-      <i class="fas fa-user"></i> Tài khoản
-      </a>
-    @endif
-        </div>
-        <a href="{{route('giohang.giohang')}}"><i class="fas fa-shopping-cart"></i> <span
-            class="cart-count">0</span></a>
       </div>
-      <div id="search-results" class="search-results"></div>
-
+    @else
+    <a onclick="showPopuplogin('loginPopup')">
+      <i class="fas fa-user"></i> Tài khoản
+    </a>
+  @endif
+      </div>
+      <a href="{{route('giohang.giohang')}}"><i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span></a>
     </div>
+    <div id="search-results" class="search-results"></div>
+
+  </div>
   </div>
   <!-- Navigation links -->
   <div>
@@ -137,6 +145,8 @@
   @include('dangnhap.Login')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
 
-  <!-- @yield('content') -->
 </header>
-</header>
+<script src="{{ asset('js/carousel.js') }}"></script>
+<script src="{{ asset('js/headerr.js') }}"></script>
+<script src="{{ asset('js/search.js') }}"></script>
+

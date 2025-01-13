@@ -306,6 +306,7 @@ body {
     border-radius: 8px;
     padding-bottom: 10px;
     max-height: 1000px;
+    
     overflow-y: auto;
     padding: 15px;
     margin-top: 15px;
@@ -597,8 +598,6 @@ body {
     border: none;
     /* Bỏ viền đen của ô input */
     outline: none;
-    /* Bỏ viền khi nhấn vào ô input */
-    padding: 5px;
     flex: 1;
     /* Giúp input chiếm hết chiều ngang còn lại */
     font-size: 14px;
@@ -917,4 +916,30 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+}
+
+.popup-comfirm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-contentcomfirm {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.popup-contentcomfirm button {
+    cursor: pointer;
+    margin-top: 10px;
 }

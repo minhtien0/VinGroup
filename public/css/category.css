@@ -1,18 +1,24 @@
 /* Carousel Container */
+
 .dual-banner-carousel {
     display: flex;
     overflow: hidden;
-    width: 100%; /* Full width container */
-    gap: 15px; /* Space between banners */
+    width: 100%;
+    /* Full width container */
+    gap: 15px;
+    /* Space between banners */
     justify-content: center;
     position: relative;
     padding: 15px;
 }
 
+
 /* Banner Items */
+
 .banner-item {
     flex: 1;
-    max-width: 48%; /* Each banner takes up about half the width */
+    max-width: 48%;
+    /* Each banner takes up about half the width */
     transition: transform 0.5s ease-in-out;
     border-radius: 10px;
     overflow: hidden;
@@ -21,11 +27,14 @@
 
 .banner-item img {
     width: 100%;
-    height: 150px; /* Adjust height as needed */
+    height: 150px;
+    /* Adjust height as needed */
     object-fit: cover;
 }
 
+
 /* Animation for Auto Slide */
+
 @keyframes slide {
     0% {
         transform: translateX(0%);
@@ -43,6 +52,7 @@
 
 
 /* Category Tabs */
+
 .category-nav {
     margin-top: 10px;
     display: flex;
@@ -72,7 +82,9 @@
     color: #fff;
 }
 
+
 /* Filter Section */
+
 .filter-section {
     margin-top: 15px;
     display: flex;
@@ -81,7 +93,8 @@
     padding: 0 15px;
 }
 
-.filters, .sort {
+.filters,
+.sort {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -104,121 +117,123 @@ button:hover {
 
 
 /* loc san pham */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
-  }
-  
-  .product-filter-page {
+}
+
+.product-filter-page {
     display: flex;
     gap: 20px;
     padding: 20px;
-  }
-  
-  .filter-sidebar {
+}
+
+.filter-sidebar {
     width: 25%;
     background-color: #fff;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .filter-section h5 {
+}
+
+.filter-section h5 {
     margin-bottom: 10px;
     font-size: 16px;
     color: #333;
-  }
-  
-  .filter-section button {
+}
+
+.filter-section button {
     margin: 5px 5px 5px 0;
     padding: 8px 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .filter-section button:hover {
+}
+
+.filter-section button:hover {
     background-color: #007bff;
     color: #fff;
-  }
-  
-  .product-grid {
+}
+
+.product-grid {
     width: 100%;
     display: none;
-  }
-  
-  .product-sort {
+}
+
+.product-sort {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .product-sort select {
+}
+
+.product-sort select {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
-  }
-  
-  .product-list {
+}
+
+.product-list {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
-  }
-  
-  .product-card {
+}
+
+.product-card {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 15px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-card img {
+}
+
+.product-card img {
     width: 150px;
     height: 150px;
     margin-bottom: 10px;
-  }
-  
-  .price {
+}
+
+.price {
     font-size: 18px;
     color: #333;
-  }
-  
-  .discount {
+}
+
+.discount {
     color: red;
     font-size: 14px;
-  }
-  
-  .variants button {
+}
+
+.variants button {
     margin: 5px 5px 5px 0;
     padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .variants button:hover {
+}
+
+.variants button:hover {
     background-color: #007bff;
     color: #fff;
-  }
-  
-  .compare-btn {
+}
+
+.compare-btn {
     background-color: #28a745;
     color: #fff;
     padding: 8px 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .compare-btn:hover {
+}
+
+.compare-btn:hover {
     background-color: #218838;
-  }
-  .product-list {
+}
+
+.product-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -234,8 +249,8 @@ body {
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-    border-radius: 50px;
-    max-height: 290px;
+    border-radius: 7px;
+    height: 190px;
 }
 
 .product-item:hover {
@@ -244,8 +259,6 @@ body {
 }
 
 .product-item img {
-    
-   
     border-radius: 5px;
     margin-bottom: 10px;
     max-height: 84px;
@@ -257,8 +270,10 @@ body {
     font-weight: bold;
     color: #333;
     margin: 10px 0;
-    height: 40px; /* Giới hạn chiều cao cho tiêu đề */
-    overflow: hidden; /* Ẩn phần thừa nếu quá dài */
+    height: 40px;
+    /* Giới hạn chiều cao cho tiêu đề */
+    overflow: hidden;
+    /* Ẩn phần thừa nếu quá dài */
 }
 
 .product-item p {
@@ -310,45 +325,55 @@ body {
 
 .product-item .btn-compare:hover {
     background-color: #218838;
-} 
+}
 
 .child-categories {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
 .child-category {
-  margin: 5px 0;
-  padding: 5px;
-  font-size: 16px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .child-category:hover {
-  background-color: #f0f0f0;
-  border-color: #ccc;
+    background-color: #f0f0f0;
+    border-color: #ccc;
 }
 
 .danhmuc-container {
-  display: flex; /* Kích hoạt flexbox */
-  justify-content: center; /* Căn giữa theo chiều ngang */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  flex-wrap: wrap; /* Đảm bảo các mục không bị tràn nếu có quá nhiều */
-  gap: 10px; /* Khoảng cách giữa các mục */
+    display: flex;
+    /* Kích hoạt flexbox */
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    flex-wrap: wrap;
+    /* Đảm bảo các mục không bị tràn nếu có quá nhiều */
+    gap: 10px;
+    /* Khoảng cách giữa các mục */
 }
 
 .danhmuc-seri {
-  padding: 10px 20px;
-  border: 1px solid #ccc; /* Viền xung quanh */
-  border-radius: 5px; /* Bo góc */
-  background-color: #f4f4f4; /* Màu nền */
-  text-align: center; /* Căn chữ ở giữa */
-  cursor: pointer; /* Con trỏ khi hover */
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    /* Viền xung quanh */
+    border-radius: 5px;
+    /* Bo góc */
+    background-color: #f4f4f4;
+    /* Màu nền */
+    text-align: center;
+    /* Căn chữ ở giữa */
+    cursor: pointer;
+    /* Con trỏ khi hover */
 }

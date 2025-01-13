@@ -133,3 +133,6 @@ h1, h3 {
     color: #607d8b;
     text-decoration: underline;
 }
+.hidden {
+    display: none;
+}

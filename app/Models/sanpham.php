@@ -24,4 +24,8 @@ class SanPham extends Model
     {
         return $this->hasOne(Blog::class, 'sanpham_id', 'id');
     }
+    public function dh_sp()
+    {
+        return $this->hasMany(dh_sp::class, 'sanpham', 'id'); // Đảm bảo khóa ngoại đúng
+    }
 }
