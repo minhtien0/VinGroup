@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\adminController;
+//use App\Http\Controllers\adminController;
 use App\Http\Controllers\DongController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
@@ -13,7 +13,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ThanhToanController;
 
 use App\Http\Controllers\OrderController;
-//use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 
 
@@ -96,7 +96,9 @@ Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('adm
 
 
 Route::get('/Layouts/index', [QuocController::class, 'index'])->name('Layouts.index');
-Route::get('/lienhe/khlienhe', [LienHeController::class, 'khlienhe'])->name('lienhe.khlienhe');
+Route::get('/lienhe/khlienhe', [LienHeController::class, 'showkhlienhe'])->name('showkhlienhe');
+Route::post('/lienhe/khlienhe', [LienHeController::class, 'khlienhe'])->name('lienhe.khlienhe');
+Route::get('/lienhe/gioithieu', [LienHeController::class, 'gioithieu'])->name('lienhe.gioithieu');
 Route::get('/lienhe/blog', [BlogController::class, 'blog'])->name('lienhe.blog');
 // Route hiển thị form đăng ký
 Route::post('/dangnhap/dangky', [QuocController::class, 'dangky'])->name('dangnhap.dangky');

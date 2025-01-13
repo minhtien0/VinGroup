@@ -7,6 +7,8 @@
     <title>Blog Page</title>
     <link rel="stylesheet" href="{{asset('css/blog.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="{{ asset('js/blog.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -28,7 +30,7 @@
                 <li>Xiaomi</li>
                 <li>Google</li>
                 <li>Oppo</li>
-                <li>Nokia</li>
+                <li>Huawei</li>
             </ul>
         </nav>
     </header>
@@ -48,39 +50,42 @@
                                     <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                     <div class="review-content">
                                         <h3>{{ $product->name }}</h3>
-                                        <h3>{{ $product->blog?->tieude??'chua co tiêu đề' }}</h3>
-                                        <h3>{{ $product->blog?->noidung ??"chua co tieu đề"}}</h3>
+                                        <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                        <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                         <div class="pagination">
-                            <button id="prev-button">&laquo;</button>
-                            <button id="next-button" data-category-id="{{ $categoryIphone->id }}">&raquo;</button>
+                            <button class="prev-button">&laquo;</button>
+                            <button class="next-button" data-category-id="{{ $categoryIphone->id }}">&raquo;</button>
                         </div>
+
                     </div>
                     <!-- ///////////////////////////////////// -->
                     <div class="blog-tech-section">
                         <div class="blog-main">
                             <div class="blog-category-main">
-                                <span class="blogspan-size">{{ $categoryNokia->name}}</span>
+                                <span class="blogspan-size">{{ $categoryHuawei->name}}</span>
                             </div>
                             <div class="featured-review" id="featured-products">
-                                @foreach ($categoryNokia->products->take(2) as $product)
+                                @foreach ($categoryHuawei->products->take(2) as $product)
                                     <div class="blogleft-review">
                                         <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                         <div class="review-content">
-                                        <h3>{{ $product->name }}</h3>
-                                        <h3>{{ $product->blog->tieude }}</h3>
-                                        <h3>{{ $product->blog->noidung }}</h3>
+                                            <h3>{{ $product->name }}</h3>
+                                            <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                            <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                             <div class="pagination">
-                                <button id="prev-button">&laquo;</button>
-                                <button id="next-button" data-category-id="{{ $categoryNokia->id }}">&raquo;</button>
+                                <button class="prev-button">&laquo;</button>
+                                <button class="next-button"
+                                    data-category-id="{{ $categoryHuawei->id }}">&raquo;</button>
                             </div>
+
                         </div>
                     </div>
                     <!-- ///////////////////////// -->
@@ -90,24 +95,25 @@
                         <div class="blog-category-main">
                             <span class="blogspan-size ">{{ $categoryOppo->name}} </span>
                         </div>
-                        <div id="featured-products">
-                            @foreach ($categoryOppo->products->take(5) as $product)
+                        <div class="oppo" id="featured-products">
+                            @foreach ($categoryOppo->products->take(1) as $product)
                                 <div class="blog-khung" style="padding: 20px;">
                                     <div class="blog-hinh">
                                         <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                     </div>
                                     <div class="blog-noidung">
-                                            <h3 class="blog-tieude">{{ $product->name }}</h3>
-                                            <h3 class="blog-tieude">{{ $product->blog->noidung }}</h3>
-                                            <h3 class="blog-tieude">{{ $product->blog->tieude }}</h3>
+                                        <h3 class="blog-tieude">{{ $product->name }}</h3>
+                                        <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                        <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                         <div class="pagination">
-                            <button id="prev-button">&laquo;</button>
-                            <button id="next-button" data-category-id="{{ $categoryOppo->id }}">&raquo;</button>
+                            <button class="prev-button">&laquo;</button>
+                            <button class="next-button" data-category-id="{{ $categoryOppo->id }}">&raquo;</button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -121,20 +127,21 @@
                 </div>
                 <div class="featured-review" id="featured-products">
                     @foreach ($categoryGoogle->products->take(1) as $product)
-                        <div class="blogleft-review main-article" >
+                        <div class="blogleft-review main-article">
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
                                 <h3>{{ $product->name }}</h3>
-                                <h3>{{ $product->blog->tieude }}</h3>
-                                <h3>{{ $product->blog->noidung }}</h3>
+                                <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="pagination">
-                    <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categoryGoogle->id }}">&raquo;</button>
+                    <button class="prev-button">&laquo;</button>
+                    <button class="next-button" data-category-id="{{ $categoryGoogle->id }}">&raquo;</button>
                 </div>
+
             </div>
 
             <!-- Column 2 -->
@@ -144,20 +151,21 @@
                 </div>
                 <div class="featured-review" id="featured-products">
                     @foreach ($categoryXiaomi->products->take(1) as $product)
-                        <div class="blogleft-review main-article" >
+                        <div class="blogleft-review main-article">
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
                                 <h3>{{ $product->name }}</h3>
-                                <h3>{{ $product->blog->tieude }}</h3>
-                                <h3>{{ $product->blog->noidung }}</h3>
+                                <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="pagination">
-                    <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categoryXiaomi->id }}">&raquo;</button>
+                    <button class="prev-button">&laquo;</button>
+                    <button class="next-button" data-category-id="{{ $categoryXiaomi->id }}">&raquo;</button>
                 </div>
+
             </div>
 
             <!-- Column 3 -->
@@ -167,20 +175,21 @@
                 </div>
                 <div class="featured-review" id="featured-products">
                     @foreach ($categorySamsung->products->take(1) as $product)
-                        <div class="blogleft-review main-article" >
+                        <div class="blogleft-review main-article">
                             <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                             <div class="review-content">
                                 <h3>{{ $product->name }}</h3>
-                                <h3>{{ $product->blog->tieude }}</h3>
-                                <h3>{{ $product->blog->noidung }}</h3>
+                                <h3>{{ $product->blog?->tieude ?? 'Chưa có tiêu đề' }}</h3>
+                                <h3>{{ $product->blog?->noidung ?? 'Chưa có nội dung' }}</h3>
                             </div>
                         </div>
                     @endforeach
                 </div>
                 <div class="pagination">
-                    <button id="prev-button">&laquo;</button>
-                    <button id="next-button" data-category-id="{{ $categorySamsung->id }}">&raquo;</button>
+                    <button class="prev-button">&laquo;</button>
+                    <button class="next-button" data-category-id="{{ $categorySamsung->id }}">&raquo;</button>
                 </div>
+
             </div>
         </section>
 
@@ -198,6 +207,6 @@
         </div>
     </footer>
 </body>
-<script src="{{ asset('js/giohang.js') }}"></script>
+
 
 </html>

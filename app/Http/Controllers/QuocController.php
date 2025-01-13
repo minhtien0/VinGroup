@@ -75,10 +75,10 @@ class QuocController extends Controller
         $request->validate([
             'name' => 'required|min:5|max:255',
             'gmail' => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/',
-            'SDT' => 'required|numeric|unique:user,SDT',
+            'sdt' => 'required|numeric|unique:user,sdt',
             'gioitinh' => 'required|in:male,female',
             'avatar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'password' => 'required|confirmed|min:3',
+            'password' => 'required|confirmed|min:6',
         ]);
 
         // Lưu ảnh đại diện
@@ -87,7 +87,7 @@ class QuocController extends Controller
         DB::table('user')->insert([
             'name' => $request->name,
             'gmail' => $request->gmail,
-            'SDT' => $request->SDT,
+            'sdt' => $request->sdt,
             'gioitinh' => $request->gioitinh,
             'avt' => $avatarPath,
             'address' => $request->address,

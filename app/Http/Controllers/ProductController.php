@@ -47,7 +47,6 @@ class ProductController extends Controller
 
         return view('admin.products.create', compact('categories', 'childCategories'));
     }
-
     // 3. Lưu sản phẩm
     public function store(Request $request)
     {

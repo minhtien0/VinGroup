@@ -22,7 +22,6 @@
                     <li><a href="{{ route('products.index') }}">Products</a></li>
                     <li><a href="{{ route('comments.index') }}">Comment</a></li>
                     <li><a href="{{ route('lienhe.index') }}">Contact</a></li>
-
                     <li><a href="#">Settings</a></li>
                 </ul>
             </nav>

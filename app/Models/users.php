@@ -14,7 +14,7 @@ class Users extends Authenticatable
         
         'password',
         'name',
-        'SDT',
+        'sdt',
         'address',
         'gmail',
         'gioitinh',

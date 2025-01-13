@@ -10,6 +10,7 @@ use App\Models\product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ThanhToanController extends Controller
 {
@@ -36,8 +37,8 @@ class ThanhToanController extends Controller
         $vouchers = Voucher::where('trangthai', 1)
             ->whereIn('id', function ($query) use ($user) {
                 $query->select('voucher')
-                      ->from('kh_vc')
-                      ->where('khachhang', $user->id);
+                    ->from('kh_vc')
+                    ->where('khachhang', $user->id);
             })
             ->get();
 
@@ -116,57 +117,27 @@ class ThanhToanController extends Controller
         $firstItem = $selectedItems->first();
 
         // Tạo đơn hàng mới
-        DonHang::create([
+        $donHang = DonHang::create([
             'madon' => $randomOrderCode,
             'khachhang' => $user->id,
-            'sanpham' => $firstItem->product->id, // Lưu ID sản phẩm
-            'soluong' => $firstItem->soluong,
             'trangthai' => '1', // Pending
             'trangthaidonhang' => 'Chờ Thanh Toán',
             'ghichu' => $request->input('ghichu', ''),
             'time' => now(),
         ]);
+        // Thêm từng sản phẩm vào bảng `dh_sp`
+        foreach ($selectedItems as $item) {
+            DB::table('dh_sp')->insert([
+                'id_donhang' => $donHang->id, // ID đơn hàng vừa tạo
+                'sanpham' => $item->product->id, // ID sản phẩm
+                'soluong' => $item->soluong, // Số lượng sản phẩm
+            ]);
+        }
 
         // Xóa các sản phẩm đã thanh toán khỏi giỏ hàng
         GioHang::whereIn('id', $selectedItems->pluck('id'))->delete();
 
         return redirect()->route('giohang.giohang')->with('success', 'Thanh toán thành công!');
     }
-
-    /* // 4. Xóa toàn bộ giỏ hàng (AJAX)
-    public function clearCart(Request $request)
-    {
-        $user = $request->session()->get('user');
-        GioHang::where('khachhang', $user->id)->delete();
-        return response()->json(['success' => true]);
-    }
-
-    // 5. Cập nhật số lượng sản phẩm trong giỏ hàng (AJAX)
-    public function updateCart(Request $request, $id)
-    {
-        $action = $request->input('action');
-        $item = GioHang::find($id);
-        if ($item && $item->khachhang == $request->session()->get('user')->id) {
-            if ($action == 'increase') {
-                $item->soluong += 1;
-            } elseif ($action == 'decrease' && $item->soluong > 1) {
-                $item->soluong -= 1;
-            }
-            $item->save();
-            return response()->json(['success' => true]);
-        }
-        return response()->json(['success' => false]);
-    }
-
-    // 6. Xóa một sản phẩm khỏi giỏ hàng (AJAX)
-    public function removeFromCart(Request $request, $id)
-    {
-        $item = GioHang::find($id);
-        if ($item && $item->khachhang == $request->session()->get('user')->id) {
-            $item->delete();
-            return response()->json(['success' => true]);
-        }
-        return response()->json(['success' => false]);
-    } */
 }
 

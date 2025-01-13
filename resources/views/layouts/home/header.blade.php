@@ -143,7 +143,6 @@
     </div>
   </div>
   @include('dangnhap.Login')
-  @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
 
 </header>
