@@ -256,7 +256,24 @@ public function showTrangThai(Request $request, $madon)
     public function detail(Request $request,$slug, $id)
     {
         // Lấy thông tin sản phẩm theo ID
-        $product = DB::table('product')->where('id', $id)->first();
+        $product = DB::table('product')
+        ->select('id', 'name', 'gb', 'color', 'price','soluong','categori','categori_child','avt','loai','slug','trangthai', DB::raw('SUM(soluong) as tong_soluong'))
+        ->where('id', $id) // Lọc theo id sản phẩm
+        ->groupBy('id', 'name', 'gb', 'color', 'price','soluong','categori','categori_child','avt','loai','slug','trangthai') // Nhóm theo tất cả các cột được chọn
+        ->first();
+
+        $product_categori = DB::table('product')
+        ->join('categori', 'product.categori', '=', 'categori.id') 
+        ->select('categori.name as categori_name')
+        ->where('product.id', $id) // Chỉ định rõ product.id
+        ->first();
+
+        $relatedProducts = DB::table('product')
+        ->where('categori', $product->categori) // Cùng danh mục
+        ->where('id', '!=', $id) // Không bao gồm sản phẩm hiện tại
+        ->inRandomOrder() // Sắp xếp ngẫu nhiên
+        ->limit(4) // Lấy 4 sản phẩm
+        ->get();
         $user = $request->session()->get('user');
         // Lấy danh sách hình ảnh liên quan đến sản phẩm
         $img = DB::table('img_sp')
@@ -266,8 +283,9 @@ public function showTrangThai(Request $request, $madon)
             ->get();
 
         $options = DB::table('product')
-            ->select('gb', 'color', 'price')
-            ->where('name', $product->name) // Lọc theo tên sản phẩm
+            ->select('name','gb', 'color', 'price',DB::raw('SUM(soluong) as tong_soluong'))
+            ->where('name', $product->name) 
+            ->groupBy('name','gb', 'color', 'price')
             ->get();
         $gigabyte = DB::table('product')
             ->select('gb', DB::raw('MIN(price) as min_price')) // Lấy gb và giá thấp nhất
@@ -275,17 +293,32 @@ public function showTrangThai(Request $request, $madon)
             ->groupBy('gb') // Nhóm theo gb
             ->orderBy('gb', 'asc') // Sắp xếp theo gb (nếu cần)
             ->get();
-        $allcomment = DB::table('comment')
-            ->where('sanpham', $id)
+            $allcomment = DB::table('comment')
+            ->leftJoin('img_comment', 'comment.id', '=', 'img_comment.binhluan')
             ->select(
+                'comment.id as comment_id',
                 'comment.avt',
                 'comment.name',
                 'comment.content',
                 'comment.rate',
                 'comment.khachhang',
                 'comment.time',
+                'comment.sanpham',
+                DB::raw('GROUP_CONCAT(img_comment.img) as images') // Gộp các ảnh lại
+            )
+            ->where('comment.sanpham', $id)
+            ->groupBy(
+                'comment.id',
+                'comment.avt',
+                'comment.name',
+                'comment.content',
+                'comment.rate',
+                'comment.khachhang',
+                'comment.time',
+                'comment.sanpham'
             )
             ->get();
+        
         //lấy từng sao đánh giá
         $allRatings = [
             1 => 0,
@@ -325,11 +358,13 @@ public function showTrangThai(Request $request, $madon)
         // Trả về view với dữ liệu sản phẩm và hình ảnh
         return view('home.detail', [
             'product' => $product,
+            'product_categori'=>$product_categori,
             'img' => $img,
             'options' => $options,
             'gigabyte' => $gigabyte,
             'allcomment' => $allcomment,
             'rates' => $rates,
+            'relatedProducts'=> $relatedProducts,
             'sumrate' => $sumrate,
             'allRatings' => $allRatings,
             'averageRate' => $averageRate,
@@ -432,10 +467,11 @@ public function showTrangThai(Request $request, $madon)
             'content' => 'required|string',
             'rate' => 'required|integer|min:1|max:5',
             'sanpham' => 'required|integer', // ID sản phẩm
+            'img.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Thêm dữ liệu vào bảng 'comment'
-        $result = DB::table('comment')->insert([
+        $result = DB::table('comment')->insertGetId([
             'name' => $user->name, // Lấy name từ session
             'avt' => $user->avt,
             'time' => now(),
@@ -445,6 +481,28 @@ public function showTrangThai(Request $request, $madon)
             'sanpham' => $request->input('sanpham'), // ID sản phẩm
             'trangthai' => 1, // Mặc định trạng thái là 1 (kích hoạt)
         ]);
+        
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                // Kiểm tra file hợp lệ
+                if ($image->isValid()) {
+                    // Tạo tên duy nhất cho file ảnh
+                    $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+        
+                    // Lưu ảnh vào thư mục 'public/img'
+                    $image->move(public_path('img'), $imageName);
+        
+                    // Lưu thông tin ảnh vào bảng 'img_comment'
+                    DB::table('img_comment')->insert([
+                        'img' =>$imageName, // Đường dẫn lưu ảnh
+                        'binhluan' => $result, // ID của bình luận
+                    ]);
+                } else {
+                    return redirect()->back()->with('error', 'Một hoặc nhiều tệp không hợp lệ.');
+                }
+            }
+        }        
+
         DB::table('donhang')
             ->where('khachhang', $user->id)
             ->where('sanpham', $request->input('sanpham')) // Không cần `andWhere`, chỉ cần thêm where
@@ -453,7 +511,7 @@ public function showTrangThai(Request $request, $madon)
             ]);
 
         if ($result) {
-            return redirect()->route('home.test')->with('success', 'Bình luận đã được thêm thành công!');
+            return redirect()->route('account.donhang')->with('success', 'Bình luận đã được thêm thành công!');
         } else {
             return redirect()->back()->with('error', 'Không thể thêm bình luận.');
         }

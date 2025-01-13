@@ -39,8 +39,6 @@ Route::post('/login', [HomeController::class, 'login'])->name('home.login');
 //logout
 Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 
-Route::get('/home/test', [HomeController::class, 'test'])->name('home.test');
-
 
 //thay đổi thông tin ng dùng
 Route::get('/infouser/{id}', [HomeController::class, 'infouser'])->name('account.infouser');
