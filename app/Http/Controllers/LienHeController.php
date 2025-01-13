@@ -4,19 +4,51 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\lienhe;
 
 
 class LienHeController extends Controller
 {
-    public function Login(){
-        return view('lienhe.khlienhe');
-     }
-    // Hiển thị danh sách liên hệ
-    public function index()
+    public function Gioithieu() {
+        return view('lienhe.gioithieu');
+    }
+    public function showkhlienhe(Request $request)
     {
-        // Lấy tất cả liên hệ từ bảng 'lienhe'
-        $contacts = DB::table('lienhe')->get();
-        return view('admin.lienhe.index', compact('contacts'));
+        // Lấy thông tin người dùng từ session
+    $user = $request->session()->get('user');
+        // Trả về view form liên hệ
+        return view('lienhe.khlienhe',compact('user'));
+    }
+
+    public function khlienhe(Request $request)
+    {
+        $user = $request->session()->get('user');
+        // Kiểm tra hợp lệ dữ liệu
+        $request->validate([
+            'name'    => 'required|string',
+            'sdt'     => 'required|string',
+            'gmail'   => 'required|email|regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/',
+            'message' => 'required',
+        ]);
+
+        $lienHe = new lienhe();
+        $lienHe->name    = $request->input('name');
+        $lienHe->sdt     = $request->input('sdt');
+        $lienHe->gmail   = $request->input('gmail');
+        $lienHe->noidung = $request->input('message');
+        
+        // Nếu user đã đăng nhập, lưu ID vào cột khachhang
+        if ($user) {
+            $lienHe->khachhang = $user->id; // Lưu ID vào cột khachhang
+        }
+        
+        // Nếu bạn có cột thoigian => lưu thời điểm
+        $lienHe->thoigian = now();
+
+        $lienHe->save();
+
+        return back()->with('success', 'Cảm ơn bạn đã liên hệ chúng tôi!');
     }
 
     // Cập nhật liên hệ (không cần trang sửa riêng)

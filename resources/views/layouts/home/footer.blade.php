@@ -18,7 +18,7 @@
       <div class="footer-column">
         <h4>Về Vin</h4>
         <ul>
-          <li><a href="#">Giới thiệu VinGroup</a></li>
+          <li><a href="{{ route('lienhe.gioithieu') }}">Giới thiệu VinGroup</a></li>
           <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
         </ul>
@@ -205,9 +205,11 @@
   </footer>
 
   <div class="floating-buttons">
-    <div class="button" onclick="showPopup('floating-popup')">
+    <div class="button" >
+      <a href="{{ route('lienhe.khlienhe') }}">
       <i class="icon">🌟</i>
-      <span>Trợ lý</span>
+      </a>
+      <span>Liên hệ</span>
     </div>
     <div class="button" onclick="showPopup('floating-popup')">
       <i class="icon">💬</i>

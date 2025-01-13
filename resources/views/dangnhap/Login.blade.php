@@ -1,5 +1,4 @@
 <script src="{{ asset('js/dangnhap.js') }}" defer></script>
-
 <div id="loginPopup" class="popup-overlay-login" style="display: {{ session('login_error') ? 'flex' : 'none' }};">
     <div class="login-popup-content">
         <span class="login-close-btn" onclick="closePopuplogin()">&times;</span>

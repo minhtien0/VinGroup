@@ -13,37 +13,40 @@ class BlogController extends Controller
     public function blog()
     {
          // Lấy tất cả các loại kèm theo sản phẩm
-         $categories = Categori::with('products')->get();
-         $categoryIphone = Categori::with('products')->where('name', 'Iphone')->first();
-        $categorySamsung = Categori::with('products')->where('name', 'Samsung')->first();
-        $categoryXiaomi = Categori::with('products')->where('name', 'Xiaomi')->first();
+        $categories = Categori::with('products')->get();
+        $categoryIphone = Categori::with('products')->where('name', 'Iphone')->first();
+        $categorySamsung = Categori::with('products')->where('name', 'SamSung')->first();
+        $categoryXiaomi = Categori::with('products')->where('name', 'XiaoMi')->first();
         $categoryGoogle = Categori::with('products')->where('name', 'Google')->first();
         $categoryOppo = Categori::with('products')->where('name', 'Oppo')->first();
-        $categoryNokia = Categori::with('products')->where('name', 'Nokia')->first();
+        $categoryHuawei = Categori::with('products')->where('name', 'Huawei')->first();
 
     
          return view('lienhe.blog', compact('categories','categoryIphone',
-         'categorySamsung','categoryXiaomi','categoryGoogle','categoryOppo','categoryNokia'));
+         'categorySamsung','categoryXiaomi','categoryGoogle','categoryOppo','categoryHuawei'));
     }
     public function getFeaturedProducts($categoryId)
 {
-    // Lấy 2 sản phẩm ngẫu nhiên thuộc danh mục cùng blog liên quan
+    $sl = 2;
+
+    if ($categoryId == 32 ||$categoryId==3||$categoryId==2) {
+        $sl = 1;
+    }
     $products = SanPham::where('categori', $categoryId)
         ->inRandomOrder()
-        ->take(2)
-        ->with('blog') // Eager load blog liên quan
+        ->take($sl)
+        ->with('blog') // Load quan hệ blog
         ->get();
 
-    // Định dạng lại dữ liệu để trả về JSON
-    $formattedProducts = $products->map(function ($product) {
-        return [
-            'name' => $product->name,
-            'avt' => $product->avt,
-            'tieude' => $product->blog->tieude ?? 'Chưa có tiêu đề',
-            'noidung' => $product->blog->noidung ?? 'Chưa có nội dung',
-        ];
-    });
-
-    return response()->json(['products' => $formattedProducts]);
+    return response()->json([
+        'products' => $products->map(function ($product) {
+            return [
+                'name' => $product->name,
+                'avt' => $product->avt,
+                'tieude' => $product->blog->tieude ?? 'Chưa có tiêu đề',
+                'noidung' => $product->blog->noidung ?? 'Chưa có nội dung',
+            ];
+        }),
+    ]);
 }
 }
