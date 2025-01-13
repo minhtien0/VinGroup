@@ -622,7 +622,6 @@ body {
 
 /* Product Grid */
 .flash-sale-product-grid {
-    display: flex;
     gap: 15px;
     overflow-x: auto;
     padding-bottom: 10px;
@@ -650,6 +649,8 @@ body {
     height: auto;
     border-radius: 8px;
     margin-bottom: 10px;
+    width: 150px;
+    height: 100px;
 }
 
 /* Discount Badge */
@@ -707,7 +708,6 @@ body {
 /* Carousel Container */
 .brand-carousel {
     position: relative; /* Để nút điều khiển nằm gọn trong phần này */
-    display: flex;
     gap: 15px;
     overflow-x: auto;
     padding-bottom: 10px;
@@ -1264,9 +1264,11 @@ body {
     color: #333;
     margin: 10px 10px 5px;
     text-align: center;
-    height: 40px; /* Cố định chiều cao tiêu đề */
+    height: 70px; /* Cố định chiều cao tiêu đề */
     overflow: hidden; /* Nếu tiêu đề quá dài, cắt bớt */
-    text-overflow: ellipsis;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
 }
 
 /* Giá sản phẩm */
@@ -1277,6 +1279,7 @@ body {
     gap: 10px;
     margin: 10px 0;
     font-size: 14px;
+    margin-top: 10px;
 }
 
 .product-price .current-price {

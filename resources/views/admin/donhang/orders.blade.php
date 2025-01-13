@@ -66,6 +66,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-link text-danger p-0 m-0 align-baseline"
                                     onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
+                                    
                             </form>
                         </td>
                     </tr>

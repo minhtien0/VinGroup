@@ -104,7 +104,6 @@
                 text: '{{ session('error') }}',
             });
         @endif
-
         // Kiểm tra nếu có thông báo thành công
         @if(session('success'))
             Swal.fire({

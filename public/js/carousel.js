@@ -50,11 +50,15 @@ function showPopup(popupId) {
 function closePopup(popupId) {
     document.getElementById(popupId).style.display = 'none';
     const overlay = document.querySelector('.overlay');
-    if (overlay) {
+    if(overlay){
         document.body.removeChild(overlay);
+    
     }
-
 }
+       
+     
+function showPopup(popupId) {
+    document.getEle}
 function showPopup(popupId) {
     document.getElementById(popupId).style.display = 'block';
 }
@@ -112,5 +116,4 @@ function showPopup(popupId) {
     }
   }
 
-
-
+  //thanh tim kiem

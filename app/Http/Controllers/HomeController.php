@@ -493,16 +493,26 @@ public function showTrangThai(Request $request, $madon)
     
     //// cai nay của huy dong 
     public function showRandomProducts()
-    {
-        // Lấy 6 sản phẩm ngẫu nhiên
-        $products = DB::table('product')
-            ->inRandomOrder() // Lấy sản phẩm ngẫu nhiên
-            ->limit(6) // Giới hạn số lượng sản phẩm (ở đây là 6)
-            ->get();
+{
+    // Lấy 6 sản phẩm ngẫu nhiên
+    $products= DB::table('product')
+    ->inRandomOrder()
+    ->limit(6)
+    ->get();
+   
 
-        // Trả về view với danh sách sản phẩm
-        return view('home.index', ['products' => $products]);
-    }
+    // Trả về view với danh sách sản phẩm
+    return view('home.index', [
+            'products' => $products,
+        ]);
+     
+}
+
+
+
+
+    
+    
 
 
 

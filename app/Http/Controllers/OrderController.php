@@ -45,11 +45,13 @@ class OrderController extends Controller
         $order = DB::table('donhang')->where('id', $id)->first();
 
         if (!$order) {
-            abort(404, 'Đơn hànghàng không tồn tại.');
+            abort(404, 'Đơn hàng không tồn tại.');
         }
 
         DB::table('donhang')->where('id', $id)->delete();
-        return redirect()->route('admin.donhang.orders')->with('success', 'Đơn hàng đã được xóa thành công.');
+
+        return redirect()->route('admin.donhang.orders')
+                     ->with('success', 'Đơn hàng đã được xóa thành công!');
     }
     public function update(Request $request, $id)
     {

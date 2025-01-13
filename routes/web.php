@@ -70,6 +70,21 @@ route::get('/thongtin', [DongController::class,'Info'])->name('layouts.home.info
 Route::get('/search-ajax', [DongController::class, 'searchAjax'])->name('product.searchAjax');
 Route::get('/san-pham/{slug}', [DongController::class, 'detail'])->name('home.product.detail');
 
+
+Route::get('/categories/{name}', [DongController::class, 'getCategoryName'])->name('categories.name');
+Route::get('/category/{name}', [DongController::class, 'showCategory'])->name('category.show');
+Route::post('/get-child-categories', [DongController::class, 'getChildCategories'])->name('getChildCategories');
+
+Route::get('/categori', [DongController::class, 'showIphoneCategory'])->name('iphone');
+
+
+
+
+
+
+
+
+
 ///Quoc/////////////////////////////////////////////
 Route::get('/giohang/giohang', [GioHangController::class, 'giohang'])->name('giohang.giohang');
 Route::post('/dangnhap/Login', [QuocController::class, 'Login'])->name('dangnhap.Login.post');
@@ -132,11 +147,6 @@ Route::post('/remove-from-cart/{id}', [ThanhToanController::class, 'removeFromCa
 /* Route::get('/categories/{slug}', [DongController::class, 'getCategoryName'])->name('categories.name');
 Route::get('/category/{slug}', [DongController::class, 'showCategory'])->name('category.show'); */
 
-Route::get('/categories/{name}', [DongController::class, 'getCategoryName'])->name('categories.name');
-Route::get('/category/{name}', [DongController::class, 'showCategory'])->name('category.show');
-Route::post('/get-child-categories', [DongController::class, 'getChildCategories'])->name('getChildCategories');
-
-Route::get('/categori', [DongController::class, 'showIphoneCategory'])->name('iphone');
 
 
 //admin thach////////////////////////////////////////////////////

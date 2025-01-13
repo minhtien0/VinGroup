@@ -1,6 +1,6 @@
-@include('layouts.home.components.product-popup')   
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
 </div>
 
 <body>
+    @include('layouts.home.components.product-popup')
     <!-- Top notification bar -->
     @include('layouts.home.header')
 
@@ -33,7 +34,7 @@
                         @endforeach
                     </ul>
                 </div>
-                
+
 
             </ul>
             <br>
@@ -129,22 +130,23 @@
             <div class="container1">
                 <div class="top-deal-section">
                     <div class="top-deal-header">
-                        <span class="top-deal-title"><i class="fas fa-thumbs-up"></i> TOP DEAL • SIÊU RẺ</span>
+                        <span class="top-deal-title"><i class="fas fa-thumbs-up"></i> TOP DEAL • SIÊU RẺ • NEW </span>
                         <a href="#" class="see-all">Xem tất cả</a>
                     </div>
                     <div class="product-grid">
-                        @foreach($products as $product)
-                        <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">   
-                        <div class="product-card">
-                                <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
-                                <div class="product-labels">
-                                    <span class="label-auth">CHÍNH HÃNG</span>
+                        @foreach($loai_New as $product)
+                            <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">
+                                <div class="product-card">
+                                    <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
+                                    <div class="product-labels">
+                                        <span class="label-auth">CHÍNH HÃNG</span>
+                                    </div>
+                                    <h3 class="product-title">{{ $product->name }}</h3>
+                                    <div class="product-price">
+                                        <span
+                                            class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
+                                    </div>
                                 </div>
-                                <h3 class="product-title">{{ $product->name }}</h3>
-                                <div class="product-price">
-                                    <span class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
-                                </div>
-                            </div>
                             </a>
                         @endforeach
                     </div>
@@ -167,66 +169,23 @@
                 <!-- Product Grid -->
                 <div class="flash-sale-product-grid">
                     <!-- Product Card Example -->
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
+                    <div class="product-grid">
+                        @foreach($loai_Sale as $product)
+                            <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">
+                                <div class="flash-sale-product-card">
+                                    <div class="discount-badge">-15%</div>
+                                    <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
+                                    <h3 class="product-title">{{ $product->name }}</h3>
+                                    <div class="product-price">
+                                        <span
+                                            class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
+                                    </div>
+                                    <div class="sale-status">Vừa mở bán</div>
+                                </div>
+                            </a>
+                        @endforeach
                     </div>
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
-                    </div>
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
-                    </div>
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
-                    </div>
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
-                    </div>
-                    <div class="flash-sale-product-card">
-                        <div class="discount-badge">-15%</div>
-                        <img src="https://salt.tikicdn.com/cache/280x280/ts/product/a3/17/5b/3c82016d2769eef0253240b8ac668357.jpg"
-                            alt="Product Image">
-                        <h3 class="product-title">Cà phê rang xay nguyên chất</h3>
-                        <div class="product-price">
-                            <span class="current-price">115.000₫</span>
-                        </div>
-                        <div class="sale-status">Vừa mở bán</div>
-                    </div>
+                    
 
 
                     <!-- danhsachsp -->
@@ -236,7 +195,7 @@
                 <div class="brand-section">
                     <!-- Header -->
                     <div class="brand-header">
-                        <span class="brand-title">Thương hiệu nổi bật</span>
+                        <span class="brand-title">Thương hiệu bình dân</span>
                     </div>
 
                     <!-- Nút Trái/Phải cho carousel sản phẩm nằm ngoài brand-carousel -->
@@ -245,188 +204,48 @@
                     <!-- Product Carousel Container -->
                     <div class="brand-carousel" id="productCarousel">
                         <!-- Product Cards -->
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
+                        <div class="product-grid">
+                        @foreach($loai_Thuong as $product)
+                                <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">
+                                    <div class="flash-sale-product-card">
+                                        <div class="discount-badge">-15%</div>
+                                        <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
+                                        <h3 class="product-title">{{ $product->name }}</h3>
+                                        <div class="product-price">
+                                            <span
+                                                class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
+                                        </div>
+                                        <!-- Nội dung thay vào đây -->
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <div class="brand-product-card">
-                            <img src="https://salt.tikicdn.com/ts/tikimsp/5e/c1/2a/2ce5cc21ffe9efa7e7dafb21e6823d92.png"
-                                alt="Product Image">
-                            <div class="product-description">
-                                Chính hãng giảm 100K <br> Mua 1 Tặng 1
-                            </div>
-                        </div>
-                        <!-- Repeat other product cards... -->
                     </div>
                 </div>
-            </div>
-            <!-- khuyenmainoibat -->
+                <!-- khuyenmainoibat -->
 
-            <div class="container1">
-                <div class="promotion-section">
-                    <div class="promotion-header">
-                        <span class="promotion-title">Khuyến mãi nổi bật</span>
-                    </div>
-                    <div class="promotion-grid">
-                        <!-- Promotion Card -->
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Quay số trúng xu</strong> <br> Flash sale giá sốc
-                                </div>
-                            </div>
+                <div class="container1">
+                    <div class="promotion-section">
+                        <div class="promotion-header">
+                            <span class="promotion-title">Sản Phẩm HOT</span>
                         </div>
-
-                        <!-- Repeat các thẻ promotion-card khác -->
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
+                        <div class="product-grid">
+                            @foreach($loai_Hot as $product)
+                                <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">
+                                    <div class="flash-sale-product-card">
+                                        <div class="discount-badge">-15%</div>
+                                        <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
+                                        <h3 class="product-title">{{ $product->name }}</h3>
+                                        <div class="product-price">
+                                            <span
+                                                class="current-price">{{ number_format($product->price, 0, ',', '.') }}₫</span>
+                                        </div>
+                                        <!-- Nội dung thay vào đây -->
+                                    </div>
+                                </a>
+                            @endforeach
                         </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promotion-card">
-                            <div class="promotion-content">
-                                <img src="https://salt.tikicdn.com/cache/w280/ts/tikimsp/36/cb/8d/76b397b92e5a3db16cb837788eb53ea9.png"
-                                    alt="Product Image">
-                                <div class="promotion-description">
-                                    <strong>Gia dụng chính hãng</strong> <br> Giảm đến 50%
-                                </div>
-                            </div>
-                        </div>
+                       
 
                         <!-- Thêm các thẻ khác theo ý muốn -->
                     </div>
@@ -447,4 +266,5 @@
 <script src="{{ asset('js/carousel.js') }}"></script>
 <script src="{{ asset('js/danhmuc.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </html>
