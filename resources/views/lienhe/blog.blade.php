@@ -48,8 +48,8 @@
                                     <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
                                     <div class="review-content">
                                         <h3>{{ $product->name }}</h3>
-                                        <h3>{{ $product->blog->tieude }}</h3>
-                                        <h3>{{ $product->blog->noidung }}</h3>
+                                        <h3>{{ $product->blog?->tieude??'chua co tiêu đề' }}</h3>
+                                        <h3>{{ $product->blog?->noidung ??"chua co tieu đề"}}</h3>
                                     </div>
                                 </div>
                             @endforeach
