@@ -200,15 +200,20 @@ public function showTrangThai(Request $request, $madon)
         abort(404, 'Không tìm thấy đơn hàng');
     }
 
-    // Lấy thông tin sản phẩm liên quan đến đơn hàng
-    $sanpham = DB::table('product')->where('id', $donhang->sanpham)->first();
+    // Lấy danh sách sản phẩm liên quan đến đơn hàng từ bảng `dh_sp`
+    $sanphams = DB::table('dh_sp')
+        ->join('product', 'dh_sp.sanpham', '=', 'product.id')
+        ->where('dh_sp.id_donhang', $donhang->id)
+        ->select('product.*', 'dh_sp.soluong') // Lấy thông tin sản phẩm và số lượng
+        ->get();
 
     return view('home.taikhoan.trangthai', [
         'user' => $user,
         'donhang' => $donhang,
-        'sanpham' => $sanpham,
+        'sanphams' => $sanphams, // Truyền danh sách sản phẩm
     ]);
 }
+
 
 /*     public function login(Request $request)
     {
