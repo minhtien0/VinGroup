@@ -15,7 +15,7 @@
 </div>
 
 <body>
-    @include('layouts.home.components.product-popup')
+    @include('layouts.home.components.product-popup', ['hotProduct' => $hotProduct])
     <!-- Top notification bar -->
     @include('layouts.home.header')
 
@@ -56,11 +56,12 @@
             <!-- Carousel Section -->
             <div>
                 <div class="carousel">
+                    <a href="{{ route('lienhe.blog') }}">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/samsung-s24-ultra-home-20-11.webp"
                                 alt="Image 1">
-                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/oppo-find-x8-mo-ban-home-6-12-24.jpg"
+                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/dien-thoai-nothing-phone-2a-home-series-moi.png"
                                 alt="Image 2">
                         </div>
                         <div class="carousel-item">
@@ -70,9 +71,9 @@
                                 alt="Image 4">
                         </div>
                         <div class="carousel-item">
-                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/sliding-home-iphone-16-pro-km-moi.webp"
+                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/home-Tet-oppo-reno13f.jpg"
                                 alt="Image 5">
-                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/oppo-find-x8-mo-ban-home-6-12-24.jpg"
+                            <img src="https://cdn2.cellphones.com.vn/insecure/rs:fill:690:300/q:90/plain/https://dashboard.cellphones.com.vn/storage/note-14-series-home.jpg"
                                 alt="Image 6">
                         </div>
                         <div class="carousel-item">
@@ -83,6 +84,7 @@
                         </div>
                         <!-- Thêm nhiều carousel-item nếu cần -->
                     </div>
+                    </a>
 
                     <!-- Carousel Controls -->
                     <button class="carousel-control prev" onclick="prevSlide()">❮</button>
@@ -153,24 +155,20 @@
                 </div>
             </div>
 
-            <div class="flash-sale-section">
-                <!-- Flash Sale Header -->
-                <div class="flash-sale-header">
-                    <span class="flash-sale-title">Flash Sale</span>
-                    <div class="flash-sale-timer">
-                        <span class="timer-box">00</span> :
-                        <span class="timer-box">30</span> :
-                        <span class="timer-box">46</span>
-                    </div>
-                    <a href="#" class="see-all " stlye=" margin-left: 820px">Xem tất cả</a>
-                </div>
+            <div class="container1">
+               
 
 
                 <!-- Product Grid -->
                 <div class="flash-sale-product-grid">
+                    <div class="top-deal-header">
+                        <span class="top-deal-title"><i class="fas fa-thumbs-up"></i> TOP Sale</span>
+                    </div>
+
                     <!-- Product Card Example -->
                     <div class="product-grid">
-                        @foreach($loai_Sale as $product)
+                        
+                    @foreach($loai_Sale as $product)
                             <a href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}">
                                 <div class="flash-sale-product-card">
                                     <div class="discount-badge">-15%</div>
@@ -185,10 +183,10 @@
                             </a>
                         @endforeach
                     </div>
-                    
 
 
                     <!-- danhsachsp -->
+
                 </div>
             </div>
             <div class="container1">
@@ -219,10 +217,15 @@
                                     </div>
                                 </a>
                             @endforeach
+                     
                         </div>
                     </div>
                 </div>
+
                 <!-- khuyenmainoibat -->
+
+            <!-- khuyenmainoibat -->
+
 
                 <div class="container1">
                     <div class="promotion-section">

@@ -4,7 +4,6 @@
     $('#search-input').on('keyup', function () {
         let keyword = $(this).val();
         let results = $('#search-results');
-
         if (keyword.length >= 2) {
             $.ajax({
                 url: '/search-ajax',

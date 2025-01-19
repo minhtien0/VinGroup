@@ -201,8 +201,8 @@ footer {
 }
 
 .featured-review img {
-  width: 100%;
-  height: auto;
+  width: 50%;
+  height: 200px;
   border-radius: 5px;
   margin-bottom: 10px;
 }

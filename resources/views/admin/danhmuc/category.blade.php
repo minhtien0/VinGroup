@@ -32,7 +32,7 @@
             </thead>
             <tbody id="category-table-body">
             @foreach($categories as $category)
-    <tr>
+    <tr class="{{ $category->trangthai == 0 ? 'hidden' : '' }}">
         <td>{{ $category->id }}</td>
         <td>{{ $category->name }}</td>
         <td>{{ $category->trangthai == 1 ? 'Hiển thị' : 'Ẩn' }}</td>
@@ -50,7 +50,7 @@
 @endforeach
 
 @foreach($childCategories as $child)
-    <tr>
+    <tr class="{{ $child->trangthai == 0 ? 'hidden' : '' }}">
         <td>{{ $child->id }}</td>
         <td>{{ $child->name }}</td>
         <td>{{ $child->trangthai == 1 ? 'Hiển thị' : 'Ẩn' }}</td>

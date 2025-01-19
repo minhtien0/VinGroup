@@ -33,9 +33,16 @@ class DongController extends Controller
             ->inRandomOrder() 
             ->limit(6) 
             ->get();
+            $hotProduct = DB::table('product')->where('loai', '=', 'Hót')->first() ;
 
         // Trả về view với danh sách sản phẩm
-        return view('home.index', ['products' => $products, 'loai_Hot'=>$loai_Hot,'loai_Sale'=>$loai_Sale,'loai_New'=>$loai_New,'loai_Thuong'=>$loai_Thuong,], compact('categori'));
+        return view('home.index', ['products' => $products,
+         'loai_Hot'=>$loai_Hot,
+         'loai_Sale'=>$loai_Sale,
+         'loai_New'=>$loai_New,
+         'loai_Thuong'=>$loai_Thuong,
+         'hotProduct' => $hotProduct],
+          compact('categori'));
 
     }
     public function Policy()
@@ -117,6 +124,7 @@ class DongController extends Controller
         $productssearch = DB::table('product')
             ->where('name', 'LIKE', "%{$name}%") // Tìm theo tên có chứa từ khóa
             ->get();
+            
 
         // Trả về view hiển thị danh mục và sản phẩm
         return view('layouts.home.IPhone', compact('childCategories', 'products', 'productssearch'));
@@ -150,15 +158,5 @@ class DongController extends Controller
             'products' => $products,
         ]);
     }
-    //popup chat trang chu
-/*     public function getHotProducts()
-{
-    // Lấy danh sách product theo loai = 'Hót'
-    $hotProducts = DB::table('product')
-        ->where('loai', '=', 'Hót')
-        ->get();
 
-    // Trả về view
-    return view('product.hot', compact('hotProducts'));
-} */
 }

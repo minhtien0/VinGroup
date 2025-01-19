@@ -46,16 +46,8 @@
             <label for="note">Ghi Chú Đơn Hàng</label>
             <textarea class="form-control" id="note" name="note">{{ $order->ghichu }}</textarea>
         </div>
-        <div class="form-group">
-            <label for="nvphutrach">Sản Phẩm</label>
-            <input type="text" class="form-control" id="sp" name="sp"
-                value="{{ $order->sanpham }}" required>
-        </div>
-        <div class="form-group">
-            <label for="nvphutrach">Số Lượng</label>
-            <input type="text" class="form-control" id="soluong" name="soluong"
-                value="{{ $order->soluong }}" required>
-        </div>
+      
+        
         <button type="submit" class="btn btn-success">Cập Nhật Đơn Hàng</button>
     </form>
 </div>

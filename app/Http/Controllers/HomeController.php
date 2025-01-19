@@ -19,96 +19,131 @@ class HomeController extends Controller
         // Lấy thông tin người dùng từ session
         $user = $request->session()->get('user');
         $donhang = DB::table('donhang')
-            ->join('product', 'donhang.sanpham', '=', 'product.id')
-            ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán'])
-            ->select(
-                'product.name',
-                'product.price',
-                'product.color',
-                'product.gb',
-                'product.avt',
-                'donhang.soluong',
-                'donhang.time',
-                'donhang.trangthaidonhang',
-                'donhang.madon',
-                DB::raw('product.price * donhang.soluong AS total_price')
-            )
-            ->get();
-
-            $donggoi = DB::table('donhang')
-            ->join('product', 'donhang.sanpham', '=', 'product.id')
-            ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói'])
-            ->select(
-                'product.name',
-                'product.price',
-                'product.color',
-                'product.gb',
-                'product.avt',
-                'donhang.soluong',
-                'donhang.time',
-                'donhang.trangthaidonhang',
-                'donhang.madon',
-                DB::raw('product.price * donhang.soluong AS total_price')
-            )
-            ->get();
-        
-        $danggiaohang = DB::table('donhang')
-            ->join('product', 'donhang.sanpham', '=', 'product.id')
-            ->where('donhang.khachhang', $user->id)
-            ->where('donhang.trangthaidonhang', 'Đang Giao Hàng')
-            ->select(
-                'product.name',
-                'product.price',
-                'product.color',
-                'product.gb',
-                'product.avt',
-                'donhang.soluong',
-                'donhang.time',
-                'donhang.trangthaidonhang',
-                'donhang.madon',
-                DB::raw('product.price * donhang.soluong AS total_price')
-            )
-            ->get();
-
-        $donhangcomplete = DB::table('donhang')
-        ->join('product', 'donhang.sanpham', '=', 'product.id')
-        ->where('donhang.khachhang', $user->id)
-        ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá'])
+        ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng đơn hàng và bảng chi tiết đơn hàng
+        ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng chi tiết đơn hàng với bảng sản phẩm
+        ->where('donhang.khachhang', $user->id) // Lọc theo khách hàng
+        ->whereIn('donhang.trangthaidonhang', ['Chờ Thanh Toán', 'Đã Thanh Toán']) // Trạng thái đơn hàng
         ->select(
-            'product.id', 
-            'product.name', 
-            'product.price', 
-            'product.color', 
-            'product.gb',
-            'product.avt',
-            'donhang.soluong', 
-            'donhang.time',
-            'donhang.trangthaidonhang',
-            'donhang.madon',
-        DB::raw('product.price * donhang.soluong AS total_price')
+            'donhang.madon', // Mã đơn hàng
+            'product.name as name', // Tên sản phẩm
+            'product.price as price', // Giá sản phẩm
+            'product.color', // Màu sản phẩm
+            'product.gb as gb', // Dung lượng sản phẩm
+            'product.avt as avt', // Ảnh sản phẩm
+            'product.slug', // Slug sản phẩm
+            'dh_sp.soluong as soluong', // Số lượng sản phẩm
+            'donhang.time as time', // Thời gian đặt hàng
+            'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+            DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng giá tiền
         )
         ->get();
 
-        $donhangcancel = DB::table('donhang')
-            ->join('product', 'donhang.sanpham', '=', 'product.id')
-            ->where('donhang.khachhang', $user->id)
-            ->whereIn('donhang.trangthaidonhang', ['Đã Hủy'])
-            ->select(
-                'product.id',
-                'product.name',
-                'product.price',
-                'product.color',
-                'product.gb',
-                'product.avt',
-                'donhang.soluong',
-                'donhang.time',
-                'donhang.trangthaidonhang',
-                'donhang.madon',
-                DB::raw('product.price * donhang.soluong AS total_price')
-            )
-            ->get();
+
+            $donggoi = DB::table('donhang')
+    ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng đơn hàng và chi tiết đơn hàng
+    ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng chi tiết đơn hàng với bảng sản phẩm
+    ->where('donhang.khachhang', $user->id) // Lọc theo ID khách hàng
+    ->whereIn('donhang.trangthaidonhang', ['Đang Đóng Gói', 'Đã Đóng Gói']) // Lọc theo trạng thái đơn hàng
+    ->select(
+        'product.name as name', // Tên sản phẩm
+        'product.price as price', // Giá sản phẩm
+        'product.color as color', // Màu sản phẩm
+        'product.gb as gb', // Dung lượng sản phẩm
+        'product.avt as avt', // Ảnh sản phẩm
+        'product.slug as slug', // Slug sản phẩm
+        'dh_sp.soluong as soluong', // Số lượng sản phẩm
+        'donhang.time as time', // Thời gian đơn hàng
+        'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+        'donhang.madon as madon', // Mã đơn hàng
+        DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng tiền cho từng sản phẩm
+    )
+    ->get();
+
+        
+    $danggiaohang = DB::table('donhang')
+    ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng `donhang` với bảng `dh_sp`
+    ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng `dh_sp` với bảng `product`
+    ->where('donhang.khachhang', $user->id) // Lọc theo khách hàng hiện tại
+    ->where('donhang.trangthaidonhang', 'Đang Giao Hàng') // Lọc theo trạng thái đơn hàng
+    ->select(
+        'product.name as name', // Tên sản phẩm
+        'product.price as price', // Giá sản phẩm
+        'product.color as color', // Màu sản phẩm
+        'product.gb as gb', // Dung lượng sản phẩm
+        'product.avt as avt', // Ảnh sản phẩm
+        'product.slug as slug', // Slug sản phẩm
+        'dh_sp.soluong as soluong', // Số lượng sản phẩm
+        'donhang.time as time', // Thời gian đặt hàng
+        'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+        'donhang.madon as madon', // Mã đơn hàng
+        DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng tiền cho từng sản phẩm
+    )
+    ->get();
+
+
+    $donhangcomplete = DB::table('donhang')
+    ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng `donhang` với bảng `dh_sp`
+    ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng `dh_sp` với bảng `product`
+    ->where('donhang.khachhang', $user->id) // Lọc theo ID khách hàng hiện tại
+    ->whereIn('donhang.trangthaidonhang', ['Hoàn Thành', 'Chờ Đánh Giá']) // Lọc trạng thái đơn hàng
+    ->select(
+        'product.id as id', // ID sản phẩm
+        'product.name as name', // Tên sản phẩm
+        'product.price as price', // Giá sản phẩm
+        'product.color as color', // Màu sản phẩm
+        'product.gb as gb', // Dung lượng sản phẩm
+        'product.avt as avt', // Ảnh sản phẩm
+        'product.slug as slug', // Slug sản phẩm
+        'dh_sp.soluong as soluong', // Số lượng sản phẩm
+        'donhang.time as time', // Thời gian đặt hàng
+        'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+        'donhang.madon as madon', // Mã đơn hàng
+        DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng tiền sản phẩm
+    )
+    ->get();
+
+    $donhangrate = DB::table('donhang')
+    ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng `donhang` với `dh_sp`
+    ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng `dh_sp` với `product`
+    ->where('donhang.khachhang', $user->id) // Lọc theo khách hàng đã đăng nhập
+    ->where('donhang.trangthaidonhang', 'Chờ Đánh Giá') // Lọc trạng thái đơn hàng là "Chờ Đánh Giá"
+    ->select(
+        'product.id as id', // ID sản phẩm
+        'product.name as name', // Tên sản phẩm
+        'product.price as price', // Giá sản phẩm
+        'product.color as color', // Màu sản phẩm
+        'product.gb as gb', // Dung lượng sản phẩm
+        'product.avt as avt', // Ảnh sản phẩm
+        'product.slug as slug', // Slug sản phẩm
+        'dh_sp.soluong as soluong', // Số lượng sản phẩm trong đơn hàng
+        'donhang.time as time', // Thời gian đặt hàng
+        'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+        'donhang.madon as madon', // Mã đơn hàng
+        DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng tiền từng sản phẩm
+    )
+    ->get();
+
+
+    $donhangcancel = DB::table('donhang')
+    ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Liên kết bảng `donhang` với `dh_sp`
+    ->join('product', 'dh_sp.sanpham', '=', 'product.id') // Liên kết bảng `dh_sp` với `product`
+    ->where('donhang.khachhang', $user->id) // Lọc theo khách hàng đã đăng nhập
+    ->where('donhang.trangthaidonhang', 'Đã Hủy') // Lọc trạng thái đơn hàng là "Đã Hủy"
+    ->select(
+        'product.id as id', // ID sản phẩm
+        'product.name as name', // Tên sản phẩm
+        'product.price as price', // Giá sản phẩm
+        'product.color as color', // Màu sản phẩm
+        'product.gb as gb', // Dung lượng sản phẩm
+        'product.avt as avt', // Ảnh sản phẩm
+        'product.slug as slug', // Slug sản phẩm
+        'dh_sp.soluong as soluong', // Số lượng sản phẩm trong đơn hàng
+        'donhang.time as time', // Thời gian đặt hàng
+        'donhang.trangthaidonhang as trangthaidonhang', // Trạng thái đơn hàng
+        'donhang.madon as madon', // Mã đơn hàng
+        DB::raw('product.price * dh_sp.soluong AS total_price') // Tổng tiền từng sản phẩm
+    )
+    ->get();
 
         // Trả về view với dữ liệu người dùng
         return view('home.taikhoan.index', [
@@ -117,7 +152,8 @@ class HomeController extends Controller
             'donggoi'=>$donggoi,
             'donhangcomplete' => $donhangcomplete,
             'danggiaohang'=>$danggiaohang,
-            'donhangcancel' => $donhangcancel
+            'donhangcancel' => $donhangcancel,
+            'donhangrate'=>$donhangrate
         ]);
 
     }
@@ -164,13 +200,17 @@ public function showTrangThai(Request $request, $madon)
         abort(404, 'Không tìm thấy đơn hàng');
     }
 
-    // Lấy thông tin sản phẩm liên quan đến đơn hàng
-    $sanpham = DB::table('product')->where('id', $donhang->sanpham)->first();
+    // Lấy danh sách sản phẩm liên quan đến đơn hàng từ bảng `dh_sp`
+    $sanpham = DB::table('dh_sp')
+        ->join('product', 'dh_sp.sanpham', '=', 'product.id')
+        ->where('dh_sp.id_donhang', $donhang->id)
+        ->select('product.*', 'dh_sp.soluong') // Lấy thông tin sản phẩm và số lượng
+        ->get();
 
     return view('home.taikhoan.trangthai', [
         'user' => $user,
         'donhang' => $donhang,
-        'sanpham' => $sanpham,
+        'sanpham' => $sanpham, // Truyền danh sách sản phẩm
     ]);
 }
 
@@ -231,7 +271,24 @@ public function showTrangThai(Request $request, $madon)
     public function detail(Request $request,$slug, $id)
     {
         // Lấy thông tin sản phẩm theo ID
-        $product = DB::table('product')->where('id', $id)->first();
+        $product = DB::table('product')
+        ->select('id', 'name', 'gb', 'color', 'price','soluong','categori','categori_child','avt','loai','slug','trangthai', DB::raw('SUM(soluong) as tong_soluong'))
+        ->where('id', $id) // Lọc theo id sản phẩm
+        ->groupBy('id', 'name', 'gb', 'color', 'price','soluong','categori','categori_child','avt','loai','slug','trangthai') // Nhóm theo tất cả các cột được chọn
+        ->first();
+
+        $product_categori = DB::table('product')
+        ->join('categori', 'product.categori', '=', 'categori.id') 
+        ->select('categori.name as categori_name')
+        ->where('product.id', $id) // Chỉ định rõ product.id
+        ->first();
+
+        $relatedProducts = DB::table('product')
+        ->where('categori', $product->categori) // Cùng danh mục
+        ->where('id', '!=', $id) // Không bao gồm sản phẩm hiện tại
+        ->inRandomOrder() // Sắp xếp ngẫu nhiên
+        ->limit(4) // Lấy 4 sản phẩm
+        ->get();
         $user = $request->session()->get('user');
         // Lấy danh sách hình ảnh liên quan đến sản phẩm
         $img = DB::table('img_sp')
@@ -241,8 +298,9 @@ public function showTrangThai(Request $request, $madon)
             ->get();
 
         $options = DB::table('product')
-            ->select('gb', 'color', 'price')
-            ->where('name', $product->name) // Lọc theo tên sản phẩm
+            ->select('name','gb', 'color', 'price',DB::raw('SUM(soluong) as tong_soluong'))
+            ->where('name', $product->name) 
+            ->groupBy('name','gb', 'color', 'price')
             ->get();
         $gigabyte = DB::table('product')
             ->select('gb', DB::raw('MIN(price) as min_price')) // Lấy gb và giá thấp nhất
@@ -250,17 +308,32 @@ public function showTrangThai(Request $request, $madon)
             ->groupBy('gb') // Nhóm theo gb
             ->orderBy('gb', 'asc') // Sắp xếp theo gb (nếu cần)
             ->get();
-        $allcomment = DB::table('comment')
-            ->where('sanpham', $id)
+            $allcomment = DB::table('comment')
+            ->leftJoin('img_comment', 'comment.id', '=', 'img_comment.binhluan')
             ->select(
+                'comment.id as comment_id',
                 'comment.avt',
                 'comment.name',
                 'comment.content',
                 'comment.rate',
                 'comment.khachhang',
                 'comment.time',
+                'comment.sanpham',
+                DB::raw('GROUP_CONCAT(img_comment.img) as images') // Gộp các ảnh lại
+            )
+            ->where('comment.sanpham', $id)
+            ->groupBy(
+                'comment.id',
+                'comment.avt',
+                'comment.name',
+                'comment.content',
+                'comment.rate',
+                'comment.khachhang',
+                'comment.time',
+                'comment.sanpham'
             )
             ->get();
+        
         //lấy từng sao đánh giá
         $allRatings = [
             1 => 0,
@@ -300,11 +373,13 @@ public function showTrangThai(Request $request, $madon)
         // Trả về view với dữ liệu sản phẩm và hình ảnh
         return view('home.detail', [
             'product' => $product,
+            'product_categori'=>$product_categori,
             'img' => $img,
             'options' => $options,
             'gigabyte' => $gigabyte,
             'allcomment' => $allcomment,
             'rates' => $rates,
+            'relatedProducts'=> $relatedProducts,
             'sumrate' => $sumrate,
             'allRatings' => $allRatings,
             'averageRate' => $averageRate,
@@ -407,10 +482,11 @@ public function showTrangThai(Request $request, $madon)
             'content' => 'required|string',
             'rate' => 'required|integer|min:1|max:5',
             'sanpham' => 'required|integer', // ID sản phẩm
+            'img.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Thêm dữ liệu vào bảng 'comment'
-        $result = DB::table('comment')->insert([
+        $result = DB::table('comment')->insertGetId([
             'name' => $user->name, // Lấy name từ session
             'avt' => $user->avt,
             'time' => now(),
@@ -420,15 +496,38 @@ public function showTrangThai(Request $request, $madon)
             'sanpham' => $request->input('sanpham'), // ID sản phẩm
             'trangthai' => 1, // Mặc định trạng thái là 1 (kích hoạt)
         ]);
+        
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                // Kiểm tra file hợp lệ
+                if ($image->isValid()) {
+                    // Tạo tên duy nhất cho file ảnh
+                    $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+        
+                    // Lưu ảnh vào thư mục 'public/img'
+                    $image->move(public_path('img'), $imageName);
+        
+                    // Lưu thông tin ảnh vào bảng 'img_comment'
+                    DB::table('img_comment')->insert([
+                        'img' =>$imageName, // Đường dẫn lưu ảnh
+                        'binhluan' => $result, // ID của bình luận
+                    ]);
+                } else {
+                    return redirect()->back()->with('error', 'Một hoặc nhiều tệp không hợp lệ.');
+                }
+            }
+        }        
+
         DB::table('donhang')
-            ->where('khachhang', $user->id)
-            ->where('sanpham', $request->input('sanpham')) // Không cần `andWhere`, chỉ cần thêm where
-            ->update([
-                'trangthaidonhang' => "Hoàn Thành"
-            ]);
+        ->join('dh_sp', 'donhang.id', '=', 'dh_sp.id_donhang') // Kết nối bảng `dh_sp` và `donhang`
+        ->where('donhang.khachhang', $user->id) // Lọc theo khách hàng
+        ->where('dh_sp.sanpham', $request->input('sanpham')) // Lọc theo sản phẩm
+        ->update([
+            'donhang.trangthaidonhang' => "Hoàn Thành"
+        ]);
 
         if ($result) {
-            return redirect()->route('home.test')->with('success', 'Bình luận đã được thêm thành công!');
+            return redirect()->route('account.donhang')->with('success', 'Bình luận đã được thêm thành công!');
         } else {
             return redirect()->back()->with('error', 'Không thể thêm bình luận.');
         }

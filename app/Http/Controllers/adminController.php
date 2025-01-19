@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
-
+{
+    // Tập hợp dữ liệu và trả về view
+    return view('admin.dashboard',);
+}
     public function indexsp(){
         return view('admin.sanpham.indexsp');
      }  

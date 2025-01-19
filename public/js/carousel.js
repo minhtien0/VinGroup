@@ -96,24 +96,13 @@ window.onload = function () {
     popup.classList.remove('hidden');
 };
 
-// Hàm đóng popup
-function closePopup() {
+
+function showPopup() {
     const popup = document.getElementById('product-popup');
-    popup.classList.add('hidden');
-}
-function showPopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-      popup.classList.remove('hidden');
-    }
+    popup.classList.remove('hidden');
   }
   
-  // Đóng popup
-  function closePopup(popupId) {
-    const popup = document.getElementById(popupId);
-    if (popup) {
-      popup.classList.add('hidden');
-    }
+  function closePopup(id) {
+    const popup = document.getElementById(id);
+    popup.classList.add('hidden');
   }
-
-  //thanh tim kiem

@@ -45,15 +45,11 @@ function update(id, action) {
         })
         .then((data) => {
             if (data.success) {
-                console.log('Số lượng cập nhật:', data.newQuantity);
                 location.reload(); // Tải lại trang để hiển thị số lượng mới
             } else {
             }
         })
-        .catch((error) => {
-            console.error('Lỗi chi tiết:', error);
-        });
-}
+    }
 
 // Xóa sản phẩm khỏi giỏ hàng
 function removeProduct(productId) {
@@ -90,5 +86,5 @@ function clearCart() {
             location.reload(); // Tải lại trang để cập nhật
         }
     })
-    .catch(error => console.error('Lỗi:', error));
+    
 }

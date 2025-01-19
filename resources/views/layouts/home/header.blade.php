@@ -8,6 +8,7 @@
   <!-- ------------- -->
   <link rel="stylesheet" href="{{asset('css/dangnhap.css')}}">
   <link rel="stylesheet" href="{{asset('css/dangky.css')}}">
+  <link rel="stylesheet" href="{{ asset('css/chat.css') }}">
   <!-- <link rel="stylesheet" href="{{asset('css/popup.css')}}"> -->
   <link rel="stylesheet" href="{{asset('css/lienhe.css')}}">
   <link rel="stylesheet" href="{{asset('css/headerr.css')}}">
@@ -32,6 +33,8 @@
         <input type="text" id="search-input" placeholder="Nhập tên sản phẩm...">
         <button id="search-button">Tìm kiếm</button>
         <div class="search-results" id="search-results"></div>
+        <div class="pagination">
+        </div>
     </div>
     <div class="header-icons">
 
@@ -143,7 +146,6 @@
     </div>
   </div>
   @include('dangnhap.Login')
-  @include('lienhe.khlienhe')
   @include('dangnhap.dangky', ['random' => $random ?? '...'])
 
 </header>

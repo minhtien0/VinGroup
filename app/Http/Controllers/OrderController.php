@@ -7,28 +7,35 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function index(Request $request)
-    {
-        $query = DB::table('donhang');
+{
+    // Khởi tạo query builder
+    $query = DB::table('donhang');
 
-        // Bộ lọc theo trạng thái thanh toán
-        if ($request->filled('trangthai')) {
-            $query->where('trangthai', $request->trangthai);
-        }
-
-        // Bộ lọc theo trạng thái đơn hàng
-        if ($request->filled('trangthaidonhang')) {
-            $query->where('trangthaidonhang', $request->trangthaidonhang);
-        }
-        // Bộ lọc theo ngày tạo đơn (chỉ hiển thị đơn hàng có ngày tạo bằng ngày đã chọn)
-        if ($request->filled('selected_date')) {
-            $query->whereDate('time', '=', $request->selected_date); // Lọc chính xác theo ngày
-        }
-
-        // Lấy danh sách đơn hàng
-        $orders = $query->get();
-
-        return view('admin.donhang.orders', compact('orders'));
+    // Áp dụng bộ lọc nếu có
+    if ($request->filled('trangthai')) {
+        $query->where('trangthai', $request->input('trangthai'));
     }
+
+    if ($request->filled('trangthaidonhang')) {
+        $query->where('trangthaidonhang', $request->input('trangthaidonhang'));
+    }
+
+    if ($request->filled('selected_date')) {
+        $query->whereDate('time', $request->input('selected_date')); // Lọc theo ngày
+    }
+
+    // Sắp xếp theo thời gian mới nhất (mặc định)
+    $query->orderBy('time', 'desc');
+
+    // Phân trang để hiển thị dữ liệu tốt hơn
+    $orders = $query->paginate(10); // 10 bản ghi mỗi trang
+
+    // Trả về view cùng với dữ liệu
+    return view('admin.donhang.orders', [
+        'orders' => $orders,
+        'filters' => $request->only(['trangthai', 'trangthaidonhang', 'selected_date']), // Giữ lại giá trị bộ lọc
+    ]);
+}
     public function edit($id)
     {
         // Lấy thông tin đơn hàng theo id
@@ -42,43 +49,69 @@ class OrderController extends Controller
     }
     public function destroy($id)
     {
+        // Kiểm tra đơn hàng có tồn tại hay không
         $order = DB::table('donhang')->where('id', $id)->first();
-
+    
         if (!$order) {
-            abort(404, 'Đơn hàng không tồn tại.');
+            return redirect()->route('admin.donhang.orders')
+                             ->with('error', 'Đơn hàng không tồn tại.');
         }
-
-        DB::table('donhang')->where('id', $id)->delete();
-
-        return redirect()->route('admin.donhang.orders')
-                     ->with('success', 'Đơn hàng đã được xóa thành công!');
+    
+        // Sử dụng transaction để đảm bảo tính toàn vẹn dữ liệu
+        DB::beginTransaction();
+        try {
+            // Xóa chi tiết đơn hàng trong bảng `dh_sp`
+            DB::table('dh_sp')->where('id_donhang', $id)->delete();
+    
+            // Xóa đơn hàng trong bảng `donhang`
+            DB::table('donhang')->where('id', $id)->delete();
+    
+            // Commit transaction
+            DB::commit();
+    
+            return redirect()->route('admin.donhang.orders')
+                             ->with('success', 'Đơn hàng đã được xóa thành công!');
+        } catch (\Exception $e) {
+            // Rollback transaction nếu có lỗi xảy ra
+            DB::rollBack();
+    
+            return redirect()->route('admin.donhang.orders')
+                             ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        }
     }
+    
     public function update(Request $request, $id)
-    {
-        // Xác thực dữ liệu đầu vào
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'order_status' => 'required|string',
-            'payment_status' => 'required|boolean',
-            'sp'=>'required|string',
-            'soluong'=>'required|int',
-            'note' => 'nullable|string',
-        ]);
+{
+    // Xác thực dữ liệu đầu vào
+    $request->validate([
+        'customer_name' => 'required|string|max:255',
+        'order_status' => 'required|string',
+        'payment_status' => 'required|boolean',
+        'note' => 'nullable|string',
+    ]);
 
-        // Cập nhật dữ liệu trong bảng orders
-        $updated = DB::table('donhang')->where('id', $id)->update([
+    // Bắt đầu transaction
+    DB::beginTransaction();
+    try {
+        // Cập nhật bảng `donhang`
+        DB::table('donhang')->where('id', $id)->update([
             'khachhang' => $request->customer_name,
             'trangthaidonhang' => $request->order_status,
             'trangthai' => $request->payment_status,
-            'sanpham'=>$request->sp,
-            'soluong'=>$request->soluong,
             'ghichu' => $request->note,
-            'time' => now()
+            'time' => now(),
         ]);
-        if ($updated) {
-            return redirect()->route('admin.donhang.orders')->with('success', 'Đơn hàng đã được cập nhật thành công.');
-        } else {
-            return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật đơn hàng.');
-        }
+
+        // Commit transaction
+        DB::commit();
+
+        return redirect()->route('admin.donhang.orders')->with('success', 'Đơn hàng đã được cập nhật thành công.');
+    } catch (\Exception $e) {
+        // Rollback transaction nếu có lỗi
+        DB::rollBack();
+
+        return redirect()->back()->with('error', 'Có lỗi xảy ra khi cập nhật đơn hàng: ' . $e->getMessage());
     }
+}
+
 }

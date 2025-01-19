@@ -40,8 +40,6 @@
                     <th>Tên khách hàng</th>
                     <th>Trạng thái Thanh toán</th>
                     <th>Trạng thái đơn hàng</th>
-                    <th>Sản Phẩm</th>
-                    <th>Số Lượng</th>
                     <th>Ghi chú đơn hàng</th>
                     <th>Thao tác</th>
                 </tr>
@@ -54,8 +52,6 @@
                         <td>{{ $order->khachhang }}</td>
                         <td>{{ $order->trangthai }}</td>
                         <td>{{ $order->trangthaidonhang }}</td>
-                        <td>{{$order->sanpham}}</td>
-                        <td>{{$order->soluong}}</td>
                         <td>{{ $order->ghichu }}</td>
                         <td style="color: #007BFF">
                             <a href="{{ route('admin.donhang.orders.edit', $order->id) }}"
@@ -66,7 +62,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-link text-danger p-0 m-0 align-baseline"
                                     onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</button>
-                                    
+
                             </form>
                         </td>
                     </tr>

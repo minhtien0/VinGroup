@@ -12,12 +12,12 @@ class CategoryController extends Controller
 
         // Lọc theo tên danh mục
         $categories = DB::table('categori')
-            ->where('name', 'like', '%' . $search . '%') // Tìm kiếm theo tên danh mục trong bảng categori
-            ->get();
+    ->whereRaw("name REGEXP ?", [implode('.*', str_split($search))])
+    ->get();
 
-        $childCategories = DB::table('child_categori')
-            ->where('name', 'like', '%' . $search . '%') // Tìm kiếm theo tên danh mục trong bảng child_categori
-            ->get();
+    $childCategories = DB::table('child_categori')
+    ->whereRaw("name REGEXP ?", [implode('.*', str_split($search))])
+    ->get();
 
         // Trả về dữ liệu HTML để hiển thị danh mục
         $html = '';
@@ -28,8 +28,8 @@ class CategoryController extends Controller
             $html .= '<td>' . $category->id . '</td>';
             $html .= '<td>' . $category->name . '</td>';
             $html .= '<td>' . ($category->trangthai == 1 ? 'Hiển thị' : 'Ẩn') . '</td>';
-            $html .= '<td>' . $category->time . '</td>';
             $html .= '<td>Không có</td>'; // Vì đây là danh mục cha, nên không có danh mục cha
+            $html .= '<td>' . $category->time . '</td>';
             $html .= '<td>';
             $html .= '<a href="' . route('admin.danhmuc.category.edit', $category->id) . '" class="btn btn-warning btn-sm">Sửa</a> ';
             $html .= '<form action="' . route('admin.danhmuc.category.destroy', $category->id) . '" method="POST" style="display:inline;">';

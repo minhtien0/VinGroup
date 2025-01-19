@@ -3,9 +3,23 @@
 <div class="body__left">
             <div class="body__left__top">
                 <nav class="body__nav">
-                    <div class="body__nav__img" width="368" height="368">
-                        <img id="main-image" src="{{ asset('img/' . $product->avt) }}" width="430" height="440" alt="Bao cao su Durex Fetherlite Ultima Hộp 12 Bao" >
+                <img 
+                    id="main-image" 
+                    src="{{ asset('img/' . $product->avt) }}" 
+                    width="430" 
+                    height="440" 
+                    alt="{{ $product->name }}" 
+                    style="@if($product->trangthai == 3||$product->trangthai == 4) filter: grayscale(100%); opacity: 0.5; @endif"
+                >
+                @if($product->trangthai == 3)
+                    <div style="position: relative; top: -30%; left: 230px; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px; width:90px">
+                        Hết hàng
                     </div>
+                @elseif($product->trangthai == 4)
+                <div style="position: relative; top: -30%; left: 230px; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); color: white; padding: 10px; border-radius: 5px; width:140px">
+                        Ngừng Sản Xuất
+                    </div>
+                @endif
 
                     <div class="body__nav__listimg">
                         @foreach ($img as $img_sp)
@@ -66,17 +80,21 @@
                                     style="width: 89px; height: 20px; opacity: 1;">
                             </div>
                             <span>Thương hiệu: </span>
-                            <span style="color: blue;">Durex</span>
+                            <span style="color: blue;">{{$product_categori->categori_name}}</span>
                             <h4 style="margin-top:5px ;margin-bottom:10px;">{{$product->name}}</h4>
                         </div>
                         <div class="section__info__rate">
-                            <span>4,7</span>
-                            <span style="color: yellow;"><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-                            <span>(367)</span>
+                            <span>{{$averageRate}}</span>
+                            @for ($i = 1; $i <= 5; $i++)
+                                    <span style="color: {{ $i <= $averageRate ? 'yellow' : 'gray' }};">
+                                        <i class="fa-solid fa-star"></i>
+                                    </span>
+                                @endfor
+                            <span>({{$sumrate}})</span>
                             <span>|</span>
                             <span>12k Lượt bán</span>
+                            <span>|</span>
+                            <span>Còn ({{$product->tong_soluong}})</span>
                         </div>
                         <div class="section__info__gia">
                             <span style="color: rgb(236, 82, 82);">
@@ -238,524 +256,52 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item active">
                                     <div class="sptuongtu">
+                                        @foreach($relatedProducts as $item)
                                         <div class="section__sptuongtu__info">
                                             <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
+                                                <a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}"><img  src="{{ asset('img/' . $item->avt) }}"
                                                     class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
+                                                    style="width: 50px; height:50px; opacity: 1;"></a>
                                             </div>
                                             <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
+                                                <h2 style="font-size: 15px;">{{$item->name}}</h2>
                                             </div>
                                             <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <span style="color: {{ $i <= $averageRate ? 'yellow' : 'gray' }};">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            @endfor
                                             </div>
                                             <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
+                                                <span style="">{{$item->price}}<sup>đ</sup></span>
                                             </div>
                                         </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                     <div class="sptuongtu">
+                                        @foreach($relatedProducts as $item)
                                         <div class="section__sptuongtu__info">
                                             <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
+                                            <a href="{{ route('home.detail', ['slug' => $item->slug, 'id' => $item->id]) }}"><img  src="{{ asset('img/' . $item->avt) }}"
                                                     class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
+                                                    style="width: 50px; height:50px; opacity: 1;"></a>
                                             </div>
                                             <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
+                                                <h2 style="font-size: 15px;">{{$item->name}}</h2>
                                             </div>
                                             <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                <span style="color: {{ $i <= $averageRate ? 'yellow' : 'gray' }};">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            @endfor
                                             </div>
                                             <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
+                                                <span style="">{{$item->price}}<sup>đ</sup></span>
                                             </div>
                                         </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="sptuongtu">
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sptuongtu">
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="sptuongtu">
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sptuongtu">
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
-                                        <div class="section__sptuongtu__info">
-                                            <div class="section__sptuongtu__info__img">
-                                                <img srcset="https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 1x, https://salt.tikicdn.com/cache/280x280/ts/product/1e/25/8f/5e98f7343514e62855d117a54828ad65.jpg 2x"
-                                                    alt="Bao cao su Durex Kingtex 12 bao"
-                                                    class="styles__StyledImg-sc-p9s3t3-0 hbqSye"
-                                                    style="width: 100%; height: 100%; opacity: 1;">
-                                            </div>
-                                            <div class="section__sptuongtu__info__name">
-                                                <h2 style="font-size: 15px;">Bao Cao Su Durex Jean</h2>
-                                            </div>
-                                            <div class="section__sptuongtu__info__rate">
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                                <i class="fa-solid fa-star"></i>
-                                            </div>
-                                            <div class="section__sptuongtu__info__price">
-                                                <span style="">304.000<sup>đ</sup></span>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -1032,8 +578,9 @@
                         </div>
                     </div>
                     <hr>
+                    @foreach ($allcomment as $comment)
                     <div class="body__comment__detail__user" style="display: flex;">
-                        @foreach ($allcomment as $comment)
+                       
                         <div class="" style="width: 10%;">
                             <div class="body__comment__detail__user__img" style="background-image: url({{ asset('img/' . $comment->avt) }});">
                             </div>
@@ -1094,37 +641,22 @@
                             </div>
                             <div class="body__comment__detail__user__content__img"
                                 style="display: flex; margin-top: 10px;">
+                                @if ($comment->images)
+                                    <div class="comment-images">
+                                        @foreach (explode(',', $comment->images) as $img)
+                                            <img src="{{ asset('img/' . $img) }}" alt="Image" width="100px" height="100px" style="margin-left:15px;border:solid 1px gray;">
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <div class="review-images__img" style="background-image: url('bcs.jpg');">
                                 </div>
-                                <div class="review-images__img" style="background-image: url('hinh-nen.jpg');">
-                                </div>
+                                
                             </div>
                         </div>
-                        @endforeach
                     </div>
                     <hr>
-                    <div class="shopee-page-controller product-ratings__page-controller"><button
-                            class="shopee-icon-button shopee-icon-button--left "><svg enable-background="new 0 0 11 11"
-                                viewBox="0 0 11 11" x="0" y="0" class="shopee-svg-icon icon-arrow-left">
-                                <g>
-                                    <path
-                                        d="m8.5 11c-.1 0-.2 0-.3-.1l-6-5c-.1-.1-.2-.3-.2-.4s.1-.3.2-.4l6-5c .2-.2.5-.1.7.1s.1.5-.1.7l-5.5 4.6 5.5 4.6c.2.2.2.5.1.7-.1.1-.3.2-.4.2z">
-                                    </path>
-                                </g>
-                            </svg></button><button class="shopee-button-no-outline">1</button><button
-                            class="shopee-button-no-outline">2</button><button
-                            class="shopee-button-solid shopee-button-solid--primary">3</button><button
-                            class="shopee-button-no-outline">4</button><button
-                            class="shopee-button-no-outline">5</button><button
-                            class="shopee-button-no-outline">6</button><button
-                            class="shopee-button-no-outline shopee-button-no-outline--non-click">...</button><button
-                            class="shopee-icon-button shopee-icon-button--right "><svg enable-background="new 0 0 11 11"
-                                viewBox="0 0 11 11" x="0" y="0" class="shopee-svg-icon icon-arrow-right">
-                                <path
-                                    d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
-                                </path>
-                            </svg></button>
-                    </div>
+                    @endforeach
+                   
                 </div>
             </div>
 </div>
@@ -1133,13 +665,13 @@
                 <div class="body__aside__top">
                     <div class="body__aside__logo">
                         <div class="body__aside__logo__img">
-                            <img srcset="https://vcdn.tikicdn.com/cache/w100/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg 1x, https://vcdn.tikicdn.com/cache/w100/ts/seller/d1/3f/ae/13ce3d83ab6b6c5e77e6377ad61dc4a5.jpg 2x"
+                            <img srcset="{{asset('images/logo.png')}}"
                                 class="styles__StyledImg-sc-p9s3t3-0 hbqSye logo" width="40" height="40"
                                 alt="Tiki Trading"
                                 style="border-radius: 50%; min-width: 40px; width: 40px; height: 40px; opacity: 1;">
                         </div>
                         <div class="body__aside__logo__info">
-                            <p style="margin: 0px;">Tiki Tranding</p>
+                            <p style="margin: 0px;">Vin Group</p>
                             <span><img
                                     srcset="https://salt.tikicdn.com/cache/w100/ts/upload/6b/25/fb/c288b5bcee51f35f2df0a5f5f03de2e1.png 1x, https://salt.tikicdn.com/cache/w100/ts/upload/6b/25/fb/c288b5bcee51f35f2df0a5f5f03de2e1.png 2x"
                                     class="styles__StyledImg-sc-p9s3t3-0 hbqSye badge-img" alt="seller-badge"
@@ -1166,7 +698,7 @@
                         <p class="label" style="font-weight: bold;">Số Lượng</p>
                         <div class="quantity-container">
                             <button class="quantity-btn" onclick="decreaseValue()">-</button>
-                            <input type="text" id="quantity-input" value="1" class="quantity-input" readonly>
+                            <input type="text" style="width: 50px;" id="quantity-input" value="1" class="quantity-input" >
                             <button class="quantity-btn" onclick="increaseValue()">+</button>
                         </div>
                         <script>
@@ -1236,6 +768,7 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2 col-6 mt-3">
+                        @if($product->trangthai==1)
                         <button class="btn btn-danger" type="button" style="width: 320px;">Mua ngay</button>
                         <form action="{{ route('giohang.add') }}" method="POST">
                             @csrf
@@ -1252,45 +785,24 @@
                                     <i id="favoriteIcon" class="fa-regular fa-heart"></i>
                                 </button>
                             </form>
-                            <script>
-                                document.addEventListener("DOMContentLoaded", function () {
-                                const favoriteForm = document.getElementById("favoriteForm");
-                                const favoriteButton = document.getElementById("favoriteButton");
-                                const favoriteText = document.getElementById("favoriteText");
-                                const favoriteIcon = document.getElementById("favoriteIcon");
-
-                                favoriteButton.addEventListener("click", function () {
-                                    const formData = new FormData(favoriteForm);
-
-                                    fetch(favoriteForm.action, {
-                                        method: "POST",
-                                        body: formData,
-                                        headers: {
-                                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
-                                        },
-                                    })
-                                        .then((response) => response.json())
-                                        .then((data) => {
-                                            if (data.success) {
-                                                // Cập nhật giao diện dựa trên trạng thái yêu thích
-                                                if (data.isFavorite) {
-                                                    favoriteText.textContent = "Đã Yêu Thích";
-                                                    favoriteButton.style.color = "red";
-                                                } else {
-                                                    favoriteText.textContent = "Thêm Vào Yêu Thích";
-                                                    favoriteButton.style.color = "blue";
-                                                }
-                                            } else {
-                                                alert(data.message || "Có lỗi xảy ra.");
-                                            }
-                                        })
-                                        .catch((error) => {
-                                            console.error("Lỗi:", error);
-                                            alert("Không thể thực hiện yêu cầu.");
-                                        });
-                                });
-                            });
-                            </script>
+                        @elseif($product->trangthai==3||$product->trangthai==4)
+                        <button class="btn btn-danger" type="button" style="width: 320px;" disabled>Mua ngay</button>
+                        <form action="{{ route('giohang.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="sanpham" value="{{ $product->id }}">
+                            <input type="hidden" name="soluong" id="soluong-input" value="1"> 
+                        <button class="btn btn-primary" type="submit" style="background-color: transparent; color: blue;width: 320px;" disabled>Thêm giỏ hàng</button>
+                        </form>
+                            <form id="favoriteForm" data-favorite="{{ $isFavorite ? 'true' : 'false' }}" action="{{ route('favorite.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="sanpham" value="{{ $product->id }}">
+                                <button id="favoriteButton" class="btn btn-primary" type="button"
+                                    style="background-color: transparent; color: {{ $isFavorite ? 'red' : 'blue' }}; width: 320px;" >
+                                    <span id="favoriteText">{{ $isFavorite ? 'Đã Yêu Thích' : 'Thêm Vào Yêu Thích' }}</span>
+                                    <i id="favoriteIcon" class="fa-regular fa-heart"></i>
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
 
@@ -1343,6 +855,45 @@
                                 }
                             }, intervalTime);
                         </script>
+                        <script>
+                                document.addEventListener("DOMContentLoaded", function () {
+                                const favoriteForm = document.getElementById("favoriteForm");
+                                const favoriteButton = document.getElementById("favoriteButton");
+                                const favoriteText = document.getElementById("favoriteText");
+                                const favoriteIcon = document.getElementById("favoriteIcon");
+
+                                favoriteButton.addEventListener("click", function () {
+                                    const formData = new FormData(favoriteForm);
+
+                                    fetch(favoriteForm.action, {
+                                        method: "POST",
+                                        body: formData,
+                                        headers: {
+                                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                                        },
+                                    })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            if (data.success) {
+                                                // Cập nhật giao diện dựa trên trạng thái yêu thích
+                                                if (data.isFavorite) {
+                                                    favoriteText.textContent = "Đã Yêu Thích";
+                                                    favoriteButton.style.color = "red";
+                                                } else {
+                                                    favoriteText.textContent = "Thêm Vào Yêu Thích";
+                                                    favoriteButton.style.color = "blue";
+                                                }
+                                            } else {
+                                                alert(data.message || "Có lỗi xảy ra.");
+                                            }
+                                        })
+                                        .catch((error) => {
+                                            console.error("Lỗi:", error);
+                                            alert("Không thể thực hiện yêu cầu.");
+                                        });
+                                });
+                            });
+                            </script>
                     </div>
                 </div>
             </aside>

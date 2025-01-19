@@ -18,9 +18,14 @@ class ProductController extends Controller
 
         // Nếu có từ khóa thì lọc
         if (!empty($search)) {
-            $query->where('name', 'like', '%'.$search.'%');
+            // Tách chuỗi tìm kiếm thành từng ký tự
+            $characters = str_split($search);
+        
+            // Thêm điều kiện `where` cho từng ký tựs
+            foreach ($characters as $char) {
+                $query->where('name', 'like', '%' . $char . '%');
+            }
         }
-
         // Lấy danh sách
         // Bạn có thể dùng paginate() nếu muốn phân trang
         $products = $query->orderBy('id', 'desc')->get();
@@ -47,7 +52,6 @@ class ProductController extends Controller
 
         return view('admin.products.create', compact('categories', 'childCategories'));
     }
-
     // 3. Lưu sản phẩm
     public function store(Request $request)
     {
@@ -190,12 +194,27 @@ class ProductController extends Controller
     // 6. Xoá
     public function destroy($id)
     {
-        // Xoá ảnh chi tiết
-        DB::table('img_sp')->where('sanpham', $id)->delete();
-
-        // Xoá product
-        DB::table('product')->where('id', $id)->delete();
-
-        return redirect()->route('products.index')->with('success', 'Xoá sản phẩm thành công');
+        // Bắt đầu transaction để đảm bảo tính toàn vẹn dữ liệu
+        DB::beginTransaction();
+        try {
+            // Xoá tất cả các bản ghi liên quan đến sản phẩm trong bảng `dh_sp`
+            DB::table('dh_sp')->where('sanpham', $id)->delete();
+    
+            // Xoá ảnh chi tiết của sản phẩm
+            DB::table('img_sp')->where('sanpham', $id)->delete();
+    
+            // Xoá sản phẩm trong bảng `product`
+            DB::table('product')->where('id', $id)->delete();
+    
+            // Commit transaction
+            DB::commit();
+    
+            return redirect()->route('products.index')->with('success', 'Xoá sản phẩm thành công');
+        } catch (\Exception $e) {
+            // Rollback transaction nếu có lỗi
+            DB::rollBack();
+            return redirect()->route('products.index')->with('error', 'Xoá sản phẩm thất bại: ' . $e->getMessage());
+        }
     }
+    
 }

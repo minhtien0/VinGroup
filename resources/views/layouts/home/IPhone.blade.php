@@ -1,4 +1,5 @@
 @include('layouts.home.header')
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>@yield('title', 'Trang web của tôi')</title>
   <link rel="stylesheet" href="{{ asset('css/category.css') }}">
+
   <script src="{{ asset('js/category.js') }}" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -86,11 +88,11 @@
       <div>
         <div class="product-list">
           @foreach ($products as $product)
-        <div class="product-item">
+        <a style="text-decoration:none;" href="{{ route('home.detail', ['slug' => $product->slug, 'id' => $product->id]) }}"><div class="product-item">
         <img src="{{ asset('img/' . $product->avt) }}" alt="{{ $product->name }}">
         <h2>{{ $product->name }}</h2>
         <p>Giá: {{ number_format($product->price) }} VNĐ</p>
-        </div>
+        </div></a>
       @endforeach
         </div>
       </div>

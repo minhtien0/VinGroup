@@ -18,7 +18,8 @@
       <div class="footer-column">
         <h4>Về Vin</h4> 
         <ul>
-          <li><a href="{{route('layouts.home.info')}}">Giới thiệu VinGroup</a></li>
+          <li><a href="{{ route('lienhe.gioithieu') }}">Giới thiệu VinGroup</a></li>
+          <li><a href="layouts.home.info">Giới thiệu về chính sách</a></li>
           <li><a href="{{ route('lienhe.blog') }}">Vin Blog</a></li>
           <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
         </ul>
@@ -205,15 +206,42 @@
   </footer>
 
   <div class="floating-buttons">
-    <div class="button" onclick="showPopup('floating-popup')">
+    <div class="button" >
+      <a href="{{ route('lienhe.khlienhe') }}">
       <i class="icon">🌟</i>
-      <span>Trợ lý</span>
+      </a>
+      <span>Liên hệ</span>
     </div>
-    <div class="button" onclick="showPopup('floating-popup')">
-      <i class="icon">💬</i>
-      <span>Tin mới</span>
+    <div class="chat-container">
+  <div class="chat-header">
+    <h3>Chat với chúng tôi</h3>
+    <button class="close-chat" onclick="toggleChat()">✖</button>
+  </div>
+  <div class="chat-body">
+    <div class="chat-messages">
+      <!-- Tin nhắn sẽ xuất hiện tại đây -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatMessage" placeholder="Nhập tin nhắn..." />
+      <button onclick="sendMessage()">Gửi</button>
     </div>
   </div>
+</div>
+
+
+<!-- Nút để mở khung chat -->
+<div class="button" onclick="toggleChat()">
+  <i class="icon">💬</i>
+  <span>Khung Chat</span>
+</div>
+<div class="button" style="margin-bottom:82px">
+      <a href="{{ route('lienhe.khlienhe') }}">
+      <i class="icon">🌟</i>
+      </a>
+      <span>Liên hệ</span>
+    </div>
+  </div>
+ 
 
   <!-- Popup floating -->
   <div id="floating-popup" class="popup-overlay hidden">
@@ -236,3 +264,5 @@
 </div>
 
 </div>
+<link rel="stylesheet" href="{{ asset('css/chat.css') }}">
+<script src="{{ asset('js/chat_hd.js') }}"></script>
